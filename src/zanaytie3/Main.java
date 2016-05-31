@@ -8,8 +8,9 @@ public class Main{
 		Point c = new Point(7,1);
 		
 		Triangle triangle = new Triangle(a,b,c);	
-		triangle.length();
-		triangle.check();
+		
+		double s = triangle.area();
+		System.out.println("S - " + s);
 		
 		
 		
