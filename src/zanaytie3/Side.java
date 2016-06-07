@@ -10,9 +10,9 @@ public class Side{
 		boolean checkSide  = false;
 		boolean checkSideone = maxtwo(ab,bc);
 		boolean checkSidetwo = maxtwo(ab,ca);
-		if (checkSideone && checkSidetwo) {
-			checkSide = true;	
-		}
+
+		checkSide = checkSideone && checkSidetwo ? true : false ;
+		
 		return checkSide;
 		
 	}
@@ -20,11 +20,9 @@ public class Side{
 	public boolean maxtwo(double ab, double bc){
 
 		boolean checkSide = false;
-			
-		if (ab >=bc) {
-
-			checkSide = true;
-		}
+		
+		checkSide = ab >=bc ? true : false;	
+		
 		return checkSide;
 	}
 	

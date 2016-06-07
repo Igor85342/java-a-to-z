@@ -1,13 +1,14 @@
 package zanaytie3;
 
 public class Triangle {
-	public static double s;
+	public double s;
 	public Point a;
 	public Point b;
 	public Point c;
 	public double ab;
 	public double bc;
 	public double ca;
+	public Point tempPoint;
 	
 
 	public Triangle(Point a, Point b, Point c) {
@@ -22,14 +23,16 @@ public class Triangle {
 		boolean checkSideSquare = false;
 		double cd = 1;
 		double da = 2;
+		tempPoint = a;
 
-		this.ab = distanceTo(a,b);
+		
+		this.ab = distanceTo(b);
  		
 
-		this.bc = distanceTo(b,c);
+		this.bc = distanceTo(c);
 		
 
-		this.ca = distanceTo(c,a);
+		this.ca = distanceTo(a);
 		
 
 		Side side = new Side();
@@ -73,33 +76,40 @@ public class Triangle {
 
 		
 		double value;
-		if ((ab > 0) & (bc > 0) & (ca > 0)) {
-			if ((ab + bc > ca)&(bc + ca > ab)&(ca + bc > ab)) {
-				value = (b.x - a.x)*(c.y - a.y)-(c.x - a.x)*(b.y-a.y);
-				s = Math.abs(value)/2;
-				
-				
-			}
-			else {
-				System.out.println("The triangle does not exist.");				
-			}
-		}
-		else {
-			System.out.println("The triangle does not exist.");
-		}
+		double p;
+		double s = -1;
+		if (isExists(ab,bc,ca)){
+				p = (ab + bc + ca)/2;
+				s = Math.sqrt(p * (p - ab)*(p - bc)*(p - ca));
+		}		
 		return s;
 	}
 
 	
 
-	public double distanceTo(Point pointA, Point pointB) {
-		double value;
-		value =	(pointB.x - pointA.x)*(pointB.x - pointA.x) + (pointB.y - pointA.y)*(pointB.y - pointA.y);
+	public double distanceTo(Point pointB) {
+		Point pointA = this.tempPoint;
+		double value =	(pointB.x - pointA.x)*(pointB.x - pointA.x) + (pointB.y - pointA.y)*(pointB.y - pointA.y);
 		value = Math.sqrt(value);
+		this.tempPoint = pointB;
 		return value;
  	
 	}
 
-			
+	public boolean	isExists(double ab, double bc, double ca){
 	
+		if ((ab > 0) & (bc > 0) & (ca > 0)) {
+			if ((ab + bc > ca)&(bc + ca > ab)&(ca + bc > ab)) {
+				return true;
+			}
+			else {
+				
+				return false;	
+			}
+		}	
+		else {
+			
+			return false;
+		}
+	}	
 }

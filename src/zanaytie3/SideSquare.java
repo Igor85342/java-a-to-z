@@ -12,10 +12,9 @@ public class SideSquare{
 		boolean checkSideone = side.maxtwo(ab,bc);
 		boolean checkSidetwo = side.maxtwo(ab,cd);
 		boolean checkSidethree = side.maxtwo(ab,da);
-
-		if (checkSideone && checkSidetwo && checkSidethree) {
-			checkSide = true;	
-		}
+		
+		checkSide = checkSideone && checkSidetwo && checkSidethree ? true : false ;
+		
 		return checkSide;
 		
 	}
