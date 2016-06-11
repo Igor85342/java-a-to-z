@@ -10,13 +10,13 @@ public class Point {
 		this.y = y;
 	}
 	
-	public void distanceTo(Point a,Point b) {
-		double value;
-		value =	(b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y);
-		value = Math.sqrt(value);
- 		System.out.println(value);
-	
+	public double distanceTo(Point pointB) {
 
+		double value =	(pointB.x - x)*(pointB.x - x) + (pointB.y - y)*(pointB.y - y);
+		return value = Math.sqrt(value);
+		
+		
+ 	
 	}
 
 }
