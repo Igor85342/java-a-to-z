@@ -7,9 +7,9 @@ public class Side{
 	public double ca;
 	
 	public static void main(String[] args){
-		Point a = new Point(5,7);
-		Point b = new Point(4,10);
-		Point c = new Point(8,2);
+		Point a = new Point(200,8);
+		Point b = new Point(2,2);
+		Point c = new Point(100,53);
 		
 		Side side = new Side();	
 		
@@ -36,13 +36,13 @@ public class Side{
 
 	public boolean max(double ab, double bc, double ca) {
 	
-		return (maxtwo(ab,bc) && maxtwo(ab,ca)) ? true : false ;
+		return (maxtwo(ab,bc) && maxtwo(ab,ca)) ;
 		
 	}
 
 	public boolean maxtwo(double ab, double bc){
 	
-		return ab >=bc ? true : false;	
+		return ab >=bc;	
 			
 	}
 	
