@@ -9,18 +9,26 @@ public class Factorial{
 		
 		
 		int step = 10;
+		
+		Factorial factorial = new Factorial();
+		
+		
+        	int value = factorial.calculationFactorial(step);
+		System.out.println(value);
+	
+	}
+	
+	public int calculationFactorial(int step){
 		int value = 1;	
 		for (int i = 1; i < step +1 ; i++) {
 
 			value = value * i;	
 		}
-        
-		System.out.println(value);
-		
-		
+		return value;
+	}
 		
 		
 
-	}
+	
 }
 

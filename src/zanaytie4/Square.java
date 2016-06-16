@@ -3,23 +3,29 @@ package zanaytie4;
 import static java.lang.Math.*;
 public class Square{
 
-	 double a;
-	 double b;
-	 double c;
-
-	Square (double a, double b, double c) {
-
-	this.a = a ;
-	this.b = b ;
-	this.c = c ;
-
-	}
+	
+	double x1;
+	double x2;
 
 	
-	public void floatCalculate(double step){
+
+	public static void main(String[] args){
+		double a = 1;
+		double b = -5;
+		double c  = 3;
+		double step = Double.valueOf(args[0]);
+		Square square = new Square();	
+		square.floatCalculate(a,b,c,step);
+
+		for (double i = square.x1; i <= square.x2; i = i + step){
+				System.out.println(i);	
+			}
+		
+	}
+
+	public void floatCalculate(double a, double b, double c, double step){
 		double  d;
-		double x1;
-		double x2;
+		
 		System.out.println(a);	
 		d = Math.pow(b,2) - 4 * a * c;
 		
@@ -32,12 +38,10 @@ public class Square{
 		}
 		
 		if ( d > 0 ) {
-			x1 = (- b - sqrt(d))/ 2 * a;	
-			x2 = (- b + sqrt(d))/ 2 * a;	
+			this.x1 = (- b - sqrt(d))/ 2 * a;	
+			this.x2 = (- b + sqrt(d))/ 2 * a;	
 			
-			for (double i = x1; i <= x2; i = i + step){
-				System.out.println(i);	
-			}
+			
 		}
 		
 		
