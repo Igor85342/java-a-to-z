@@ -28,18 +28,20 @@ public class Square{
 		double x2 = Double.valueOf(args[4]);
 		double step = Double.valueOf(args[5]);
 		
-		int x =4;
+		
  
 		Square square = new Square(a,b,c);	
-		float y = square.calculate(x);
-		System.out.println(y);
-		for (double i = x1; i <= x2; i = i + step){
-				System.out.println(i);	
+		
+		
+		for ( double i = x1; i <= x2; i = i + step){
+
+				float y = square.calculate(i);
+				System.out.println(y);	
 		}
 		
 	}
 
-	public float calculate(int x){
+	public float calculate(double x){
 		
 		return (float)(this.a * Math.pow(x,2) + this.b * x + this.c);
 		
