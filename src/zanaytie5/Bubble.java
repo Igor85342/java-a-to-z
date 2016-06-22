@@ -26,7 +26,7 @@ public class Bubble{
 	public void outputArray(int[] values){
 		
 		for (int value : values ) {
-			System.out.print(value + " ");
+			System.out.printf("%d ", value);;
 		}
 	}
 	public int[] sorting(int[] values){
