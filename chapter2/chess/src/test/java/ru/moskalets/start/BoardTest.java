@@ -38,7 +38,7 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void whenPathOccupiedAnotherPieceReturnTrue(){
+	public void whenPathOccupiedAnotherPieceReturnFalse(){
 		
 		Board board = new Board();
 		Cell source = new Cell(2,2);
