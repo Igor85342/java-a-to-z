@@ -5,6 +5,16 @@
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
+	<properties>
+		<maven.compiler.sourse>1.8</maven.compiler.sourse>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEcoding>UTF-8</project.build.sourceEcoding>
+	</properties>
+
+	<modules>
+		<module>chapter2</module>
+	</modules>
+
 	<dependencies>
 		<dependency>
     			<groupId>junit</groupId>
@@ -12,4 +22,17 @@
     			<version>4.12</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<compilerVersion>1.8</compilerVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -6,8 +6,16 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * TwoArraysTest - Tests the class TwoArrays.
+ * @author Igor Moskalets
+ * @since 09.02.2017
+ */
 public class TwoArraysTest{
-	
+	/**
+	 * Tests the case where in the second array is a greater element.
+	 * Testing method sumTwoArrays.
+	 */
 	@Test
 	public void whenElementsSecondArrayMaxReturnOneMassive(){
 		TwoArrays tA = new TwoArrays();
@@ -17,7 +25,11 @@ public class TwoArraysTest{
 		int[] result = tA.sumTwoArrays(first,second);
 		Assert.assertThat(resultTest, is(result));
 	}
-	
+
+	/**
+	 * Tests the case where in the first array is a greater element.
+	 * Testing method sumTwoArrays
+	 */
 	@Test
 	public void whenElementsFirstArrayMaxReturnOneMassive(){
 		TwoArrays tA = new TwoArrays();

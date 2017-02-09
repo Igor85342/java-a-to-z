@@ -1,7 +1,16 @@
 package ru.moskalets;
-
+/**
+ * TwoArrays - The solution of the problem of the addition of two sorted arrays.
+ * @author Igor Moskalets
+ * @since 09.02.2017
+ */
 public class TwoArrays{
-	
+	/**
+	 * The method adds two sorted array.
+	 * @param first - The first sorted array.
+	 * @param second - The second sorted array.
+	 * @return The sum of two sorted arrays.
+	 */
 	public int[] sumTwoArrays(int[] first, int[] second){
 		int[] result = new int[first.length + second.length];
 		int i = 0;
