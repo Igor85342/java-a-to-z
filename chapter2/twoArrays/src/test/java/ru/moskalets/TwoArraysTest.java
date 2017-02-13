@@ -25,7 +25,6 @@ public class TwoArraysTest{
 		int[] result = tA.sumTwoArrays(first,second);
 		Assert.assertThat(resultTest, is(result));
 	}
-
 	/**
 	 * Tests the case where in the first array is a greater element.
 	 * Testing method sumTwoArrays
