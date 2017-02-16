@@ -13,17 +13,15 @@ public class CheakByteStream {
      * @return bollean result.
      */
     public boolean isNumber(InputStream in) throws IOException {
-
-        int number;
         boolean result = false;
         BufferedReader br = new BufferedReader (new InputStreamReader(in));
         try  {
-            number = br.read();
-            if (number % 2 == 0) {
+            if (br.read() % 2 == 0) {
                 result = true;
             }
         }
         catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         finally {
             br.close();
