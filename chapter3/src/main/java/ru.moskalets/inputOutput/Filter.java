@@ -14,7 +14,7 @@ public class Filter implements FileFilter {
         this.ext = ext.split(",");
     }
     /**
-     * The method filters the file with a specific format.
+     * The method compares the file format.
      * @param File pathname.
      * @return String.
      */
