@@ -28,10 +28,10 @@ public class Archiver {
         File inputDir = new File(this.pathInput);
         ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(this.pathOutput));
         try {
-        moveToDirectory(zout, inputDir);
+            moveToDirectory(zout, inputDir);
         }
-        catch (IOException e) {
-        System.out.println(e.getMessage());
+            catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         finally {
             zout.close();
@@ -45,21 +45,37 @@ public class Archiver {
      */
     public void moveToDirectory(ZipOutputStream zout, File inputDir) throws Exception{
         File[] files = inputDir.listFiles(new Filter(this.filterFormat));
-        for (File file: files){
-            if (file.isDirectory()){
-                moveToDirectory(zout, file);
-            } else {
-                FileInputStream fis= new FileInputStream(new File(file.getAbsolutePath()));
-                String parent = file.getParent().substring(file.getParent().lastIndexOf("\\") + 1);
-                zout.putNextEntry(new ZipEntry(parent + "\\" + file.getName()));
-                byte[] buffer = new byte[4048];
-                int length;
-                while((length = fis.read(buffer)) > 0) {
-                    zout.write(buffer, 0, length);
+        FileInputStream fis = null;
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    moveToDirectory(zout, file);
+                } else {
+                    try {
+                        fis = new FileInputStream(new File(file.getAbsolutePath()));
+                        String parent = file.getParent().substring(file.getParent().lastIndexOf("\\") + 1);
+                        zout.putNextEntry(new ZipEntry(parent + "\\" + file.getName()));
+                        byte[] buffer = new byte[4048];
+                        int length;
+                        while ((length = fis.read(buffer)) > 0) {
+                            zout.write(buffer, 0, length);
+                        }
+                    }
+                    catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    finally {
+                        try {
+                            if (fis != null) {
+                                fis.close();
+                            }
+                            zout.closeEntry();
+                        }
+                        catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 }
-                fis.close();
-                zout.closeEntry();
             }
-        }
+
     }
 }
