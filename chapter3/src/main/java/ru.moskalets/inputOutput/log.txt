@@ -1,18 +1,18 @@
-1
+11
 No!
-2
-Where?
-3
-What?
-stop
-4
-5
-6
-continue
-What thaaaaaa...
-7
-What thaaaaaa...
-8
-Where?
-9
+22
 Yes!
+33
+When?
+stoP
+44
+55
+66
+ConTinue
+No!
+77
+Why so serious?
+88
+Why so serious?
+00
+What thaaaaaa...

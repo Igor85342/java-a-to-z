@@ -17,6 +17,9 @@ public class ConsoleChat {
     private final String distance;
     private final Random random = new Random();
     private final Scanner scanner = new Scanner(System.in);
+    static final String EXIT = "exit";
+    static final String STOP = "stop";
+    static final String CONTINUE = "continue";
     public ConsoleChat(String source, String distance) {
     this.source = source;
     this.distance = distance;
@@ -37,23 +40,23 @@ public class ConsoleChat {
             String inputString="";
             boolean stopFlag = false;
             String outputString;
-            while (inputString.compareToIgnoreCase("Exit") != 0) {
+            while (EXIT.equalsIgnoreCase(inputString) == false) {
                 inputString = scanner.nextLine();
-                if (inputString.compareToIgnoreCase("stop") == 0){
+                if (STOP.equalsIgnoreCase(inputString)){
                     stopFlag = true;
                 }
-                if (inputString.compareToIgnoreCase("continue") == 0){
+                if (CONTINUE.equalsIgnoreCase(inputString)){
                     stopFlag = false;
                 }
-                if (stopFlag == false & inputString.compareToIgnoreCase("Exit") != 0 ) {
+                if (stopFlag == false & EXIT.equalsIgnoreCase(inputString) == false ) {
                     outputString = getPhrase();
                     System.out.println(outputString);
                     distanceFile = writingToFile(distanceFile, inputString, outputString);
                 }
-                if (stopFlag == true & inputString.compareToIgnoreCase("Exit") != 0 ) {
+                if (stopFlag == true & EXIT.equalsIgnoreCase(inputString) == false) {
                     distanceFile = writingToFile(distanceFile, inputString);
                 }
-                if (inputString.compareToIgnoreCase("Exit") == 0) {
+                if (EXIT.equalsIgnoreCase(inputString)) {
                     break;
                 }
             }
