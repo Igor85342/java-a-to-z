@@ -1,40 +1,70 @@
 package ru.moskalets.socket;
 
+import com.google.common.base.Joiner;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.Socket;
+
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 /**
  * ServerOracleTest - tests the class ServerOracle.
  * @author Igor Moskalets.
- * @since 14.04.2017.
+ * @since 21.04.2017.
  */
 public class ServerOracleTest {
-    @Test
+    private static final String LS = System.getProperty("line.separator");
+
+
     /**
-     * Checks which string method returns.
-     * Testing method answerToQuestion().
+     * Checks to see how the server responds to the questions.
+     * Keywords will be obtained a definite answer.
+     * Testing method runServerOracle().
      */
-    public void WhenEnterStringReturnAnotherString() {
-        ServerOracle serverOracle = new ServerOracle(7777);
-        String inStrFirst = "eXit";
-        String inStrSecond = "hellO";
-        String inStrTrird = "Name";
-        String inStrFourth = "couNtry";
-        String inStrFifth = "asdfklesfsf";
-        String expectedFirst = "Goodbye.";
-        String expectedSecond = "Hello, dear friend.";
-        String expectedTrird = "My name is Oracle.";
-        String expectedFourth = "I live in Russia.";
-        String expectedFifth = "I don't understand.";
-        String actualFirst = serverOracle.answerToQuestion(inStrFirst);
-        String actualSecond = serverOracle.answerToQuestion(inStrSecond);
-        String actualTrird = serverOracle.answerToQuestion(inStrTrird);
-        String actualFourth = serverOracle.answerToQuestion(inStrFourth);
-        String actualFifth = serverOracle.answerToQuestion(inStrFifth);
-        Assert.assertThat(expectedFirst,is(actualFirst));
-        Assert.assertThat(expectedSecond,is(actualSecond));
-        Assert.assertThat(expectedTrird,is(actualTrird));
-        Assert.assertThat(expectedFourth,is(actualFourth));
-        Assert.assertThat(expectedFifth,is(actualFifth));
+    public void testRunServerOracle(String input, String excepted) throws IOException {
+        Socket socket = mock(Socket.class);
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        when(socket.getInputStream()).thenReturn(in);
+        when(socket.getOutputStream()).thenReturn(out);
+        ServerOracle server = new ServerOracle(socket);
+        server.runServerOracle();
+        assertThat(out.toString(),is(excepted));
     }
+
+    @Test
+    public void WhenAskExitReturnGoodbyu() throws IOException {
+        this.testRunServerOracle( Joiner.on(LS).join("exit",""),
+                Joiner.on(LS).join("Goodbye.",""));
+    }
+    @Test
+    public void WhenAskHelloReturnHelloDearFriend() throws IOException {
+        this.testRunServerOracle( Joiner.on(LS).join("HellO","exit"),
+                Joiner.on(LS).join("Hello, dear friend.","Goodbye.",""));
+    }
+    @Test
+    public void WhenAskNameReturnMyNameOracle() throws IOException {
+        this.testRunServerOracle( Joiner.on(LS).join("Name","exit"),
+                Joiner.on(LS).join("My name is Oracle.","Goodbye.",""));
+    }
+    @Test
+    public void WhenAskCountryReturnLiveRussia() throws IOException {
+        this.testRunServerOracle( Joiner.on(LS).join("CoUntry","exit"),
+                Joiner.on(LS).join("I live in Russia.","Goodbye.",""));
+    }
+    @Test
+    public void WhenAskRandomReturnNotUnderstand() throws IOException {
+        this.testRunServerOracle( Joiner.on(LS).join("Random","exit"),
+                Joiner.on(LS).join("I don't understand.","Goodbye.",""));
+    }
+
+
 }
