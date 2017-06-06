@@ -59,7 +59,7 @@ public class PerformanceTestingCollections {
         Date start = new Date();
         Iterator iterator = collection.iterator();
         for (int i = 0; i < amount; i++){
-            while(iterator.hasNext()) {
+            if(iterator.hasNext()) {
                 iterator.next();
                 iterator.remove();
             }
