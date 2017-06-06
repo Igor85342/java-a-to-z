@@ -59,8 +59,10 @@ public class PerformanceTestingCollections {
         Date start = new Date();
         Iterator iterator = collection.iterator();
         for (int i = 0; i < amount; i++){
-            iterator.next();
-            iterator.remove();
+            while(iterator.hasNext()) {
+                iterator.next();
+                iterator.remove();
+            }
         }
         Date finish = new Date();
         return finish.getTime() - start.getTime();
