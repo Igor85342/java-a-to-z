@@ -34,31 +34,18 @@ public class ConvertList {
      */
     public int[][] toArray(List<Integer> list, int rows) {
         int column = list.size()/rows;
-        int rest = 0;
         if ((list.size() % rows) != 0){
-            rest = column - list.size()%rows;
             column++;
         }
         int[][] finalArray = new int[rows][column];
-        int itemRows = 0;
-        int itemColumn = 0;
         Iterator<Integer> iterator = list.iterator();
-        for (int i=0; i < list.size() + rest; i++ ) {
-            if (iterator.hasNext()) {
-                if (itemColumn < column) {
-                    finalArray[itemRows][itemColumn] = iterator.next() ;
-                    itemColumn++;
-                } else {
-                    itemRows++;
-                    itemColumn = 0;
-                    finalArray[itemRows][itemColumn] = iterator.next();
-                    itemColumn++;
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < column; j++) {
+                    if (iterator.hasNext()) {
+                        finalArray[i][j] = iterator.next();
+                    }
                 }
-            } else {
-                finalArray[itemRows][itemColumn] = 0;
-                itemColumn++;
             }
-        }
         return finalArray;
     }
 }
