@@ -2,6 +2,7 @@ package ru.moskalets.sorting.task1;
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -21,12 +22,9 @@ public class SortUserTest {
         User user2 = new User("Igor", 31);
         User user3 = new User("Robert", 18);
         List<User> list = Arrays.asList(user1, user2, user3);
-        TreeSet<User> expected = new TreeSet<User>();
-        expected.add(user3);
-        expected.add(user1);
-        expected.add(user2);
-        su.sort(list);
-        assertThat(su.getSetUsers().first().getName(), is("Robert"));
-        assertThat(su.getSetUsers().last().getName(), is("Igor"));
+        TreeSet<User> setUsers = new TreeSet<User>();
+        setUsers = su.sort(list);
+        assertThat(setUsers.first().getName(), is("Robert"));
+        assertThat(setUsers.last().getName(), is("Igor"));
     }
 }
