@@ -39,9 +39,8 @@ public class Tracker {
      * @return void.
      */
     public void addAccountToUser(User user, Account account) {
-        ArrayList<Account> tempList = new ArrayList<Account>();
-        if (this.users.containsKey(user) && !tempList.contains(account)){
-            tempList = this.users.get(user);
+        if (this.users.containsKey(user) && !this.users.get(user).contains(account)){
+            ArrayList<Account> tempList = this.users.get(user);
             tempList.add(account);
             this.users.put(user, tempList);
         }
@@ -81,11 +80,12 @@ public class Tracker {
      * @return boolean.
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount){
-        boolean flag = true;
+        boolean flag = false;
         if ((this.users.get(srcUser).contains(srcAccount)) && (this.users.get(dstUser).contains(dstAccount))&&((srcAccount.getValue() - amount)>=0)){
                 this.users.put(srcUser, changeValuesAccountMinus(srcUser, srcAccount,0-amount));
                 this.users.put(dstUser, changeValuesAccountMinus(dstUser, dstAccount, amount));
-        }else flag = false;
+                flag = true;
+        }
         return flag;
     }
     /**
@@ -97,11 +97,12 @@ public class Tracker {
      * @return boolean.
      */
     public boolean transferMoneyBetweenAccountsSameUser(User dstUser, Account srcAccount, Account dstAccount, double amount ){
-        boolean flag = true;
+        boolean flag = false;
         if ( (this.users.get(dstUser).contains(srcAccount)) && (this.users.get(dstUser).contains(dstAccount))&& ((srcAccount.getValue() - amount)>=0)){
             this.users.put(dstUser, changeValuesAccountMinus(dstUser,srcAccount,0-amount));
             this.users.put(dstUser, changeValuesAccountMinus(dstUser, dstAccount, amount));
-        } else flag = false;
+            flag = true;
+        }
         return flag;
     }
     /**
