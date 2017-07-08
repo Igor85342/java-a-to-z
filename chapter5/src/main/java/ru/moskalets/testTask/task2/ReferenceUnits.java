@@ -36,16 +36,18 @@ public class ReferenceUnits {
             public int compare(String st1, String st2){
                 int flag;
                 flag = st2.compareTo(st1);
-                if (st1.substring(0,2).equals(st2.substring(0,2))){
-                    if (st1.length() > 2 && st2.length() > 2){
+                String[] st1Arr = st1.split("\\\\");
+                String[] st2Arr = st2.split("\\\\");
+                if (st1Arr[0].equals(st2Arr[0])){
+                    if (st1Arr.length > 1 & st2Arr.length > 1 ){
                         flag = st2.compareTo(st1);
                     } else flag = st1.compareTo(st2);
-                    if (st1.length() >= 6 && st2.length() >= 6 ) {
-                            if (st1.length() != st2.length()) {
-                                if (st1.substring(0, 6).equals(st2.substring(0, 6))) {
-                                    flag = st1.compareTo(st2);
-                                }
+                    if (st1Arr.length >= 2 & st2Arr.length >= 2 ) {
+                        if (st1Arr.length != st2Arr.length) {
+                            if (st1Arr[1].equals(st2Arr[1])) {
+                                flag = st1.compareTo(st2);
                             }
+                        }
                     }
                 }
            return flag;
