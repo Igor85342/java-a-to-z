@@ -33,11 +33,12 @@ public class ReferenceUnits {
      */
     public List<String> sortDescending(List<String> units){
         Collections.sort(units, new Comparator<String>(){
+            String separator = "\\\\";
             public int compare(String st1, String st2){
                 int flag;
                 flag = st2.compareTo(st1);
-                String[] st1Arr = st1.split("\\\\");
-                String[] st2Arr = st2.split("\\\\");
+                String[] st1Arr = st1.split(this.separator);
+                String[] st2Arr = st2.split(this.separator);
                 if (st1Arr[0].equals(st2Arr[0])){
                     if (st1Arr.length > 1 & st2Arr.length > 1 ){
                         flag = st2.compareTo(st1);
