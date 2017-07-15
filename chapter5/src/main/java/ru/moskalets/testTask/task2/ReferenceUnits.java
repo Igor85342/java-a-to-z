@@ -33,25 +33,28 @@ public class ReferenceUnits {
      */
     public List<String> sortDescending(List<String> units){
         Collections.sort(units, new Comparator<String>(){
-            String separator = "\\\\";
             public int compare(String st1, String st2){
                 int flag;
                 flag = st2.compareTo(st1);
-                String[] st1Arr = st1.split(this.separator);
-                String[] st2Arr = st2.split(this.separator);
-                if (st1Arr[0].equals(st2Arr[0])){
-                    if (st1Arr.length > 1 & st2Arr.length > 1 ){
+                st1 = st1.concat("\\");
+                st2 = st2.concat("\\");
+                if (st1.substring(0, st1.indexOf("\\")).equals(st2.substring(0, st2.indexOf("\\")))) {
+                    if (counter(st1) > 1 & counter(st2) > 1) {
                         flag = st2.compareTo(st1);
                     } else flag = st1.compareTo(st2);
-                    if (st1Arr.length >= 2 & st2Arr.length >= 2 ) {
-                        if (st1Arr.length != st2Arr.length) {
-                            if (st1Arr[1].equals(st2Arr[1])) {
+                    if (counter(st1) >= 2 & counter(st2) >= 2) {
+                        if (counter(st1) != counter(st2)) {
+                            if (st1.substring(st1.indexOf("\\") + 1, st1.indexOf("\\",st1.indexOf("\\")+1)).equals(st2.substring(st2.indexOf("\\") + 1, st2.indexOf("\\",st2.indexOf("\\")+1)))) {
                                 flag = st1.compareTo(st2);
                             }
                         }
                     }
                 }
            return flag;
+            }
+            public int counter(String string){
+                int replace = string.length() - string.replace("\\", "").length();
+                return replace;
             }
         });
         return units;
