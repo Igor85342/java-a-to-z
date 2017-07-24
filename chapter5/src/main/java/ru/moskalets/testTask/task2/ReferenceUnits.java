@@ -1,6 +1,4 @@
 package ru.moskalets.testTask.task2;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,26 +34,22 @@ public class ReferenceUnits {
             public int compare(String st1, String st2){
                 int flag;
                 flag = st2.compareTo(st1);
-                st1 = st1.concat("\\");
-                st2 = st2.concat("\\");
-                if (st1.substring(0, st1.indexOf("\\")).equals(st2.substring(0, st2.indexOf("\\")))) {
-                    if (counter(st1) > 1 & counter(st2) > 1) {
+                Dep st1Arr = new Dep(st1.split("\\\\"));
+                Dep st2Arr = new Dep(st2.split("\\\\"));
+                if (st1Arr.getDeps()[0].equals(st2Arr.getDeps()[0])){
+                    if (st1Arr.getLength() > 1 & st2Arr.getLength() > 1 ){
                         flag = st2.compareTo(st1);
                     } else flag = st1.compareTo(st2);
-                    if (counter(st1) >= 2 & counter(st2) >= 2) {
-                        if (counter(st1) != counter(st2)) {
-                            if (st1.substring(st1.indexOf("\\") + 1, st1.indexOf("\\",st1.indexOf("\\")+1)).equals(st2.substring(st2.indexOf("\\") + 1, st2.indexOf("\\",st2.indexOf("\\")+1)))) {
+                    if (st1Arr.getLength() >= 2 & st2Arr.getLength() >= 2 ) {
+                        if (st1Arr.getLength() != st2Arr.getLength()) {
+                            if (st1Arr.getDeps()[1].equals(st2Arr.getDeps()[1])) {
                                 flag = st1.compareTo(st2);
                             }
                         }
                     }
                 }
-           return flag;
-            }
-            public int counter(String string){
-                int replace = string.length() - string.replace("\\", "").length();
-                return replace;
-            }
+                        return flag;
+                    }
         });
         return units;
     }
