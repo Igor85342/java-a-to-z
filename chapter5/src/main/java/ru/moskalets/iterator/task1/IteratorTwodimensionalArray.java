@@ -17,20 +17,7 @@ public class IteratorTwodimensionalArray implements Iterator {
      * @return boolean.
      */
     public boolean hasNext(){
-        boolean cheak = false;
-        if (this.values.length > indexX){
-            if (this.values[this.indexX].length - 1 > this.indexY){
-                cheak = true;
-            } else {
-                if (this.values.length - 1 > this.indexX){
-                    cheak = true;
-                }
-            }
-        }
-        if ((this.values.length - 1 == this.indexX) && (this.values[this.indexX].length - 1 == this.indexY)){
-            cheak = true;
-        }
-        return cheak;
+        return ((this.values.length - 1 >= this.indexX) & (this.values[this.indexX].length > this.indexY));
     }
     /**
      * This method returns the next element of the array.
@@ -44,9 +31,10 @@ public class IteratorTwodimensionalArray implements Iterator {
             if (values.length -1 > indexX){
                 this.indexX++;
                 this.indexY = 0;
-            } else { this.indexX++; }
+            } else {
+                //this.indexX++;
+                this.indexY ++; }
         }
-
         return result;
     }
 }
