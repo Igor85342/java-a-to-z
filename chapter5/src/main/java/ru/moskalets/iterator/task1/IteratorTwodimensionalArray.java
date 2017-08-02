@@ -32,7 +32,6 @@ public class IteratorTwodimensionalArray implements Iterator {
                 this.indexX++;
                 this.indexY = 0;
             } else {
-                //this.indexX++;
                 this.indexY ++; }
         }
         return result;
