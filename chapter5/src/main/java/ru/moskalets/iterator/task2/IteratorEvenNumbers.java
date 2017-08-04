@@ -21,8 +21,10 @@ public class IteratorEvenNumbers implements Iterator {
     @Override
     public boolean hasNext() {
         boolean cheak =  false;
-        if (this.values[this.index] % 2 == 0){
+        for (int i = this.index; i < this.values.length; i++)
+        if (this.values[i] % 2 == 0){
             cheak = true;
+            break;
         }
         return cheak;
     }

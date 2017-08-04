@@ -21,11 +21,23 @@ public class IteratorEvenNumbersTest {
         assertThat(result, is(14));
     }
     /**
-     * In this test, the caret points to the last even number. Called two times method hasNext().
-     * In the result, check that the array is not left even numbers.
+     * TThis test checks whether the array after the pointer is an even number, and returns true.
      */
     @Test
-    public void whenCheckNextPositionShouldReturnContantValue(){
+    public void WhenArrayHasAnEvenNumberAfterPointerReturnsTrue(){
+        IteratorEvenNumbers ien = new IteratorEvenNumbers(new int[]{2,5,7,9,10,14,3,2});
+        ien.next();
+        ien.next();
+        ien.next();
+        ien.hasNext();
+        boolean result = ien.hasNext();
+        assertThat(result,is(true));
+    }
+    /**
+     * This test checks whether the array is an even number, and returns false.
+     */
+    @Test
+    public void WhenArrayHasNoEvenNumbersAfterPointerReturnsFalse(){
         IteratorEvenNumbers ien = new IteratorEvenNumbers(new int[]{2,5,7,9,10,14,3});
         ien.next();
         ien.next();
