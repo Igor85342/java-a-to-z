@@ -42,6 +42,33 @@ public class ConverterTest {
         assertThat(result, is(true));
     }
     /**
+     * Test checks the case when the iterator is nested in one the iterator is the next item. Then returns "true".
+     */
+    @Test
+    public void whenIteratorInOneNestedIteratorReturnsTrue(){
+        Iterator<Iterator<Integer>> it = Arrays.asList(
+                Collections.singletonList(1).iterator()
+        ).iterator();
+        Iterator<Integer> convert = new Converter().convert(it);
+        convert.hasNext();
+        boolean result = convert.hasNext();
+        assertThat(result, is(true));
+    }
+    /**
+     * Test checks the case when the iterator is nested in one iterator and following item no. Then it returns "false".
+     */
+    @Test
+    public void whenIteratorInOneNestedIteratorReturnsFalse(){
+        Iterator<Iterator<Integer>> it = Arrays.asList(
+                Collections.singletonList(1).iterator()
+        ).iterator();
+        Iterator<Integer> convert = new Converter().convert(it);
+        convert.next();
+        convert.hasNext();
+        boolean result = convert.hasNext();
+        assertThat(result, is(false));
+    }
+    /**
      * Test checks whether there are more elements in the iterator and returns false.
      */
     @Test
