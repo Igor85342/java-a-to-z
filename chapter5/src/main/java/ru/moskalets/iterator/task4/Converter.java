@@ -24,7 +24,11 @@ public class Converter {
              */
             @Override
             public boolean hasNext() {
-                return Converter.this.it.hasNext();
+                boolean cheak = false;
+                if (!Converter.this.it.hasNext()){
+                    if (Converter.this.iterator.hasNext()) cheak = true;
+                } else cheak = true;
+                return cheak ;
             }
             /**
              * The method returns the next element.
@@ -34,12 +38,12 @@ public class Converter {
             public Integer next() {
                 Integer result;
                 if (Converter.this.iterator == null){
-                     iterator = Converter.this.it.next();
-                } if (iterator.hasNext()){
-                    result = iterator.next();
+                    Converter.this.iterator = Converter.this.it.next();
+                } if (Converter.this.iterator.hasNext()){
+                    result = Converter.this.iterator.next();
                 } else {
-                    iterator = Converter.this.it.next();
-                    result = iterator.next();
+                    Converter.this.iterator = Converter.this.it.next();
+                    result = Converter.this.iterator.next();
                 }
                 return result;
             }

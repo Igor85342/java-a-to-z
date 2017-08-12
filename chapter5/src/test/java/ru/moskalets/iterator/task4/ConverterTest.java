@@ -15,14 +15,14 @@ public class ConverterTest {
     @Test
     public void whenSelectElementSecondIteratorReturnsElement() {
         Iterator<Iterator<Integer>> it = Arrays.asList(
-               Collections.singletonList(1).iterator(),
-                Collections.singletonList(2).iterator(),
-                Collections.singletonList(3).iterator()
+                Arrays.asList(1, 2).iterator(),
+                Arrays.asList(3, 4).iterator()
         ).iterator();
         Iterator<Integer> convert = new Converter().convert(it);
         convert.next();
+        convert.next();
         int result = convert.next();
-        assertThat(result, is(2));
+        assertThat(result, is(3));
     }
     /**
      * Test checks whether there are more elements in the iterator and returns true.
@@ -47,26 +47,13 @@ public class ConverterTest {
     @Test
     public void whenIteratorInOneNestedIteratorReturnsTrue(){
         Iterator<Iterator<Integer>> it = Arrays.asList(
-                Collections.singletonList(1).iterator()
-        ).iterator();
-        Iterator<Integer> convert = new Converter().convert(it);
-        convert.hasNext();
-        boolean result = convert.hasNext();
-        assertThat(result, is(true));
-    }
-    /**
-     * Test checks the case when the iterator is nested in one iterator and following item no. Then it returns "false".
-     */
-    @Test
-    public void whenIteratorInOneNestedIteratorReturnsFalse(){
-        Iterator<Iterator<Integer>> it = Arrays.asList(
-                Collections.singletonList(1).iterator()
+                Arrays.asList(1, 1).iterator()
         ).iterator();
         Iterator<Integer> convert = new Converter().convert(it);
         convert.next();
         convert.hasNext();
         boolean result = convert.hasNext();
-        assertThat(result, is(false));
+        assertThat(result, is(true));
     }
     /**
      * Test checks whether there are more elements in the iterator and returns false.
@@ -74,16 +61,32 @@ public class ConverterTest {
     @Test
     public void whenIteratorNoElementsReturnsFalse() {
         Iterator<Iterator<Integer>> it = Arrays.asList(
-                Collections.singletonList(1).iterator(),
-                Collections.singletonList(2).iterator(),
-                Collections.singletonList(3).iterator()
+                Arrays.asList(1, 1).iterator(),
+                Arrays.asList(1, 1).iterator(),
+                Arrays.asList(1, 1).iterator()
         ).iterator();
         Iterator<Integer> convert = new Converter().convert(it);
+        convert.next();
+        convert.next();
+        convert.next();
         convert.next();
         convert.next();
         convert.next();
         convert.hasNext();
         boolean result = convert.hasNext();
         assertThat(result, is(false));
+    }
+    /**
+     * Test checks the case when the iterator is nested in one iterator and following item no. Then it returns "false".
+     */
+    @Test
+    public void whenIteratorInOneNestedIteratorReturnsFalse(){
+        Iterator<Iterator<Integer>> it = Arrays.asList(
+                Arrays.asList(1, 1).iterator()
+        ).iterator();
+        Iterator<Integer> convert = new Converter().convert(it);
+        convert.next();
+        convert.next();
+        assertThat(convert.hasNext(), is(false));
     }
 }
