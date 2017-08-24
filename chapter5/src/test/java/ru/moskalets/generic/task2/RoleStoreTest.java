@@ -15,7 +15,7 @@ public class RoleStoreTest {
      */
     @Test
     public void whenAddedUserIsReturnedArrayWithUser(){
-        RoleStore<User> rs = new RoleStore<User>(10);
+        RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         assertThat(rs.getValues().get(0), is(new Role("First")));
     }
@@ -24,7 +24,7 @@ public class RoleStoreTest {
      */
     @Test
     public void whenUpdateUserReturnUpdatedUser(){
-        RoleStore<User> rs = new RoleStore<User>(10);
+        RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         rs.updateValue(0, new Role("First Updated"));
         assertThat(rs.getValues().get(0), is(new Role("First Updated")));
@@ -35,7 +35,7 @@ public class RoleStoreTest {
      */
     @Test
     public void  whenRemovedUserReturnsNextUser(){
-        RoleStore<User> rs = new RoleStore<User>(10);
+        RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         rs.addValue(new Role("Second"));
         rs.deleteValue(0);
