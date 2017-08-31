@@ -15,7 +15,7 @@ public class SortUserTest {
      * Checks that the age of first and last element of TreeSet was the least and the largest, respectively.
      */
     @Test
-    public void whenInputListReturnSortedToAgeSet(){
+    public void whenInputListReturnSortedToAgeSet() {
         SortUser su = new SortUser();
         User user1 = new User("Ivan", 25);
         User user2 = new User("Igor", 31);
@@ -30,7 +30,7 @@ public class SortUserTest {
      * Sorts in alphabetical order the names of the users.
      */
     @Test
-    public void whenSortedToNamesReturnList(){
+    public void whenSortedToNamesReturnList() {
         SortUser su = new SortUser();
         User user1 = new User("Ivan", 25);
         User user2 = new User("Igor", 31);
@@ -44,7 +44,7 @@ public class SortUserTest {
      * Sorts in alphabetical order the names of the users.If the names are the same, compares the age.
      */
     @Test
-    public void whenSortedToNamesAndAgeReturnList(){
+    public void whenSortedToNamesAndAgeReturnList() {
         SortUser su = new SortUser();
         User user1 = new User("Ivan", 25);
         User user2 = new User("Igor", 31);

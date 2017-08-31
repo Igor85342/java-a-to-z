@@ -2,7 +2,6 @@ package ru.moskalets.sorting.task1;
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -16,7 +15,7 @@ public class SortUserTest {
      * Checks that the age of first and last element of TreeSet was the least and the largest, respectively.
      */
     @Test
-    public void whenInputListReturnSortedToAgeSet(){
+    public void whenInputListReturnSortedToAgeSet() {
         SortUser su = new SortUser();
         User user1 = new User("Ivan", 25);
         User user2 = new User("Igor", 31);
