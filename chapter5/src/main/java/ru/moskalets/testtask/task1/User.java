@@ -1,4 +1,4 @@
-package ru.moskalets.testTask.task1;
+package ru.moskalets.testtask.task1;
 
 /**
  * The class stores information about user name and number of his passport.
@@ -6,23 +6,46 @@ package ru.moskalets.testTask.task1;
  * Since 15.06.2017
  */
 public class User {
+    /**
+     * Name.
+     */
     private String name;
+    /**
+     * Passport.
+     */
     private String passport;
-    public User(String name, String passport){
+
+    /**
+     *
+     * @param name Name user.
+     * @param passport Passport user.
+     */
+    public User(String name, String passport) {
         this.name = name;
         this.passport = passport;
     }
-    public String getName(){
+
+    /**
+     * Return name.
+     * @return String
+     */
+    public String getName() {
         return this.name;
     }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
         return passport != null ? passport.equals(user.passport) : user.passport == null;
     }
 
