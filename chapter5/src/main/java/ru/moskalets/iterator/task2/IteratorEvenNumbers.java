@@ -9,9 +9,19 @@ import java.util.Iterator;
  * Since 01.08.2017
  */
 public class IteratorEvenNumbers implements Iterator {
+    /**
+     * Values - int[].
+     */
     private final int[] values;
+    /**
+     * Index.
+     */
     private int index;
-    public IteratorEvenNumbers(final int[] values){
+    /**
+     * Constructor.
+     * @param values Numbers.
+     */
+    public IteratorEvenNumbers(final int[] values) {
         this.values = values;
     }
     /**
@@ -21,10 +31,11 @@ public class IteratorEvenNumbers implements Iterator {
     @Override
     public boolean hasNext() {
         boolean cheak =  false;
-        for (int i = this.index; i < this.values.length; i++)
-        if (this.values[i] % 2 == 0){
-            cheak = true;
-            break;
+        for (int i = this.index; i < this.values.length; i++) {
+            if (this.values[i] % 2 == 0) {
+                cheak = true;
+                break;
+            }
         }
         return cheak;
     }
@@ -34,7 +45,7 @@ public class IteratorEvenNumbers implements Iterator {
      */
     @Override
     public Object next() {
-        while (this.values[this.index] % 2 != 0){
+        while (this.values[this.index] % 2 != 0) {
             this.index++;
         }
         return this.values[this.index++];

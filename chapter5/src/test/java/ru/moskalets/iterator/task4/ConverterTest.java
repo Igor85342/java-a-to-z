@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 /**
  * Created by Пользователь on 06.08.2017.
  */
@@ -45,7 +45,7 @@ public class ConverterTest {
      * Test checks the case when the iterator is nested in one the iterator is the next item. Then returns "true".
      */
     @Test
-    public void whenIteratorInOneNestedIteratorReturnsTrue(){
+    public void whenIteratorInOneNestedIteratorReturnsTrue() {
         Iterator<Iterator<Integer>> it = Arrays.asList(
                 Arrays.asList(1, 1).iterator()
         ).iterator();
@@ -80,7 +80,7 @@ public class ConverterTest {
      * Test checks the case when the iterator is nested in one iterator and following item no. Then it returns "false".
      */
     @Test
-    public void whenIteratorInOneNestedIteratorReturnsFalse(){
+    public void whenIteratorInOneNestedIteratorReturnsFalse() {
         Iterator<Iterator<Integer>> it = Arrays.asList(
                 Arrays.asList(1, 1).iterator()
         ).iterator();

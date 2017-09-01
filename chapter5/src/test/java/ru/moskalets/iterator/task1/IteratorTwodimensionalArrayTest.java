@@ -13,12 +13,12 @@ public class IteratorTwodimensionalArrayTest {
      * In the test four times invoked the next() method and the result is the fourth element of the array.
      */
     @Test
-    public void whenGetNextCallShouldPointerForward(){
-        IteratorTwodimensionalArray ita = new IteratorTwodimensionalArray(new int[][]{{0,1},{2,3}});
+    public void whenGetNextCallShouldPointerForward() {
+        IteratorTwodimensionalArray ita = new IteratorTwodimensionalArray(new int[][]{{0, 1}, {2, 3}});
         ita.next();
         ita.next();
         ita.next();
-        int result = (Integer)ita.next();
+        int result = (Integer) ita.next();
         assertThat(result, is(3));
     }
     /**
@@ -27,14 +27,14 @@ public class IteratorTwodimensionalArrayTest {
      * The method returns "false". Method hasNext() is called twice.
      */
     @Test
-    public void whenCheckNextPositionShouldReturnContantValue(){
-        IteratorTwodimensionalArray ita = new IteratorTwodimensionalArray(new int[][]{{0,1},{2,3}});
+    public void whenCheckNextPositionShouldReturnContantValue() {
+        IteratorTwodimensionalArray ita = new IteratorTwodimensionalArray(new int[][]{{0, 1}, {2, 3}});
         ita.next();
         ita.next();
         ita.next();
         ita.next();
         ita.hasNext();
         boolean result = ita.hasNext();
-        assertThat(result,is(false));
+        assertThat(result, is(false));
     }
 }

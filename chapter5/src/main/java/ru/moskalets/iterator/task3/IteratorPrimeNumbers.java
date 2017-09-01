@@ -6,9 +6,19 @@ import java.util.Iterator;
  * Since 06.08.2017
  */
 public class IteratorPrimeNumbers implements Iterator {
+    /**
+     * Value.
+     */
     private final int[] value;
+    /**
+     * Index.
+     */
     private int index;
-    public IteratorPrimeNumbers(int[] value){
+    /**
+     * Constructor.
+     * @param value Array number.
+     */
+    public IteratorPrimeNumbers(int[] value) {
         this.value = value;
     }
     /**
@@ -18,8 +28,8 @@ public class IteratorPrimeNumbers implements Iterator {
     @Override
     public boolean hasNext() {
         boolean cheak = false;
-        for (int i = index; i < this.value.length; i++){
-            if (thisPrimeNumber(this.value[i])){
+        for (int i = index; i < this.value.length; i++) {
+            if (thisPrimeNumber(this.value[i])) {
                 cheak = true;
                 break;
             }
@@ -32,23 +42,23 @@ public class IteratorPrimeNumbers implements Iterator {
      */
     @Override
     public Object next() {
-        while (thisPrimeNumber(this.value[this.index])==false){
+        while (!thisPrimeNumber(this.value[this.index])) {
             this.index++;
         }
         return this.value[this.index++];
     }
     /**
      * This method checks whether a number is Prime.
-     * @param int number.
+     * @param number Number.
      * @return boolean.
      */
-    public boolean thisPrimeNumber(int number){
+    public boolean thisPrimeNumber(int number) {
         int cheak = 0;
-        for (int i=1; i!=number; i++){
-            if (number%i == 0 ){
+        for (int i = 1; i != number; i++) {
+            if (number % i == 0) {
                 cheak++;
             }
         }
-        return cheak <=1;
+        return cheak <= 1;
     }
 }

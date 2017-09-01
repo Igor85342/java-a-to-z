@@ -8,16 +8,23 @@ import java.util.Iterator;
  * Since 07.08.2017
  */
 public class Converter {
-    Iterator <Iterator<Integer>> it;
-    Iterator<Integer> iterator;
+    /**
+     * An iterator consisting of iterators.
+     */
+    private Iterator<Iterator<Integer>> it;
+    /**
+     * iteratorTemp.
+     */
+    private Iterator<Integer> iteratorTemp;
     /**
      * The method returns one iterator that is composed of a plurality of iterators.
-     * @param Iterator<Iterator<Integer>> it.
+     * @param it An iterator consisting of iterators.
      * @return Iterator<Integer>.
      */
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         this.it = it;
         return new Iterator<Integer>() {
+
             /**
              * The method checks whether the next element.
              * @return boolean.
@@ -25,10 +32,14 @@ public class Converter {
             @Override
             public boolean hasNext() {
                 boolean cheak = false;
-                if (!Converter.this.it.hasNext()){
-                    if (Converter.this.iterator.hasNext()) cheak = true;
-                } else cheak = true;
-                return cheak ;
+                if (!Converter.this.it.hasNext()) {
+                    if (Converter.this.iteratorTemp.hasNext()) {
+                        cheak = true;
+                    }
+                } else {
+                    cheak = true;
+                }
+                return cheak;
             }
             /**
              * The method returns the next element.
@@ -37,13 +48,14 @@ public class Converter {
             @Override
             public Integer next() {
                 Integer result;
-                if (Converter.this.iterator == null){
-                    Converter.this.iterator = Converter.this.it.next();
-                } if (Converter.this.iterator.hasNext()){
-                    result = Converter.this.iterator.next();
+                if (Converter.this.iteratorTemp == null) {
+                    Converter.this.iteratorTemp = Converter.this.it.next();
+                }
+                if (Converter.this.iteratorTemp.hasNext()) {
+                    result = Converter.this.iteratorTemp.next();
                 } else {
-                    Converter.this.iterator = Converter.this.it.next();
-                    result = Converter.this.iterator.next();
+                    Converter.this.iteratorTemp = Converter.this.it.next();
+                    result = Converter.this.iteratorTemp.next();
                 }
                 return result;
             }
