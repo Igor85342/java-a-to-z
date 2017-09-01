@@ -4,37 +4,55 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * Class implements a simple list. Implements the interface SimpleContainer.
+ * Class implements a simple list.
  * author Igor Moskalets
  * Since 22.08.2017
+ * @param <E>.
  */
 public class SimpleList<E> implements Iterable<E> {
+    /**
+     * container.
+     */
     private Object[] container;
+    /**
+     * index.
+     */
     private int index = 0;
     /**
      * The size of the collection by default.
      */
-    private final int DEFAULTSIZE = 10;
+    private static final int DEFAULTSIZE = 10;
+    /**
+     * iterator.
+     */
     private Iterator<E> iterator;
-    public SimpleList () {
+
+    /**
+     * Constructor.
+     */
+    public SimpleList() {
         this.container = new Object[this.DEFAULTSIZE];
     };
-    public SimpleList (int size) {
+    /**
+     * Constructor.
+     * @param size The size of the collection.
+     */
+    public SimpleList(int size) {
         this.container = new Object[size];
     }
     /**
      * The method adds a new item to the collection.
-     * @param Object o.
-     * @return void
+     * @param o The object that you are adding.
      */
     public void add(E o) {
-        if (this.index + 1 == this.container.length){
+        if (this.index + 1 == this.container.length) {
             expansionSizeArray();
         }
         this.container[index++] = o;
     }
     /**
      * This method returns the value of the element at index.
+     * @param pozition The position of the return element.
      * @return Object.
      */
     public E get(int pozition) {
@@ -50,16 +68,15 @@ public class SimpleList<E> implements Iterable<E> {
     }
     /**
      * The method increases the size of the collection two times.
-     * @return void
      */
-    public void expansionSizeArray(){
+    public void expansionSizeArray() {
         this.container = Arrays.copyOf(this.container, this.container.length * 2);
     }
     /**
      * Method returns all the elements of the collection.
      * @return Object[].
      */
-    public Object[] getContainer(){
+    public Object[] getContainer() {
         return this.container;
     }
 }

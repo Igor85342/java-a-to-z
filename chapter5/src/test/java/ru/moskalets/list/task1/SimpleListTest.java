@@ -3,7 +3,7 @@ package ru.moskalets.list.task1;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Testing the class SimpleList.
@@ -24,7 +24,7 @@ public class SimpleListTest {
      * This method tests the increase in the collection twice.
      */
     @Test
-    public void whenSizeArrayExpansionReturnSizeDoubled(){
+    public void whenSizeArrayExpansionReturnSizeDoubled() {
         SimpleList<String> sl = new SimpleList<String>(2);
         sl.expansionSizeArray();
         assertThat(sl.getContainer().length, is(4));
