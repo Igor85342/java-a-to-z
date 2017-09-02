@@ -1,21 +1,35 @@
 package ru.moskalets.generalizations.task3.start;
-import ru.moskalets.generalizations.task3.models.*;
 /**
  * The class displays the menu items.
  * author Igor Moskalets
  * Since 11.06.2017
  */
 public class StartUI {
-	private int[] ranges = new int[] {0,1,2,3,4,5,6,7};
+	/**
+	 * ranges.
+	 */
+	private int[] ranges = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
+	/**
+	 * input.
+	 */
 	private Input input;
-	public StartUI(Input input){
+
+	/**
+	 * StartUI.
+	 * @param input .
+	 */
+	public StartUI(Input input) {
 		this.input = input;
 	}
+
+	/**
+	 * init().
+	 */
 	public void init() {
 		Tracker tracker = new Tracker();
-		MenuTracker menu = new MenuTracker(this.input,tracker);
+		MenuTracker menu = new MenuTracker(this.input, tracker);
 		menu.fillActions();
-		UserAction deleteAction = new UserAction(){
+		UserAction deleteAction = new UserAction() {
 			public int key() {
 				return 8;
 			}
@@ -30,8 +44,13 @@ public class StartUI {
 		do {
 			menu.show();
 			menu.select(input.ask("select:", ranges));
-		} while(!"y".equals(this.input.ask("Exit?(y)")));
+		} while (!"y".equals(this.input.ask("Exit?(y)")));
 	}
+
+	/**
+	 * main.
+	 * @param args .
+	 */
 	public static void main(String[] args) {
 		Input input = new ValidateInput();
 		new StartUI(input).init();

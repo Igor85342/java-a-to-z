@@ -6,75 +6,189 @@ import java.util.ArrayList;
  * Since 09.06.2017
  */
 public class Item {
-	public String id;
-	public String name;
-	public String description;
-	public long create;
-	ArrayList<String> comments = new ArrayList();
-	public Item () {
+	/**
+	 * id.
+	 */
+	private String id;
+	/**
+	 * name.
+	 */
+	private String name;
+	/**
+	 * description.
+	 */
+	private String description;
+	/**
+	 * create.
+	 */
+	private long create;
+	/**
+	 * comments.
+	 */
+	private ArrayList<String> comments = new ArrayList();
+
+	/**
+	 * Constructor.
+	 */
+	public Item() {
 	}
-	public Item (String name, String description, long create) {
+
+	/**
+	 * Constructor.
+	 * @param name .
+	 * @param description .
+	 * @param create .
+	 */
+	public Item(String name, String description, long create) {
 		this.name = name;
 		this.description = description;
 		this.create = create;
 	}
-	public Item (String name, String description) {
+
+	/**
+	 * Constructor.
+	 * @param name .
+	 * @param description .
+	 */
+	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
 	}
-	public Item (String name, String description, String id) {
+
+	/**
+	 * Constructor.
+	 * @param name .
+	 * @param description .
+	 * @param id .
+	 */
+	public Item(String name, String description, String id) {
 		this.name = name;
 		this.description = description;
 		this.id = id;
 	}
-	public Item (String name, String description, String id, String comment) {
+
+	/**
+	 * Constructor.
+	 * @param name .
+	 * @param description .
+	 * @param id .
+	 * @param comment .
+	 */
+	public Item(String name, String description, String id, String comment) {
 		this.name = name;
 		this.description = description;
 		this.id = id;
 		this.comments.add(comment);
 	}
+
+	/**
+	 * Get name.
+	 * @return String.
+	 */
 	public String getName() {
 		return this.name;
 	}
+
+	/**
+	 * Get Description.
+	 * @return String.
+	 */
 	public String getDescription() {
 		return this.description;
 	}
+
+	/**
+	 * Get create.
+	 * @return Long.
+	 */
 	public Long getCreate() {
 		return this.create;
 	}
+
+	/**
+	 * Get Id.
+	 * @return String.
+	 */
 	public String getId() {
 		return this.id;
 	}
+
+	/**
+	 * Set id.
+	 * @param id .
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	/**
+	 * setName().
+	 * @param name .
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	/**
+	 * setDesc().
+	 * @param desc .
+	 */
 	public void setDesc(String desc) {
 		this.description = desc;
 	}
-	public void setCreate(long create){
-			this.create = create;
+
+	/**
+	 * setCreate().
+	 * @param create .
+	 */
+	public void setCreate(long create) {
+		this.create = create;
 	}
+
+	/**
+	 * getComments().
+	 * @return ArrayList<String>.
+	 */
 	public ArrayList<String> getComments() {
 		return this.comments;
 	}
-	public void setAllComments(ArrayList<String> comments){
+
+	/**
+	 * setAllComments().
+	 * @param comments .
+	 */
+	public void setAllComments(ArrayList<String> comments) {
 		this.comments = comments;
 	}
-	public void setComments(String comment){
+
+	/**
+	 * Set comments.
+	 * @param comment .
+	 */
+	public void setComments(String comment) {
 		this.comments.add(comment);
 	}
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		Item item = (Item) o;
-		if (create != item.create) return false;
-		if (id != null ? !id.equals(item.id) : item.id != null) return false;
-		if (name != null ? !name.equals(item.name) : item.name != null) return false;
-		if (description != null ? !description.equals(item.description) : item.description != null) return false;
+		if (create != item.create) {
+			return false;
+		}
+		if (id != null ? !id.equals(item.id) : item.id != null) {
+			return false;
+		}
+		if (name != null ? !name.equals(item.name) : item.name != null) {
+			return false;
+		}
+		if (description != null ? !description.equals(item.description) : item.description != null) {
+			return false;
+		}
 		return comments != null ? comments.equals(item.comments) : item.comments == null;
 	}
 	@Override

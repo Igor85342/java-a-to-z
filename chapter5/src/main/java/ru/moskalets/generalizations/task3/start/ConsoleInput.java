@@ -1,11 +1,33 @@
 package ru.moskalets.generalizations.task3.start;
-import java.util.*;
+import java.util.Scanner;
+
+/**
+ * Class ConsoleInput implements Input.
+ * @author Igor Moskalets.
+ * @since 02.09.2017.
+ */
 public class ConsoleInput implements Input {
-	private Scanner scanner = new Scanner (System.in);
+	/**
+	 * scanner.
+	 */
+	private Scanner scanner = new Scanner(System.in);
+
+	/**
+	 * ask().
+	 * @param question .
+	 * @return String.
+	 */
 	public String ask(String question) {
 		System.out.print(question);
 		return scanner.nextLine();
 	}
+
+	/**
+	 * ask().
+	 * @param question .
+	 * @param range .
+	 * @return int.
+	 */
 	public int ask(String question, int[] range) {
 		int key = Integer.valueOf(this.ask(question));
 		boolean exist = false;
@@ -19,6 +41,6 @@ public class ConsoleInput implements Input {
 			return key;
 		} else {
 			throw new MenuOutException("Out of menu range.");
-		}	
+		}
 	}
 }

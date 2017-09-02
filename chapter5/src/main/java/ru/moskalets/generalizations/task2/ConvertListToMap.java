@@ -11,13 +11,13 @@ import java.util.List;
 public class ConvertListToMap {
     /**
      * The method converts a list consisting of User objects in the Map.
-     * @param List<User> users.
+     * @param users .
      * @return HashMap<Integer, User>.
      */
     public HashMap<Integer, User> process(List<User> users) {
         HashMap<Integer, User> finalHashMap = new HashMap<Integer, User>();
-        for (User user: users){
-            finalHashMap.put(user.getID(),user);
+        for (User user: users) {
+            finalHashMap.put(user.getID(), user);
         }
         return finalHashMap;
     }
