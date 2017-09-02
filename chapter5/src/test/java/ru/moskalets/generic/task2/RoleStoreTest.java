@@ -2,7 +2,7 @@ package ru.moskalets.generic.task2;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Testing the method RoleStore.
@@ -14,7 +14,7 @@ public class RoleStoreTest {
      * This test checks methods addValue() and getValues. First added the Role then returns all the values.
      */
     @Test
-    public void whenAddedUserIsReturnedArrayWithUser(){
+    public void whenAddedUserIsReturnedArrayWithUser() {
         RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         assertThat(rs.getValues().get(0), is(new Role("First")));
@@ -23,7 +23,7 @@ public class RoleStoreTest {
      * This test checks the method updateValues(). Add a Role then modify it.
      */
     @Test
-    public void whenUpdateUserReturnUpdatedUser(){
+    public void whenUpdateUserReturnUpdatedUser() {
         RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         rs.updateValue(0, new Role("First Updated"));
@@ -34,7 +34,7 @@ public class RoleStoreTest {
      * Add two Roles, then delete the first, next, call first, and returns second.
      */
     @Test
-    public void  whenRemovedUserReturnsNextUser(){
+    public void  whenRemovedUserReturnsNextUser() {
         RoleStore<Role> rs = new RoleStore<Role>(10);
         rs.addValue(new Role("First"));
         rs.addValue(new Role("Second"));

@@ -1,10 +1,24 @@
 package ru.moskalets.generic.task2;
 
 /**
- * Created by Пользователь on 22.08.2017.
+ * The class implements the interface Store. Is the abstract store.
+ * @author Igor Moskalets
+ * @since 01.09.2017
+ * @param <T> .
  */
-public abstract class BaseStore <T extends Base> implements Store<T> {
-    public SimpleArray<T> values;
+public abstract class BaseStore<T extends Base> implements Store<T> {
+    /**
+     * values.
+     */
+    private SimpleArray<T> values;
+
+    /**
+     * Constructor.
+     * @param size .
+     */
+    protected BaseStore(int size) {
+        this.values = new SimpleArray(size);
+    }
     /**
      * This method returns a collection with the objects.
      * @return SimpleArray.
@@ -15,7 +29,7 @@ public abstract class BaseStore <T extends Base> implements Store<T> {
     }
     /**
      * This method adds a new object in the collection.
-     * @param Base value.
+     * @param value .
      */
     @Override
     public void addValue(T value) {
@@ -23,8 +37,8 @@ public abstract class BaseStore <T extends Base> implements Store<T> {
     }
     /**
      * This method update object in the collection.
-     * @param int position.
-     * @param Base value.
+     * @param position .
+     * @param value .
      */
     @Override
     public void updateValue(int position, T value) {
@@ -33,7 +47,7 @@ public abstract class BaseStore <T extends Base> implements Store<T> {
     /**
      * This method removes the object and moves the whole collection
      * right from the remote object by one element to the left.
-     * @param int position.
+     * @param position .
      */
     @Override
     public void deleteValue(int position) {

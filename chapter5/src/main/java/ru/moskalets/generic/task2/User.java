@@ -6,8 +6,15 @@ package ru.moskalets.generic.task2;
  * @since 18.08.2017
  */
 public class User extends Base {
-    public String id;
-    public User (String id) {
+    /**
+     * id.
+     */
+    private String id;
+    /**
+     * Constructor.
+     * @param id Id.
+     */
+    public User(String id) {
         super(id);
     }
 

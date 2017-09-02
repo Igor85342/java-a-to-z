@@ -6,29 +6,41 @@ package ru.moskalets.generic.task2;
  * @since 18.08.2017
  */
 public abstract class Base {
+    /**
+     * id.
+     */
     private String id;
-    public Base(String id){
-        this.id =id;
+
+    /**
+     * Constructor.
+     * @param id .
+     */
+    public Base(String id) {
+        this.id = id;
     }
     /**
      * This method returns the value of the field "Id".
      * @return String.
      */
-    public String getId(){
+    public String getId() {
         return this.id;
     }
     /**
      * This method populates the value of the Id field.
-     * @param String id.
+     * @param id .
      */
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Base base = (Base) o;
 
