@@ -1,8 +1,8 @@
-package ru.moskalets.collectionsFramework.task2;
+package ru.moskalets.collectionsframework.task2;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * PerformanceTestingCollectionsTest - Testing the method PerformanceTestingCollections.
@@ -17,8 +17,8 @@ public class PerformanceTestingCollectionsTest {
     public void returnTotalNumberOfElementsInLists() {
         PerformanceTestingCollections ptc = new PerformanceTestingCollections();
         ptc.runPerformanceTestingCollections();
-        assertThat(ptc.collectionsArrayList.size(), is(990000));
-        assertThat(ptc.collectionsLinkedList.size(), is(990000));
-        assertThat(ptc.collectionsTreeSet.size(), is(990000));
+        assertThat(ptc.getArrayList().size(), is(990000));
+        assertThat(ptc.getLinkedList().size(), is(990000));
+        assertThat(ptc.getTreeSet().size(), is(990000));
     }
 }
