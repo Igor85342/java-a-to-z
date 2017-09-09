@@ -6,7 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Testing the class BaseLinkedTest.
+ * Testing the class BaseLinkedList.
  * @author Igor Moskalets
  * @since 04.09.2017
  */
