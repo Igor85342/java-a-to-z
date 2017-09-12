@@ -12,6 +12,10 @@ public class Node<T> {
      */
     private T value;
     /**
+     * Previous element.
+     */
+    private Node<T> prev;
+    /**
      * Next element.
      */
     private Node<T> next;
@@ -26,10 +30,10 @@ public class Node<T> {
 
     /**
      * Constructor.
-     * @param next .
+     * @param prev .
      * @param value .
      */
-    public Node(Node next, T value) {
+    public Node(Node prev, T value) {
         this.next = next;
         this.value = value;
     }

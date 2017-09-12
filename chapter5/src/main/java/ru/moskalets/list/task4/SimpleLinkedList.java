@@ -36,7 +36,7 @@ public class SimpleLinkedList<T> {
      * @return boolean.
      */
     public boolean hasCycle() {
-        return this.first.equals(this.getLast().getNext());
+        return this.last.getNext() != null;
     }
 
     /**
@@ -57,4 +57,17 @@ public class SimpleLinkedList<T> {
         return this.last;
     }
 
+    /**
+     * Returns the element at position.
+     * @param pozition .
+     * @param <T> .
+     * @return Node.
+     */
+    public <T> Node get(int pozition) {
+        Node temp = first;
+        for (int i = 1; i < pozition; i++) {
+            temp = temp.getNext();
+        }
+        return temp;
+    }
 }
