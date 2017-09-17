@@ -51,6 +51,10 @@ public class SimpleLinkedListTest {
         sll.add(2);
         assertThat(sll.getLast().getValue(), is(2));
     }
+
+    /**
+     * The method checks the call of the second element.
+     */
     @Test
     public void whenListContainsMultipleItemsCallGetElementSecondPositionReturnsSeconeElemens() {
         SimpleLinkedList<Integer> sll = new SimpleLinkedList<>();
@@ -96,7 +100,7 @@ public class SimpleLinkedListTest {
         sll.add(2);
         sll.add(3);
         sll.add(4);
-        sll.getLast().setNext(sll.get(2));
+        sll.get(3).setNext(sll.get(2));
         assertThat(sll.hasCycle(), is(true));
     }
 }

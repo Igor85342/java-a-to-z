@@ -34,7 +34,7 @@ public class Node<T> {
      * @param value .
      */
     public Node(Node prev, T value) {
-        this.next = next;
+        this.prev = prev;
         this.value = value;
     }
 
@@ -56,10 +56,46 @@ public class Node<T> {
     }
 
     /**
+     * Returns the previous element.
+     * @param <T> .
+     * @return .
+     */
+    public <T> Node getPrev() {
+        return this.prev;
+    }
+    /**
      * Returns the value of the item.
      * @return T.
      */
     public T getValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Node<?> node = (Node<?>) o;
+
+        if (value != null ? !value.equals(node.value) : node.value != null) {
+            return false;
+        }
+        if (prev != null ? !prev.equals(node.prev) : node.prev != null) {
+            return false;
+        }
+        return next != null ? next.equals(node.next) : node.next == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value != null ? value.hashCode() : 0;
+        result = 31 * result + (prev != null ? prev.hashCode() : 0);
+        result = 31 * result + (next != null ? next.hashCode() : 0);
+        return result;
     }
 }

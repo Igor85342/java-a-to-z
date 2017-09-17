@@ -15,6 +15,10 @@ public class SimpleLinkedList<T> {
      * last - the last element in the collection.
      */
     private Node last;
+    /**
+     * index.
+     */
+    private int index;
 
     /**
      * Adds a new item to the collection.
@@ -24,10 +28,12 @@ public class SimpleLinkedList<T> {
         if (this.first == null) {
             this.first = new Node(value);
             this.last = this.first;
+            this.index = 0;
         } else {
             Node temp = new Node(this.last, value);
             this.last.setNext(temp);
             this.last = temp;
+            this.index++;
         }
     }
 
@@ -36,7 +42,23 @@ public class SimpleLinkedList<T> {
      * @return boolean.
      */
     public boolean hasCycle() {
-        return this.last.getNext() != null;
+        boolean cheak = false;
+        Node temp1 = this.first;
+        Node temp2 = this.first.getNext();
+        if (this.last.getNext() == null) {
+            for (int i = 0; i < this.index; i++) {
+                if (temp1.getNext().equals(temp2) & temp1.equals(temp2.getPrev())) {
+                    temp1 = temp2;
+                    temp2 = temp1.getNext();
+                } else {
+                    cheak = true;
+                    break;
+                }
+            }
+        } else {
+            cheak = true;
+        }
+        return cheak;
     }
 
     /**
