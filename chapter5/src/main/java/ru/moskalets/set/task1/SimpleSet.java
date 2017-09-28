@@ -18,14 +18,14 @@ public class SimpleSet<E> implements Iterable<E> {
     /**
      * iterator.
      */
-    private Iterator<E> iterator;
+   // private Iterator<E> iterator;
 
     /**
      * Constructor.
-     * @param size .
+     * @param sizeArray .
      */
-    public SimpleSet(int size) {
-        this.container = new Object[size];
+    public SimpleSet(int sizeArray) {
+        this.container = new Object[sizeArray];
     }
 
     /**
@@ -70,6 +70,28 @@ public class SimpleSet<E> implements Iterable<E> {
      */
     @Override
     public Iterator<E> iterator() {
-        return this.iterator;
+        return new SimpleSetIterator<E>();
     }
+
+    /**
+     * A class implements an iterator for sequential iterate through this collection.
+     * @param <E> .
+     */
+    private class SimpleSetIterator<E> implements Iterator<E> {
+        /**
+         * indexIterator.
+         */
+        private int indexIterator = 0;
+
+        @Override
+        public boolean hasNext() {
+            return this.indexIterator < getSize();
+        }
+
+        @Override
+        public E next() {
+            return (E) SimpleSet.this.container[this.indexIterator++];
+        }
+    }
+
 }
