@@ -24,33 +24,41 @@ public class LinkedSimpleSet<E> implements Iterable {
             this.first = new Node(e);
             this.last = this.first;
         } else {
-            Node nodeForCycle = this.first;
             Node temp = new Node(this.last, e);
-            boolean flagOfUniqueness = true;
-            if (this.first.equals(this.last)) {
-                if (temp.getE().equals(nodeForCycle.getE())) {
-                    flagOfUniqueness = false;
-                }
-            } else {
-                if (!temp.getE().equals(this.last.getE())) {
-                    while (nodeForCycle.hasNext()) {
-                        if (temp.getE().equals(nodeForCycle.getE())) {
-                            flagOfUniqueness = false;
-                            break;
-                        }
-                        nodeForCycle = nodeForCycle.getNext();
-                    }
-                } else {
-                    flagOfUniqueness = false;
-                }
-            }
-            if (flagOfUniqueness) {
+            if (contains(temp)) {
                 this.last.setNext(temp);
                 this.last = temp;
             }
         }
     }
 
+    /**
+     * The method checks the uniqueness of the item.
+     * @param temp .
+     * @return boolean.
+     */
+    public boolean contains(Node temp) {
+        Node nodeForCycle = this.first;
+        boolean flagOfUniqueness = true;
+        if (this.first.equals(this.last)) {
+            if (temp.getE().equals(nodeForCycle.getE())) {
+                flagOfUniqueness = false;
+            }
+        } else {
+            if (!temp.getE().equals(this.last.getE())) {
+                while (nodeForCycle.hasNext()) {
+                    if (temp.getE().equals(nodeForCycle.getE())) {
+                        flagOfUniqueness = false;
+                        break;
+                    }
+                    nodeForCycle = nodeForCycle.getNext();
+                }
+            } else {
+                flagOfUniqueness = false;
+            }
+        }
+        return flagOfUniqueness;
+    }
     /**
      * Return first node.
      * @return Node.
