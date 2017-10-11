@@ -40,23 +40,13 @@ public class LinkedSimpleSet<E> implements Iterable {
     public boolean contains(Node temp) {
         Node nodeForCycle = this.first;
         boolean flagOfUniqueness = true;
-        if (this.first.equals(this.last)) {
-            if (temp.getE().equals(nodeForCycle.getE())) {
-                flagOfUniqueness = false;
-            }
-        } else {
-            if (!temp.getE().equals(this.last.getE())) {
-                while (nodeForCycle.hasNext()) {
-                    if (temp.getE().equals(nodeForCycle.getE())) {
-                        flagOfUniqueness = false;
-                        break;
-                    }
-                    nodeForCycle = nodeForCycle.getNext();
+           while (nodeForCycle != null) {
+                if (temp.getE().equals(nodeForCycle.getE())) {
+                    flagOfUniqueness = false;
+                    break;
                 }
-            } else {
-                flagOfUniqueness = false;
+                nodeForCycle = nodeForCycle.getNext();
             }
-        }
         return flagOfUniqueness;
     }
     /**
