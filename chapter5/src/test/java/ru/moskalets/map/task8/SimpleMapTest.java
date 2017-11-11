@@ -61,7 +61,7 @@ public class SimpleMapTest {
      */
     @Test
     public void testNextSimpleMapIterator() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(10);
+        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);
@@ -70,8 +70,8 @@ public class SimpleMapTest {
         Iterator iter = sm.iterator();
         iter.next();
         iter.next();
-        int result = (Integer) iter.next();
-        assertThat(sm.get(result), is(3));
+        Entry result = (Entry) iter.next();
+        assertThat(result.getValue(), is(3));
     }
 
     /**
@@ -80,7 +80,7 @@ public class SimpleMapTest {
      */
     @Test
     public void testHasNextSimpleMapIteratorReturnTrue() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(10);
+        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);
@@ -98,7 +98,7 @@ public class SimpleMapTest {
      */
     @Test
     public void testHasNextSimpleMapIteratorReturnFalse() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(10);
+        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);

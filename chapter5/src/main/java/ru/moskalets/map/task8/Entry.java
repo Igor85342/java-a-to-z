@@ -14,15 +14,20 @@ public class Entry<K, V> {
      * Value.
      */
     private V value;
-
+    /**
+     * Hash.
+     */
+    private int hash;
     /**
      * Constructor.
      * @param key.
      * @param value.
+     * @param hash.
      */
-    public Entry(K key, V value) {
+    public Entry(K key, V value, int hash) {
         this.key = key;
         this.value = value;
+        this.hash = hash;
     }
 
     /**
@@ -39,6 +44,14 @@ public class Entry<K, V> {
      */
     public V getValue() {
         return this.value;
+    }
+
+    /**
+     * Get hash.
+     * @return int.
+     */
+    public int getHash() {
+        return this.hash;
     }
 
     /**

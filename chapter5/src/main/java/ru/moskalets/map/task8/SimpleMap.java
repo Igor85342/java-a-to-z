@@ -33,9 +33,9 @@ public class SimpleMap<K, V> implements Iterable<K> {
      * @return boolean.
      */
     public boolean insert(K key, V value) {
-        boolean duplicate = false;
+        boolean unique = true;
         int pozition;
-        for (int i = 0; i < this.index + 1; i++) {
+        /*for (int i = 0; i < this.index + 1; i++) {
             if (this.table[i] != null) {
                 if (key.hashCode() == this.table[i].getKey().hashCode()) {
                     duplicate = true;
@@ -44,13 +44,60 @@ public class SimpleMap<K, V> implements Iterable<K> {
                     break;
                 }
             }
+        }*/
+        int hash;
+        for (Entry entry: this.table){
+            if (entry != null && indexFor(hash(key)) == indexFor(entry.getHash())) {
+                unique = false;
+                hash = entry.getHash();
+                replacementValue(hash, value);
+                break;
+            }
         }
-        if (!duplicate) {
-            this.table[index++] = new Entry(key, value);
+        if (unique) {
+            this.table[index++] = new Entry(key, value, indexFor(hash(key)));
         }
-        return !duplicate;
+        return unique;
     }
 
+    /**
+     * The method defines a hash function for the key.
+     * @param key.
+     * @return.
+     */
+    public int hash(K key) {
+        int hash;
+        return (key == null) ? 0 : (hash = key.hashCode()) ^ (hash >>> 16);
+    }
+
+    /**
+     * The method determines the index in the array table.
+     * @param hash.
+     * @return.
+     */
+    public int indexFor(int hash) {
+        return hash & (this.table.length - 1);
+    }
+
+    /**
+     * Replaces the value.
+     * @param hash
+     * @param value
+     */
+    public void replacementValue(int hash, V value) {
+        getItemToHash(hash).setValue(value);
+
+    }
+    public Entry getItemToHash(int hash) {
+        Entry result = null;
+        for (Entry entry: this.table){
+            if (indexFor(hash) == indexFor(entry.getHash())) {
+                result = entry;
+                break;
+            }
+        }
+        return result;
+    }
     /**
      * The method returns the element at key.
      * @param key.
@@ -58,9 +105,15 @@ public class SimpleMap<K, V> implements Iterable<K> {
      */
     public V get(K key) {
         V result = null;
-        for (int i = 0; i < this.index + 1; i++) {
+        /*for (int i = 0; i < this.index + 1; i++) {
             if (key.hashCode() == this.table[i].getKey().hashCode()) {
                 result = (V) this.table[i].getValue();
+                break;
+            }
+        }*/
+        for (Entry entry: this.table){
+            if (key.equals(entry.getKey())){
+                result = (V) entry.getValue();
                 break;
             }
         }
@@ -88,30 +141,54 @@ public class SimpleMap<K, V> implements Iterable<K> {
         return cheak;
     }
 
+
     /**
      * The method returns a new iterator.
      * @return Iterator<K>.
      */
     @Override
     public Iterator<K> iterator() {
-        return new SimpleMapIterator<K>();
+        return new SimpleMapIterator();
     }
 
     /**
      * The class implements a simple iterator.
-     * @param <K>.
      */
-    private class SimpleMapIterator<K> implements Iterator<K> {
+    private class SimpleMapIterator implements Iterator {
         private int indexIterator = 0;
 
         @Override
         public boolean hasNext() {
-            return this.indexIterator < SimpleMap.this.index;
+            //return this.indexIterator < SimpleMap.this.index;
+            boolean cheak = false;
+            //int k = 1;
+            if (this.indexIterator < SimpleMap.this.table.length) {
+                for (int i = this.indexIterator; i < SimpleMap.this.table.length; i++ ) {
+                    if (SimpleMap.this.table[i] != null) {
+                        cheak = true;
+                        break;
+                    }
+                }
+            }
+            return cheak;
         }
 
         @Override
-        public K next() {
-            return (K) SimpleMap.this.table[this.indexIterator++].getKey();
+        public Entry next() {
+            Entry result = SimpleMap.this.table[this.indexIterator++];
+            while (result == null) {
+                result = SimpleMap.this.table[this.indexIterator++];
+            }
+            /*if (SimpleMap.this.table[this.indexIterator] == null) {
+                this.indexIterator++;
+            } else {
+                result = (K) SimpleMap.this.table[this.indexIterator++].getKey();
+            }*/
+            /**while (SimpleMap.this.table[this.indexIterator] != null) {
+                this.indexIterator++;
+            }*/
+
+            return result;
         }
     }
 }
