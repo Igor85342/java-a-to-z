@@ -16,7 +16,7 @@ public class SimpleMapTest {
      */
     @Test
     public void whenAddOneElementReturnsTrue() {
-        SimpleMap<Integer, String> sm = new SimpleMap(10);
+        SimpleMap<Integer, String> sm = new SimpleMap();
         boolean result = sm.insert(1, "First");
         assertThat(result, is(true));
     }
@@ -26,7 +26,7 @@ public class SimpleMapTest {
      */
     @Test
     public void whenSomeItemsAreAddedAndIsGetSecondReturnsTheSecondValueElement() {
-        SimpleMap<Integer, String> sm = new SimpleMap(10);
+        SimpleMap<Integer, String> sm = new SimpleMap();
         sm.insert(1, "First");
         sm.insert(2, "Second");
         assertThat(sm.get(2), is("Second"));
@@ -37,7 +37,7 @@ public class SimpleMapTest {
      */
     @Test
     public void whenAddAnElementWithAnExistingKeyReturnsFalse() {
-        SimpleMap<Integer, String> sm = new SimpleMap(10);
+        SimpleMap<Integer, String> sm = new SimpleMap();
         sm.insert(1, "First");
         boolean result = sm.insert(1, "Second");
         assertThat(result, is(false));
@@ -48,7 +48,7 @@ public class SimpleMapTest {
      */
     @Test
     public void whenRemovedElementReturnsTrue() {
-        SimpleMap<Integer, String> sm = new SimpleMap(10);
+        SimpleMap<Integer, String> sm = new SimpleMap();
         sm.insert(1, "First");
         sm.insert(2, "Second");
         sm.insert(3, "Third");
@@ -61,17 +61,16 @@ public class SimpleMapTest {
      */
     @Test
     public void testNextSimpleMapIterator() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
+        SimpleMap<Integer, Integer> sm = new SimpleMap();
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);
         sm.insert(4, 4);
-        sm.insert(5, 5);
         Iterator iter = sm.iterator();
         iter.next();
         iter.next();
         Entry result = (Entry) iter.next();
-        assertThat(result.getValue(), is(3));
+        assertThat(result.getValue(), is(2));
     }
 
     /**
@@ -80,7 +79,7 @@ public class SimpleMapTest {
      */
     @Test
     public void testHasNextSimpleMapIteratorReturnTrue() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
+        SimpleMap<Integer, Integer> sm = new SimpleMap();
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);
@@ -98,7 +97,7 @@ public class SimpleMapTest {
      */
     @Test
     public void testHasNextSimpleMapIteratorReturnFalse() {
-        SimpleMap<Integer, Integer> sm = new SimpleMap(100);
+        SimpleMap<Integer, Integer> sm = new SimpleMap();
         sm.insert(1, 1);
         sm.insert(2, 2);
         sm.insert(3, 3);
