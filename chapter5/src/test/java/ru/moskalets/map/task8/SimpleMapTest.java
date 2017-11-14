@@ -70,7 +70,7 @@ public class SimpleMapTest {
         iter.next();
         iter.next();
         Entry result = (Entry) iter.next();
-        assertThat(result.getValue(), is(2));
+        assertThat(result.getValue(), is(3));
     }
 
     /**

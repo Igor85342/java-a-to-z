@@ -16,7 +16,7 @@ public class SimpleMap<K, V> implements Iterable<K> {
     /**
      * Capacity
      */
-    private int capacity = 100;
+    private int capacity = 16;
 
     /**
      * Constructor.
