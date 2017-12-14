@@ -3,6 +3,8 @@ package ru.moskalets.tree.task1;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Tree - класс реализует простое дерево. Узел дерева может иметь сколько угодно дочерних элементов.
@@ -34,9 +36,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 result = true;
                 size = size + 2;
         } else {
-            if (find(this.root, child) == null) {
-                if (find(this.root, parent) != null) {
-                    find(this.root, parent).setChildren(child);
+            if (findBy(child) == null) {
+                if (findBy(parent) != null) {
+                    findBy(parent).setChildren(child);
                     result = true;
                     size++;
                 }
@@ -44,9 +46,31 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         }
         return result;
     }
-
     /**
-     * Поиск узла по значению.
+     * Поиск узла по значению, алгоритм поиска в ширину.
+     * @param value
+     * @return
+     */
+    public Node<E> findBy(E value) {
+        Node<E> result = null;
+        Queue<Node<E>> queue = new LinkedList<Node<E>>();
+        queue.offer(this.root);
+        while (!queue.isEmpty()) {
+            Node<E> temp = queue.poll();
+            if (temp.getValue().equals(value)) {
+                result = temp;
+                break;
+            }
+            if (temp.getChildren() != null) {
+                for (Node<E> child : temp.getChildren()) {
+                    queue.offer(child);
+                }
+            }
+        }
+        return result;
+    }
+    /**
+     * Поиск узла по значению, алгоритм поиска в глубину.
      * @param tempRoot
      * @param value
      * @return
@@ -73,6 +97,33 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
     return result;
     }
+
+    /**
+     * Метод проверяет, является ли дерево бинарным.
+     * @return
+     */
+        public boolean isBinary() {
+            boolean result = true;
+            Queue<Node<E>> queue = new LinkedList<Node<E>>();
+            queue.offer(this.root);
+            while (!queue.isEmpty()) {
+                Node<E> temp = queue.poll();
+                if ( temp.getChildren() != null && temp.getChildren().size() > 2) {
+                    result = false;
+                    break;
+                }
+                if (temp.getChildren() != null) {
+                    for (Node<E> child : temp.getChildren()) {
+                        queue.offer(child);
+                    }
+                }
+            }
+            return result;
+        }
+    /**
+     * Метод возвращает количество элементов в дереве.
+     * @return
+     */
     public int getSize() {
         return this.size;
     }

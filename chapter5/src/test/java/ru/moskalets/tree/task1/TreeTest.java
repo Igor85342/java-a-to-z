@@ -119,4 +119,38 @@ public class TreeTest {
         int result = iter.next();
         assertThat(result, is(5));
     }
+
+    /**
+     * Проверяет является ли дерево бинарным. Возвращает True.
+     */
+    @Test
+    public void whenIsBinaryTreeReturnsTrue() {
+        Tree<Integer> tr = new Tree();
+        tr.add(1, 2);
+        tr.add(1, 3);
+        tr.add(3, 4);
+        tr.add(3, 5);
+        tr.add(2, 6);
+        tr.add(5, 7);
+        boolean result = tr.isBinary();
+        assertThat(result, is(true));
+    }
+
+    /**
+     * Проверяет является ли дерево бинарным. Возвращает False.
+     */
+    @Test
+    public void whenNotBinaryTreeReturnsFalse() {
+        Tree<Integer> tr = new Tree();
+        tr.add(1, 2);
+        tr.add(1, 3);
+        tr.add(3, 4);
+        tr.add(3, 5);
+        tr.add(2, 6);
+        tr.add(5, 7);
+        tr.add(5, 8);
+        tr.add(5, 9);
+        boolean result = tr.isBinary();
+        assertThat(result, is(false));
+    }
 }
