@@ -46,4 +46,12 @@ public class User {
         }
         return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
     }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + children;
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        return result;
+    }
 }

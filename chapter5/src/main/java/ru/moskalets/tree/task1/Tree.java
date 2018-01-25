@@ -108,7 +108,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             queue.offer(this.root);
             while (!queue.isEmpty()) {
                 Node<E> temp = queue.poll();
-                if ( temp.getChildren() != null && temp.getChildren().size() > 2) {
+                if (temp.getChildren() != null && temp.getChildren().size() > 2) {
                     result = false;
                     break;
                 }
