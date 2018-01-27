@@ -16,7 +16,7 @@ public class MapWork {
      */
     @Test
     public void addingTwoIdenticalObjectsAreNotOverridingEqualsAndHashCode() {
-        Map<User, Object> map = new HashMap<>();
+        Map<User, Object> map = new HashMap<User, Object>();
         User first = new User("Igor");
         User second = new User("Igor");
         map.put(first, "first");

@@ -31,7 +31,7 @@ public class Node<E> {
      */
     public Node(E value, E child) {
         this.value = value;
-        this.children = new ArrayList<>();
+        this.children = new ArrayList<Node<E>>();
         this.children.add(new Node(child));
 
     }
@@ -58,7 +58,7 @@ public class Node<E> {
      */
     public void setChildren(E child) {
         if (this.children == null) {
-            this.children = new ArrayList<>();
+            this.children = new ArrayList<Node<E>>();
         }
         this.children.add(new Node(child));
     }

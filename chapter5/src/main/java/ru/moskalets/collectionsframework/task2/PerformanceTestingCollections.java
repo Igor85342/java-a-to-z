@@ -16,15 +16,15 @@ public class PerformanceTestingCollections {
     /**
      * collectionsArrayList.
      */
-    private ArrayList<String> collectionsArrayList = new ArrayList<>();
+    private ArrayList<String> collectionsArrayList = new ArrayList<String>();
     /**
      * collectionsLinkedList.
      */
-    private LinkedList<String> collectionsLinkedList = new LinkedList<>();
+    private LinkedList<String> collectionsLinkedList = new LinkedList<String>();
     /**
      * collectionsTreeSet.
      */
-    private TreeSet<String> collectionsTreeSet = new TreeSet<>();
+    private TreeSet<String> collectionsTreeSet = new TreeSet<String>();
 
 
     /**
