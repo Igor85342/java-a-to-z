@@ -1,7 +1,6 @@
 package ru.moskalets.set.task3;
 
 import org.junit.Test;
-import ru.moskalets.set.task1.SimpleSet;
 
 import java.util.Iterator;
 
@@ -17,10 +16,17 @@ public class SimpleSetTest {
      * Added one item. Is called the first element, returns the first element.
      */
     @Test
-    public void whenyouAddOneElementReturnFirstElement() {
+    public void whenAddOneElementReturnFirstElement() {
         SimpleSet<String> ss = new SimpleSet<String>(10);
         ss.add("First");
         assertThat(ss.get(0), is("First"));
+    }
+
+    @Test
+    public void whenFastAddOneElementReturnFirstElement() {
+        SimpleSet<String> ssf = new SimpleSet<String>(10);
+        ssf.addFast("First");
+        assertThat(ssf.get(0), is("First"));
     }
 
     /**
@@ -154,7 +160,7 @@ public class SimpleSetTest {
      */
     @Test
     public void testHasNextSimpleSetIteratorReturnFalse() {
-        ru.moskalets.set.task1.SimpleSet<Integer> ss = new SimpleSet<Integer>(10);
+        SimpleSet<Integer> ss = new SimpleSet<Integer>(10);
         ss.add(1);
         ss.add(2);
         Iterator iter = ss.iterator();
