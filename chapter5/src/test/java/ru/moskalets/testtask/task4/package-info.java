@@ -1,6 +1,6 @@
 /**
  * Package for test testtask.task4;
  * @author Igor Moskalets (imoskalets@gmail.com)
- * @since 17.02.2017
+ * @since 04.03.2018
  */
 package ru.moskalets.testtask.task4;

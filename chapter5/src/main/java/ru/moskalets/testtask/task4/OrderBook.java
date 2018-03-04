@@ -1,7 +1,13 @@
 package ru.moskalets.testtask.task4;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -36,106 +42,44 @@ public class OrderBook {
     }
 
     /**
-     * Считывание файла построчно.
+     * Парсин файла.
+     * @throws ParserConfigurationException
      * @throws IOException
+     * @throws SAXException
      */
-    public void parsingFile() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(this.source));
-        Order order;
-        try {
-            String string;
-            while ((string = br.readLine()) != null) {
-                if (string.startsWith("<AddOrder")) {
-                    order = parcingAddOrder(string);
-                    if (this.books == null || !this.books.containsKey(order.getBook())) {
-                        this.books.put(order.getBook(), new Book(order.getBook()));
-                        this.books.get(order.getBook()).setOrder(order);
+    public void parsingFile() throws ParserConfigurationException, IOException, SAXException {
+        DefaultHandler handler = new DefaultHandler() {
+
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                if (qName.equals("AddOrder")) {
+                    Order order = new Order(
+                            attributes.getValue("book"),
+                            attributes.getValue("operation"),
+                            parseDouble(attributes.getValue("price")),
+                            parseInt(attributes.getValue("volume")),
+                            parseInt(attributes.getValue("orderId"))
+                    );
+                    if (OrderBook.this.books == null || !OrderBook.this.books.containsKey(order.getBook())) {
+                        OrderBook.this.books.put(order.getBook(), new Book(order.getBook()));
+                        OrderBook.this.books.get(order.getBook()).setOrder(order);
                     } else {
-                        if (this.books.containsKey(order.getBook())) {
-                            this.books.get(order.getBook()).setOrder(order);
+                        if (OrderBook.this.books.containsKey(order.getBook())) {
+                            OrderBook.this.books.get(order.getBook()).setOrder(order);
                         }
                     }
                 }
-                if (string.startsWith("<DeleteOrder")) {
-                    parcingDeleteOrder(string);
+                if (qName.equals("DeleteOrder")) {
+                   String book = attributes.getValue("book");
+                   int orderId = parseInt(attributes.getValue("orderId"));
+                    deleteOrder(book, orderId);
                 }
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            br.close();
-        }
-    }
+        };
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = factory.newSAXParser();
+        parser.parse(new File(this.source), handler);
 
-    /**
-     * Разбивка строки на новую заявку.
-     * @param string
-     * @return
-     */
-    public Order parcingAddOrder(String string) {
-        int index;
-        String book = "";
-        String operation = "";
-        String price = "";
-        String volume = "";
-        String orderId = "";
-        if (string.contains("AddOrder")) {
-            for (int i = string.indexOf("book") + 6; i < string.length(); i++) {
-                if (string.charAt(i) == '\"') {
-                    break;
-                }
-                book = book + string.charAt(i);
-            }
-            for (int i = string.indexOf("operation") + 11; i < string.length(); i++) {
-                if (string.charAt(i) == '\"') {
-                    break;
-                }
-                operation = operation + string.charAt(i);
-            }
-            for (int i = string.indexOf("price") + 7; i < string.length(); i++) {
-                if (string.charAt(i) == '\"') {
-                    price.trim();
-                    break;
-                }
-                price = price + string.charAt(i);
-            }
-            for (int i = string.indexOf("volume") + 8; i < string.length(); i++) {
-                if (string.charAt(i) == '\"') {
-                    break;
-                }
-                volume = volume + string.charAt(i);
-            }
-            for (int i = string.indexOf("orderId") + 9; i < string.length(); i++) {
-                if (string.charAt(i) == '\"') {
-                    break;
-                }
-                orderId = orderId + string.charAt(i);
-            }
-
-        }
-        return new Order(book, operation, parseDouble(price),  parseInt(volume),  parseInt(orderId));
-    }
-
-    /**
-     * Разбивка строки на удаление заявки.
-     * @param string
-     */
-    public void parcingDeleteOrder(String string) {
-        String book = "";
-        String orderId = "";
-        for (int i = string.indexOf("book") + 6; i < string.length(); i++) {
-            if (string.charAt(i) == '\"') {
-                break;
-            }
-            book = book + string.charAt(i);
-        }
-        for (int i = string.indexOf("orderId") + 9; i < string.length(); i++) {
-            if (string.charAt(i) == '\"') {
-                break;
-            }
-            orderId = orderId + string.charAt(i);
-        }
-        deleteOrder(book, orderId);
     }
 
     /**
@@ -143,8 +87,8 @@ public class OrderBook {
      * @param book
      * @param orderId
      */
-    public void deleteOrder(String book, String orderId) {
-        this.books.get(book).deleteOrder(parseInt(orderId));
+    public void deleteOrder(String book, int orderId) {
+        this.books.get(book).deleteOrder(orderId);
     }
 
     /**

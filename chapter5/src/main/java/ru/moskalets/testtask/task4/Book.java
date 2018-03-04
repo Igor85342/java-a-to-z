@@ -26,6 +26,14 @@ public class Book {
      * ask - заявки на продажу, отсортированный по убыванию цены.
      */
     private TreeSet<Order> ask;
+    /**
+     * Операция- продажа.
+     */
+    private static final String SELL = "SELL";
+    /**
+     * Операция - покупка.
+     */
+    private static final String BUY = "BUY";
 
     /**
      * Конструктор.
@@ -40,10 +48,10 @@ public class Book {
      * @param order
      */
     public void setOrder(Order order) {
-        if (order.getOperation().equals("SELL")) {
+        if (this.SELL.equals(order.getOperation())) {
             sellOrders.put(order.getOrderId(), order);
         }
-        if (order.getOperation().equals("BUY")) {
+        if (this.BUY.equals(order.getOperation())) {
             buyOrders.put(order.getOrderId(), order);
         }
     }
@@ -74,26 +82,30 @@ public class Book {
         for (Order order: this.sellOrders.values()) {
             this.ask.add(order);
         }
-        for (Iterator<Order> i = this.bid.iterator(); i.hasNext();) {
-            Order orderBid = i.next();
-            for (Iterator<Order> j = this.ask.iterator(); j.hasNext();) {
-                Order orderAsk = j.next();
-                if (orderBid.getPrice() <= orderAsk.getPrice()) {
-                    if (orderBid.getVolume() > orderAsk.getVolume()) {
-                        orderBid.setVolume(orderBid.getVolume() - orderAsk.getVolume());
-                        j.remove();
+        Iterator<Order> iterBid = this.bid.iterator();
+        Iterator<Order> iterAsk = this.ask.iterator();
+        Order orderBid = iterBid.next();
+        Order orderAsk = iterAsk.next();
+        while (iterAsk.hasNext() & iterBid.hasNext()) {
+            if (orderBid.getPrice() >= orderAsk.getPrice()) {
+                if (orderBid.getVolume() > orderAsk.getVolume()) {
+                    orderBid.setVolume(orderBid.getVolume() - orderAsk.getVolume());
+                    iterAsk.remove();
+                    orderAsk = iterAsk.next();
+                } else {
+                    if (orderBid.getVolume() == orderAsk.getVolume()) {
+                        iterBid.remove();
+                        orderBid = iterBid.next();
+                        iterAsk.remove();
+                        orderAsk = iterAsk.next();
                     } else {
-                        if (orderBid.getVolume() == orderAsk.getVolume()) {
-                            i.remove();
-                            j.remove();
-                            break;
-                        } else {
-                            orderAsk.setVolume(orderAsk.getVolume() - orderBid.getVolume());
-                            i.remove();
-                            break;
-                        }
+                        orderAsk.setVolume(orderAsk.getVolume() - orderBid.getVolume());
+                        iterBid.remove();
+                        orderBid = iterBid.next();
                     }
                 }
+            } else {
+                orderAsk = iterAsk.next();
             }
         }
     }
@@ -105,14 +117,29 @@ public class Book {
         this.sellAndBuy();
         System.out.printf("%16s%n", this.bookName);
         System.out.printf("%-10s%-12s%-10s%n", "Cell", "Price", "Buy");
-        for (Order order: this.bid) {
+        for (Order order: this.ask) {
             System.out.printf("%-10d%-12.2f%-10d%n", order.getVolume(), order.getPrice(), 0);
         }
-        for (Order order: this.ask) {
+        for (Order order: this.bid) {
             System.out.printf("%-10d%-12.2f%-10d%n", 0, order.getPrice(), order.getVolume());
         }
     }
 
+    /**
+     * Возвращает заявки на продажу.
+     * @return
+     */
+    public Map getSellOrders() {
+        return this.sellOrders;
+    }
+
+    /**
+     * Возвращает заявки на покупку.
+     * @return
+     */
+    public Map getBuyOrders() {
+        return this.buyOrders;
+    }
     /**
      * Класс компратор - сортирует заявки по убыванию поля price.
      */
