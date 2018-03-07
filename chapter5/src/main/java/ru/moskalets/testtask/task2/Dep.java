@@ -1,32 +1,62 @@
 package ru.moskalets.testtask.task2;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.TreeSet;
+
 /**
  * The class is a list view of the units.
  * author Igor Moskalets
- * Since 23.07.2017
+ * Since 07.03.2018
  */
 public class Dep {
     /**
-     * The units.
+     * Последовательная цепочка департаментов.
      */
-    private String[] deps;
+    private ArrayList<String> deps = new ArrayList<String>();
+
     /**
-     * @param deps Units.
+     * Конструктор.
+     * @param deps
      */
-    public Dep(String[] deps) {
+    public Dep(ArrayList<String> deps) {
         this.deps = deps;
     }
+
     /**
-     * This metod return Length deps.
-     * @return int.
+     * Возвращет this.deps.
+     * @return
      */
-    public int getLength() {
-        return this.deps.length;
-    }
-    /**
-     * This metod return deps.
-     * @return String[].
-     */
-    public String[] getDeps() {
+    public ArrayList<String> getDeps() {
         return this.deps;
+    }
+
+    /**
+     * Печатает this.deps.
+     */
+    public void print() {
+        for (String line: this.deps) {
+            System.out.print(line + "\\");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Dep dep = (Dep) o;
+
+        return deps != null ? deps.equals(dep.deps) : dep.deps == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return deps != null ? deps.hashCode() : 0;
     }
 }
