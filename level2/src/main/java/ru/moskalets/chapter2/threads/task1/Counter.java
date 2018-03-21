@@ -31,7 +31,14 @@ public class Counter {
      * @return
      */
     public int countingNumberSpaces() {
-            return this.string.length() - this.string.replace(" ", "").length();
+            int count = 0;
+            for (int i = 0; i < this.string.length(); i++) {
+                if (this.string.charAt(i) == ' ') {
+                    count++;
+                }
+            }
+            return count;
+
     }
 
     /**
