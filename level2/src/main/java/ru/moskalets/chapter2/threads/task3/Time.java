@@ -18,7 +18,7 @@ public class Time implements Runnable {
     public Time(long time) {
         this.time = time;
     }
-    public static void main(String arg[]) {
+    public static void main(String[] args) {
         new Thread(new Time(5000)).start();
     }
     @Override
@@ -27,7 +27,12 @@ public class Time implements Runnable {
         long end = start + this.time;
         Thread threadCountChar = new Thread(new CountChar("asdfafsafdasdf"));
         threadCountChar.start();
-        while(threadCountChar.isAlive() && System.currentTimeMillis() < end) {
+        while (threadCountChar.isAlive() && System.currentTimeMillis() < end) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         System.exit(0);
     }
