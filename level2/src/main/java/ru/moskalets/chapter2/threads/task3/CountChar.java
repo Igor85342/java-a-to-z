@@ -20,6 +20,7 @@ public class CountChar implements Runnable {
     public void run() {
         int length = countNumberOfCharacters();
         System.out.format("The number of characters equals: %d%n", length);
+        Thread.currentThread().interrupt();
     }
 
     /**

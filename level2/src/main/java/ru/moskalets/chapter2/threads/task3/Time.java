@@ -28,11 +28,11 @@ public class Time implements Runnable {
         Thread threadCountChar = new Thread(new CountChar("asdfafsafdasdf"));
         threadCountChar.start();
         try {
-            while (threadCountChar.isAlive() && System.currentTimeMillis() < end) {
-                    Thread.sleep(1);
+            while (!threadCountChar.interrupted() && System.currentTimeMillis() < end) {
+                Thread.sleep(1);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+           e.printStackTrace();
         }
         System.exit(0);
     }
