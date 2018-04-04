@@ -18,22 +18,15 @@ public class Time implements Runnable {
     public Time(long time) {
         this.time = time;
     }
-    public static void main(String[] arg) {
-        new Thread(new Time(5000)).start();
-    }
     @Override
     public void run() {
         long start = System.currentTimeMillis();
         long end = start + this.time;
-        Thread threadCountChar = new Thread(new CountChar("asdfafsafdasdf"));
-        threadCountChar.start();
         try {
-            while (!threadCountChar.interrupted() && System.currentTimeMillis() < end) {
-                Thread.sleep(1);
-            }
+                Thread.sleep(this.time);
         } catch (InterruptedException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
-        System.exit(0);
+        Thread.currentThread().interrupt();
     }
 }

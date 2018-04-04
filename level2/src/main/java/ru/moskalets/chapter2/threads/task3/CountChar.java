@@ -16,11 +16,14 @@ public class CountChar implements Runnable {
     public CountChar(String line) {
         this.line = line;
     }
+    public static void main(String[] arg) {
+        new Thread(new CountChar("asdfafsafdasdf")).start();
+    }
     @Override
     public void run() {
         int length = countNumberOfCharacters();
         System.out.format("The number of characters equals: %d%n", length);
-        Thread.currentThread().interrupt();
+        System.exit(0);
     }
 
     /**
@@ -28,6 +31,15 @@ public class CountChar implements Runnable {
      * @return int.
      */
     public int countNumberOfCharacters() {
-        return this.line.length();
+        Thread timeThread = new Thread(new Time(10000));
+        timeThread.start();
+        int length = 0;
+        for (int i = 0; i < this.line.length(); i++) {
+            length++;
+            if (timeThread.isInterrupted()) {
+                System.exit(0);
+            }
+        }
+        return length;
     }
 }
