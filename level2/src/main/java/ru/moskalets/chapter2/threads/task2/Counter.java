@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 /**
  * Класс считает пробелы и слова в строке. Методы выполняются параллельно.
  */
-public class Counter{
+public class Counter {
     private String string;
     public Counter(String string) {
         this.string = string;
