@@ -101,7 +101,9 @@ public class SimpleList<E> implements Iterable<E> {
 
         @Override
         public E next() {
+            synchronized (SimpleList.this) {
                 return (E) SimpleList.this.container[this.indexIterator++];
+            }
         }
     }
 }
