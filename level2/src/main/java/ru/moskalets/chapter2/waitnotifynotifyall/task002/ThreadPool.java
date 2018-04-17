@@ -3,7 +3,6 @@ package ru.moskalets.chapter2.waitnotifynotifyall.task002;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,30 +11,30 @@ import java.util.Queue;
  */
 @ThreadSafe
 public class ThreadPool {
-    @GuardedBy("this")
     /**
      * works - лист задач.
      */
+    @GuardedBy("this")
     private Queue<Work> works = new LinkedList<>();
     /**
      * threads - массив потоков.
      */
     private Thread[] threads;
+    /**
+     * finish
+     */
+    private boolean finish = false;
 
     /**
-     * Метод иницилизирует количество потоков равное количеству ядер процессора. Доблавляет эти потоки в массив и
-     * запускает их.
-     * @throws InterruptedException
+     * Конструктор.
      */
-    public void startThreadPool() throws InterruptedException {
+    public ThreadPool() {
         int core = Runtime.getRuntime().availableProcessors();
         this.threads = new Thread[core];
         for (int i = 0; i < core; i++) {
             new WorkingThread().start();
         }
-        Thread.currentThread().sleep(100);
     }
-
     /**
      * Добавляет задачу.
      * @param work - задача.
@@ -43,10 +42,9 @@ public class ThreadPool {
     public void add(Work work) {
         synchronized (this) {
             this.works.add(work);
-            notify();
+            notifyAll();
         }
     }
-
     /**
      * Проверяет, если задачи в листе.
      * @return
@@ -56,7 +54,6 @@ public class ThreadPool {
             return this.works.isEmpty();
         }
     }
-
     /**
      * Удаляет первую задачу.
      * @return
@@ -66,28 +63,28 @@ public class ThreadPool {
             return this.works.poll();
         }
     }
-
+    /**
+     * Заканчивает работу.
+     */
+    public void finish() {
+        this.finish = true;
+    }
     /**
      * Класс нить, которая обрабатывает задачи из списка.
      */
    private class WorkingThread extends Thread {
         @Override
         public void run() {
-            synchronized (this) {
-                while (true) {
+            synchronized (ThreadPool.this) {
+                while (!ThreadPool.this.finish) {
                     while (ThreadPool.this.isEmpty()) {
                         try {
-                            wait();
+                            ThreadPool.this.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     Work work = ThreadPool.this.pool();
-                    try {
-                        Thread.currentThread().sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     if (work != null) {
                         work.run();
                     }

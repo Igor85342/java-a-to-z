@@ -7,6 +7,5 @@ package ru.moskalets.chapter2.waitnotifynotifyall.task002;
 public class Work implements Runnable {
     @Override
     public void run() {
-
     }
 }
