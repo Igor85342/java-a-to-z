@@ -23,7 +23,7 @@ public class ThreadPool {
     /**
      * finish
      */
-    private boolean finish = false;
+    private volatile boolean finish = false;
 
     /**
      * Конструктор.
@@ -75,22 +75,23 @@ public class ThreadPool {
    private class WorkingThread extends Thread {
         @Override
         public void run() {
-            synchronized (ThreadPool.this) {
+            Work work;
                 while (!ThreadPool.this.finish) {
-                    while (ThreadPool.this.isEmpty()) {
-                        try {
-                            ThreadPool.this.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                    synchronized (ThreadPool.this) {
+                        while (ThreadPool.this.isEmpty()) {
+                            try {
+                                ThreadPool.this.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        work = ThreadPool.this.pool();
                     }
-                    Work work = ThreadPool.this.pool();
                     if (work != null) {
                         work.run();
                     }
                     System.out.println("Thread " + Thread.currentThread().getId() + " executed work");
                 }
-            }
         }
     }
 }
