@@ -26,8 +26,10 @@ public class SimpleLock {
      */
     public void unlock() {
         synchronized (this) {
-            lockIsFree = true;
-            notify();
+            if (!lockIsFree) {
+                lockIsFree = true;
+                notifyAll();
+            }
         }
     }
 
