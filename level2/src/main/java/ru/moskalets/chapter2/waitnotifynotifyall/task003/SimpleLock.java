@@ -8,8 +8,15 @@ import net.jcip.annotations.ThreadSafe;
  */
 @ThreadSafe
 public class SimpleLock {
+    /*
+    lockIsFree - флаг, заблокирован ли лок.
+     */
     @GuardedBy("this")
     private boolean lockIsFree = true;
+    /*
+    thread - текущий поток.
+     */
+    private Thread thread;
     /*
     Проверяет свободен ли lock, иначе блокирует.
      */
@@ -18,15 +25,16 @@ public class SimpleLock {
             while (!lockIsFree) {
                 wait();
             }
+            this.thread = Thread.currentThread();
             this.lockIsFree = false;
         }
     }
     /*
-    Проверяет владеет ли потоком Lock, если да, то  освобождает.
+    Проверяет владеет ли потоком Lock, если да, то освобождает.
      */
     public void unlock() {
         synchronized (this) {
-            if (!lockIsFree) {
+            if (this.thread == Thread.currentThread()) {
                 lockIsFree = true;
                 notifyAll();
             }
