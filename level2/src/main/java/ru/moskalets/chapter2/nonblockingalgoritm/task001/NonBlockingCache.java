@@ -1,5 +1,6 @@
 package ru.moskalets.chapter2.nonblockingalgoritm.task001;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -28,9 +29,9 @@ public class NonBlockingCache {
         upModel.setVersion(this.container.get(id).getVersion() + 1);
         upModel.setId(this.container.get(id).getId());
         if (this.container.get(id).getVersion() + 1 == upModel.getVersion()) {
-            this.container.put(id, upModel);
+            this.container.computeIfPresent(id, (k, v) -> upModel);
         } else {
-            throw new OplimisticException("Oplimistic Exception !!!");
+           throw new OplimisticException("Oplimistic Exception !!!");
         }
     }
 
