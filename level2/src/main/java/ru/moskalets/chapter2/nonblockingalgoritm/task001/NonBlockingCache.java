@@ -26,10 +26,12 @@ public class NonBlockingCache {
      * @throws OplimisticException
      */
     public void update(int id, Model upModel) throws OplimisticException {
-        upModel.setVersion(this.container.get(id).getVersion() + 1);
-        upModel.setId(this.container.get(id).getId());
-        if (this.container.get(id).getVersion() + 1 == upModel.getVersion()) {
-            this.container.computeIfPresent(id, (k, v) -> upModel);
+        if (this.container.get(id).getVersion() == upModel.getVersion()) {
+            this.container.computeIfPresent(id, (k, v) -> {
+                upModel.setVersion(this.container.get(id).getVersion() + 1);
+                upModel.setId(this.container.get(id).getId());
+                return upModel;
+            });
         } else {
            throw new OplimisticException("Oplimistic Exception !!!");
         }
