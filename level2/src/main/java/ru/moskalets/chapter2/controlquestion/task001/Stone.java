@@ -1,19 +1,17 @@
 package ru.moskalets.chapter2.controlquestion.task001;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 public class Stone implements Runnable {
     private final int x;
     private final int y;
-    private final ReentrantLock[][] lockBoard;
-    public Stone(int x, int y, ReentrantLock[][] lockBoard) {
+    private Board board;
+    public Stone(int x, int y, Board board) {
         this.x = x;
         this.y = y;
-        this.lockBoard = lockBoard;
+        this.board = board;
     }
     @Override
     public void run() {
-        this.lockBoard[this.x][this.y].lock();
+        this.board.getLockBoard()[this.x][this.y].lock();
         System.out.println("Stone is " + this.x + " " + this.y);
     }
 }

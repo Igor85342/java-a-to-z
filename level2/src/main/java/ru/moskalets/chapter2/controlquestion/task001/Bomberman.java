@@ -1,25 +1,21 @@
 package ru.moskalets.chapter2.controlquestion.task001;
 
-
-import java.util.concurrent.locks.ReentrantLock;
-
-
 public class Bomberman implements Runnable {
    private int x;
    private int y;
-   private final ReentrantLock[][] lockBoard;
+   private final Board board;
    private final String[] moves;
    private final int size;
-   public Bomberman(int x, int y, ReentrantLock[][] lockBoard, String[] moves, int size) {
+   public Bomberman(int x, int y, Board board, String[] moves) {
        this.x = x;
        this.y = y;
-       this.lockBoard = lockBoard;
+       this.board = board;
        this.moves = moves;
-       this.size = size;
+       this.size = board.getLockBoard().length;
    }
    @Override
    public void run() {
-       this.lockBoard[this.x][this.y].lock();
+            this.board.getLockBoard()[this.x][this.y].lock();
        System.out.println("Start bomberman " + this.x + " " + this.y);
        int tempX;
        int tempY;
@@ -27,10 +23,10 @@ public class Bomberman implements Runnable {
            tempX = this.x;
            tempY = this.y;
            if (move(move)) {
-               if (this.lockBoard[tempX][tempY].isLocked()) {
-                   this.lockBoard[tempX][tempY].unlock();
+               if (this.board.getLockBoard()[tempX][tempY].isLocked()) {
+                   this.board.getLockBoard()[tempX][tempY].unlock();
                }
-               this.lockBoard[x][y].lock();
+               this.board.getLockBoard()[x][y].lock();
                try {
                    Thread.currentThread().sleep(1000);
                } catch (InterruptedException e) {
@@ -50,10 +46,10 @@ public class Bomberman implements Runnable {
        }
    }
     public boolean move(String command) {
-       String UP = "up";
-       String DOWN = "down";
-       String LEFT = "left";
-       String RIGHT = "right";
+       final String UP = "up";
+       final String DOWN = "down";
+       final String LEFT = "left";
+       final String RIGHT = "right";
        boolean flag = false;
         if (UP.equalsIgnoreCase(command)) {
             flag = moveUp(this.size);
@@ -68,7 +64,7 @@ public class Bomberman implements Runnable {
             flag = moveRight(this.size);
         }
         if (flag) {
-            if (lockBoard[x][y].isLocked()) {
+            if (this.board.getLockBoard()[x][y].isLocked()) {
                 flag = false;
             }
         }
@@ -82,7 +78,8 @@ public class Bomberman implements Runnable {
         }
         return flag;
     }
-    public boolean moveUp(int size) {boolean flag = false;
+    public boolean moveUp(int size) {
+       boolean flag = false;
        if (this.x >= 0 & this.x <= size) {
            this.x--;
            flag = true;
