@@ -1,0 +1,54 @@
+create table states (
+	id_state serial primary key,
+	state character varying (2000)
+);
+
+create table categories (
+	id_category serial primary key,
+	category character varying (2000)
+);
+
+create table items (
+	id_item serial primary key,
+	item character varying (2000),
+	id_state integer references states(id_state),
+	id_category integer references categories(id_category)
+);
+
+create table comments (
+	id_comment serial primary key,
+	comment character varying (2000),
+	id_item integer references items(id_item)
+);
+
+create table attaches (
+	id_attach serial primary key,
+	attach character varying (2000),
+	id_item integer references items(id_item)
+);
+
+create table users (
+	id_user serial primary key,
+	user_name character varying (2000),
+	id_item integer references items(id_item)
+);
+
+alter table items add column id_user integer references users(id_user);
+
+create table roles (
+	id_role serial primary key,
+	role character varying (2000)
+);
+
+alter table users add column id_role integer references roles(id_role);
+
+create table rules (
+ 	id_rule serial primary key,
+ 	rule character varying (2000)
+);
+
+create table roles_rules (
+ 	id_role_rule serial primary key,
+ 	id_role integer references roles(id_role),
+ 	id_rule integer references rules(id_rule)
+);

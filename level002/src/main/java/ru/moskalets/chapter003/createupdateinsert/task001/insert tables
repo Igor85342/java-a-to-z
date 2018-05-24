@@ -1,0 +1,25 @@
+insert into states(state) values ('State 1');
+insert into states(state) values ('State 2');
+insert into states(state) values ('State 3');
+update states set state = 'State 3 update' where id_state = 3;
+delete from states where id_state = 2;
+
+insert into categories(category) values ('Category 1');
+
+insert into roles(role) values ('Role 1');
+
+insert into rules(rule) values ('Rule 1');
+
+insert into roles_rules(id_role, id_rule) values (1,1);
+
+insert into users(user_name, id_role) values ('User 1', 1);
+
+insert into items(item, id_state, id_category, id_user) values ('Item 1', 1, 1, 1);
+
+update users set id_item = 1 where id_user = 1;
+
+insert into comments(comment, id_item) values ('Comment 1', 1);
+insert into comments(comment, id_item) values ('Comment 2', 1);
+
+insert into attaches(attach, id_item) values ('Attache 1', 1);
+

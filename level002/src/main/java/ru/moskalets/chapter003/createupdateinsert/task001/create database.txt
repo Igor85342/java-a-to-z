@@ -1,0 +1,3 @@
+В коммандной строке.
+psql --username=postgres
+create database task001;
