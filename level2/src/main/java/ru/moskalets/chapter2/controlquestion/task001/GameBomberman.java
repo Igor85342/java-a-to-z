@@ -21,9 +21,9 @@ public class GameBomberman {
         }
     }
     public int getBombermanX() {
-        return this.bomberman.getX();
+        return this.bomberman.getPosition().getPositionX();
     }
     public int getBombermanY() {
-        return this.bomberman.getY();
+        return this.bomberman.getPosition().getPositionY();
     }
 }

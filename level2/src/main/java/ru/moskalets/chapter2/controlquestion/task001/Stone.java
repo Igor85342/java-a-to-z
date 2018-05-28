@@ -1,17 +1,15 @@
 package ru.moskalets.chapter2.controlquestion.task001;
 
 public class Stone implements Runnable {
-    private final int x;
-    private final int y;
+    private final Cell position;
     private Board board;
-    public Stone(int x, int y, Board board) {
-        this.x = x;
-        this.y = y;
+    public Stone(Cell position, Board board) {
+        this.position = position;
         this.board = board;
     }
     @Override
     public void run() {
-        this.board.getLockBoard()[this.x][this.y].lock();
-        System.out.println("Stone is " + this.x + " " + this.y);
+        this.board.getLockBoard()[this.position.getPositionX()][this.position.getPositionY()].lock();
+        System.out.println("Stone is " + this.position.getPositionX() + " " + this.position.getPositionY());
     }
 }
