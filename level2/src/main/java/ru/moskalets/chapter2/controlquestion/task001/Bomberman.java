@@ -17,10 +17,6 @@ public class Bomberman implements Runnable {
        System.out.println("Start bomberman " + this.position.getPositionX() + " " + this.position.getPositionY());
        for (Cell dest : this.moves) {
            if (board.move(position, dest)) {
-               if (this.board.getLockBoard()[this.position.getPositionX()][this.position.getPositionY()].isLocked()) {
-                   this.board.getLockBoard()[this.position.getPositionX()][this.position.getPositionY()].unlock();
-               }
-               this.board.getLockBoard()[dest.getPositionX()][dest.getPositionY()].lock();
                this.position.setPositionX(dest.getPositionX());
                this.position.setPositionY(dest.getPositionY());
                try {
