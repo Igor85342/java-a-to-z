@@ -29,6 +29,10 @@ public class Board {
                 if (Math.abs(source.getPositionX() - dest.getPositionX()) == 1 | Math.abs(source.getPositionY() - dest.getPositionY()) == 1) {
                     if (!this.lockBoard[dest.getPositionX()][dest.getPositionY()].isLocked()) {
                         result = true;
+                        if (this.lockBoard[source.getPositionX()][source.getPositionY()].isLocked()) {
+                            this.lockBoard[source.getPositionX()][source.getPositionY()].unlock();
+                        }
+                        this.getLockBoard()[dest.getPositionX()][dest.getPositionY()].lock();
                     }
                 }
             }
