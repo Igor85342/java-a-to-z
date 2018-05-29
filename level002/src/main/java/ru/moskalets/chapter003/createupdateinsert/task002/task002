@@ -1,0 +1,47 @@
+create table type (
+	id serial primary key,
+	name varchar(2000)
+);
+
+create table product (
+	id serial primary key,
+	name varchar(2000),
+	type_id int not null references type(id),
+	expired_date timestamp,
+	price float
+);
+
+insert into type(name) values ('Сыр');
+insert into product(name, type_id, expired_date, price) values ('Пармезан', 1, '2018-05-01 00:00:01', 500);
+insert into product(name, type_id, expired_date, price) values ('Чеддер', 1, '2018-06-01 00:00:01', 600);
+insert into type(name) values ('Мороженое');
+insert into product(name, type_id, expired_date, price) values ('Сливочное мороженое', 2, '2018-04-01 00:00:01', 50);
+insert into product(name, type_id, expired_date, price) values ('Шоколадное мороженое', 2, '2018-03-01 00:00:01', 100);
+insert into product(name, type_id, expired_date, price) values ('Клубничное мороженое', 2, '2018-07-01 00:00:01', 75);
+insert into type(name) values ('Молоко');
+insert into product(name, type_id, expired_date, price) values ('Домик в деревне', 3, '2018-05-01 00:00:01', 75);
+
+-- 1. Написать запрос получение всех продуктов с типом "СЫР"
+select * from product as p inner join type as t on p.type_id = t.id where t.name = 'Сыр';
+
+-- 2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженое"
+select * from product as p where p.name like '%мороженое%';
+
+-- 3. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
+select * from product as p where p.expired_date > '2018-06-01 00:00:00' and p.expired_date < '2018-07-01 00:00:00';
+
+-- 4. Написать запрос, который выводит самый дорогой продукт.
+select * from product as p where p.price = (select max(p.price) from product as p);
+
+-- 5. Написать запрос, который выводит количество всех продуктов определенного типа.
+select count(*) from product as p inner join type as t on p.type_id = t.id where t.name = 'Мороженое';
+
+-- 6. Написать запрос получение всех продуктов с типом "Сыр" и "Молоко"
+select * from product as p inner join type as t on p.type_id = t.id where t.name = 'Сыр' or t.name = 'Молоко';
+
+-- 7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.
+select t.name from product as p inner join type as t on p.type_id = t.id group by t.name having count(type_id) < 10;
+
+-- 8. Вывести все продукты и их тип.
+select p.name, t.name from product as p inner join type as t on p.type_id = t.id;
+
