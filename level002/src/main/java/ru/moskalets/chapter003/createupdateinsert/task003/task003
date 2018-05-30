@@ -1,0 +1,51 @@
+create table transmissions (
+ 	id serial primary key,
+ 	name varchar(2000)
+);
+
+create table motors(
+ 	id serial primary key,
+ 	name varchar(2000)
+);
+
+create table carbodies (
+ 	id serial primary key,
+ 	name varchar(2000)
+);
+
+create table cars (
+ 	id serial primary key,
+ 	name varchar(2000),
+ 	id_transmission int not null references transmissions(id),
+ 	id_motor int not null references motors(id),
+ 	id_carbody int not null references carbodies(id)
+);
+
+insert into transmissions(name) values('Transmission 1');
+insert into transmissions(name) values('Transmission 2');
+insert into transmissions(name) values('Transmission 3');
+insert into motors(name) values('Motor 1');
+insert into motors(name) values('Motor 2');
+insert into motors(name) values('Motor 3');
+insert into motors(name) values('Motor 4');
+insert into carbodies(name) values('Carbody 1');
+insert into carbodies(name) values('Carbody 2');
+insert into carbodies(name) values('Carbody 3');
+insert into cars(name, id_transmission, id_motor, id_carbody) values ('Car 1', 1, 1, 1);
+insert into cars(name, id_transmission, id_motor, id_carbody) values ('Car 2', 2, 2, 2);
+
+-- Все машины:
+select c.name, t.name, m.name, cb.name from cars as c inner join transmissions as t on c.id_transmission = t.id
+												inner join motors as m on c.id_motor = m.id
+												inner join carbodies as cb on c.id_carbody = cb.id;
+
+--Неиспользованные трансмиссии:
+select t.name from cars as c right outer join transmissions as t on c.id_transmission = t.id where c.id is null;
+
+--Неиспользованные двигатели:
+select m.name from motors as m left outer join cars as c on c.id_motor = m.id where c.id is null;
+
+--Неиспользованные кузова:
+select cb.name from cars as c right outer join carbodies as cb on c.id_carbody = cb.id where c.id is null;
+
+
