@@ -16,6 +16,7 @@
 		<module>chapter3</module>
 		<module>chapter5</module>
 		<module>level2</module>
+		<module>level002</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -43,6 +44,16 @@
 			<groupId>net.jcip</groupId>
 			<artifactId>jcip-annotations</artifactId>
 			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 	</dependencies>
 	<build>
