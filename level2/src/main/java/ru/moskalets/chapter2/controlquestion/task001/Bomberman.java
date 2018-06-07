@@ -16,23 +16,16 @@ public class Bomberman implements Runnable {
        this.board.getLockBoard()[this.position.getPositionX()][this.position.getPositionY()].lock();
        System.out.println("Start bomberman " + this.position.getPositionX() + " " + this.position.getPositionY());
        for (Cell dest : this.moves) {
-           if (board.move(position, dest)) {
-               this.position.setPositionX(dest.getPositionX());
-               this.position.setPositionY(dest.getPositionY());
-               try {
-                   Thread.currentThread().sleep(1000);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-               System.out.println("Move " + dest.getPositionX() + " " + dest.getPositionY());
-           } else {
-               System.out.println("The path is blocked!");
-               try {
-                   Thread.currentThread().sleep(500);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-           }
+                   if (board.move(position, dest)) {
+                       this.position.setPositionX(dest.getPositionX());
+                       this.position.setPositionY(dest.getPositionY());
+                       try {
+                           Thread.currentThread().sleep(500);
+                       } catch (InterruptedException e) {
+                           e.printStackTrace();
+                       }
+                       System.out.println("Move " + dest.getPositionX() + " " + dest.getPositionY());
+                   }
        }
    }
    public Cell getPosition() {

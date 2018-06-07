@@ -1,5 +1,6 @@
 package ru.moskalets.chapter2.controlquestion.task001;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 
@@ -24,18 +25,24 @@ public class Board {
 
    public boolean move(Cell source, Cell dest) {
         boolean result = false;
-        if (dest.getPositionX() >= 0 & dest.getPositionX() < this.size & dest.getPositionY() >= 0 & dest.getPositionY() < this.size) {
-            if (source.getPositionX() == dest.getPositionX() | source.getPositionY() == dest.getPositionY()) {
-                if (Math.abs(source.getPositionX() - dest.getPositionX()) == 1 | Math.abs(source.getPositionY() - dest.getPositionY()) == 1) {
-                    if (!this.lockBoard[dest.getPositionX()][dest.getPositionY()].isLocked()) {
-                        result = true;
-                        if (this.lockBoard[source.getPositionX()][source.getPositionY()].isLocked()) {
-                            this.lockBoard[source.getPositionX()][source.getPositionY()].unlock();
+      try {
+            if (this.lockBoard[source.getPositionX()][source.getPositionY()].tryLock(500, TimeUnit.MILLISECONDS)) {
+                if (dest.getPositionX() >= 0 & dest.getPositionX() < this.size & dest.getPositionY() >= 0 & dest.getPositionY() < this.size) {
+                    if (source.getPositionX() == dest.getPositionX() | source.getPositionY() == dest.getPositionY()) {
+                        if (Math.abs(source.getPositionX() - dest.getPositionX()) == 1 | Math.abs(source.getPositionY() - dest.getPositionY()) == 1) {
+                            if (!this.lockBoard[dest.getPositionX()][dest.getPositionY()].isLocked()) {
+                                result = true;
+                                if (this.lockBoard[source.getPositionX()][source.getPositionY()].isLocked()) {
+                                    this.lockBoard[source.getPositionX()][source.getPositionY()].unlock();
+                                }
+                                this.getLockBoard()[dest.getPositionX()][dest.getPositionY()].lock();
+                            }
                         }
-                        this.getLockBoard()[dest.getPositionX()][dest.getPositionY()].lock();
                     }
                 }
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
        return result;
    }
