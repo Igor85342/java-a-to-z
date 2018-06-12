@@ -25,25 +25,33 @@ public class Board {
 
    public boolean move(Cell source, Cell dest) {
         boolean result = false;
-      try {
+        try {
             if (this.lockBoard[source.getPositionX()][source.getPositionY()].tryLock(500, TimeUnit.MILLISECONDS)) {
-                if (dest.getPositionX() >= 0 & dest.getPositionX() < this.size & dest.getPositionY() >= 0 & dest.getPositionY() < this.size) {
-                    if (source.getPositionX() == dest.getPositionX() | source.getPositionY() == dest.getPositionY()) {
-                        if (Math.abs(source.getPositionX() - dest.getPositionX()) == 1 | Math.abs(source.getPositionY() - dest.getPositionY()) == 1) {
-                            if (!this.lockBoard[dest.getPositionX()][dest.getPositionY()].isLocked()) {
-                                result = true;
-                                if (this.lockBoard[source.getPositionX()][source.getPositionY()].isLocked()) {
-                                    this.lockBoard[source.getPositionX()][source.getPositionY()].unlock();
-                                }
-                                this.getLockBoard()[dest.getPositionX()][dest.getPositionY()].lock();
-                            }
-                        }
+                if (outOfBound(dest) & rightMove(source, dest)) {
+                    if (!this.lockBoard[dest.getPositionX()][dest.getPositionY()].isLocked()) {
+                        result = true;
+                        this.lockBoard[source.getPositionX()][source.getPositionY()].unlock();
+                        this.lockBoard[dest.getPositionX()][dest.getPositionY()].lock();
                     }
                 }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-       return result;
+        return result;
+   }
+
+   public boolean outOfBound(Cell dest) throws InterruptedException  {
+        return dest.getPositionX() >= 0 & dest.getPositionX() < this.size & dest.getPositionY() >= 0 & dest.getPositionY() < this.size;
+   }
+
+   public boolean rightMove(Cell source, Cell dest) {
+        boolean flag = false;
+       if (source.getPositionX() == dest.getPositionX() | source.getPositionY() == dest.getPositionY()) {
+           if (Math.abs(source.getPositionX() - dest.getPositionX()) == 1 | Math.abs(source.getPositionY() - dest.getPositionY()) == 1) {
+               flag = true;
+           }
+       }
+        return flag;
    }
 }
