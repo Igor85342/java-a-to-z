@@ -1,5 +1,7 @@
 package ru.moskalets.chapter003.jdbc.task001.start;
 
+import java.sql.SQLException;
+
 /**
  * Abstract class BaseAction implements UserAction.
  * @author Igor Moskalets.
@@ -29,7 +31,7 @@ public abstract class BaseAction implements UserAction {
 	 * @param input .
 	 * @param tracker .
 	 */
-	public abstract void execute(Input input, Tracker tracker);
+	public abstract void execute(Input input, Tracker tracker) throws SQLException;
 
 	/**
 	 * info().

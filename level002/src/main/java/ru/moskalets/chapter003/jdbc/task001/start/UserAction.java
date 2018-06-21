@@ -1,5 +1,7 @@
 package ru.moskalets.chapter003.jdbc.task001.start;
 
+import java.sql.SQLException;
+
 /**
  * Interface UserAction.
  * @author Igor Moskalets.
@@ -17,7 +19,7 @@ public interface UserAction {
 	 * @param input .
 	 * @param tracker .
 	 */
-	void execute(Input input, Tracker tracker);
+	void execute(Input input, Tracker tracker) throws SQLException;
 
 	/**
 	 * info().

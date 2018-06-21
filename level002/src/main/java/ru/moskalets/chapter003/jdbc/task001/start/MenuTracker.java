@@ -1,7 +1,12 @@
 package ru.moskalets.chapter003.jdbc.task001.start;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.moskalets.chapter003.createupdateinsert.task004.SQLStorage;
 import ru.moskalets.chapter003.jdbc.task001.models.Item;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +35,7 @@ class EditItem extends BaseAction {
 	 * @param input .
 	 * @param tracker .
 	 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
             String id = input.ask("Please, enter the task's id: ");
             String name = input.ask("Please, enter the task's new name: ");
             String description = input.ask("Please, enter the task's new desc: ");
@@ -97,7 +102,7 @@ public class MenuTracker {
 	 * select().
 	 * @param key .
 	 */
-	public void select(int key) {
+	public void select(int key) throws SQLException {
 		this.actions.get(key).execute(this.input, this.tracker);
 	}
 
@@ -116,6 +121,7 @@ public class MenuTracker {
 	 * author Igor Moskalets
 	 */
 	private class AddItem extends BaseAction {
+		private Logger log = LoggerFactory.getLogger(SQLStorage.class);
 		/**
 		 * Add item.
 		 * @param name .
@@ -140,7 +146,11 @@ public class MenuTracker {
 		public void execute(Input input, Tracker tracker) {
 			String name = input.ask("Please, enter the task's name: ");
 			String desc = input.ask("Please, enter the task's desc: ");
-			tracker.add(new Item(name, desc));
+			try {
+				tracker.add(new Item(name, desc));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 		}
 	}
 	/**
@@ -152,6 +162,7 @@ public class MenuTracker {
 		 * Show items.
 		 * @param name .
 		 */
+		private static Logger log = LoggerFactory.getLogger(SQLStorage.class);
 		private ShowItems(String name) {
 			super(name);
 		}
@@ -170,7 +181,11 @@ public class MenuTracker {
 		 * @param tracker .
 		 */
 		public void execute(Input input, Tracker tracker) {
-			tracker.getAll();
+			try {
+				tracker.getAll();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 		}
 	}
 	/**
@@ -199,7 +214,7 @@ public class MenuTracker {
 		 * @param input .
 		 * @param tracker .
 		 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
 			String name = input.ask("Please, enter the task's name: ");
 			tracker.findByName(name);
 		}
@@ -230,7 +245,7 @@ public class MenuTracker {
 		 * @param input .
 		 * @param tracker .
 		 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
 			String desc = input.ask("Please, enter the task's desc: ");
 			tracker.findByDesc(desc);
 		}
@@ -262,7 +277,7 @@ public class MenuTracker {
 		 * @param input .
 		 * @param tracker .
 		 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
 			String id = input.ask("Please, enter the task's id: ");
 			tracker.remove(Integer.parseInt(id));
 		}
@@ -294,7 +309,7 @@ public class MenuTracker {
 		 * @param input .
 		 * @param tracker .
 		 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
 			String id = input.ask("Please, enter the task's id: ");
 			String comment = input.ask("Please, enter the comment; ");
 			tracker.addComment(comment, Integer.parseInt(id));
@@ -327,7 +342,7 @@ public class MenuTracker {
 		 * @param input .
 		 * @param tracker .
 		 */
-		public void execute(Input input, Tracker tracker) {
+		public void execute(Input input, Tracker tracker) throws SQLException {
 			String id = input.ask("Please, enter the task's id: ");
 			tracker.showAllCommentsFromItem(Integer.parseInt(id));
 		}
@@ -337,6 +352,7 @@ public class MenuTracker {
 	 * Создает новые таблицы, если выбрано соответствущий пункт меню.
 	 */
 	private class CreateTable extends BaseAction {
+		private Logger log = LoggerFactory.getLogger(SQLStorage.class);
 		/**
 		 * Конструктор
 		 * @param name
@@ -359,8 +375,13 @@ public class MenuTracker {
 		 * @param tracker .
 		 */
 		public void execute(Input input, Tracker tracker) {
-			tracker.createTable();
-			System.out.println("Tables created!");
+			try {
+				tracker.createTable();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			} finally {
+				System.out.println("Tables created!");
+			}
 		}
 	}
 }

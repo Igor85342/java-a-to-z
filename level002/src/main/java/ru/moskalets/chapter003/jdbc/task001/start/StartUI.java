@@ -1,4 +1,7 @@
 package ru.moskalets.chapter003.jdbc.task001.start;
+
+import java.sql.SQLException;
+
 /**
  * The class displays the menu items.
  * author Igor Moskalets
@@ -24,33 +27,37 @@ public class StartUI {
     /**
      * init().
      */
-    public void init() {
-        Tracker tracker = new Tracker();
-        MenuTracker menu = new MenuTracker(this.input, tracker);
-        menu.fillActions();
-        UserAction deleteAction = new UserAction() {
-            public int key() {
-                return 9;
-            }
-            public void execute(Input input, Tracker tracker) {
-                //todo
-            }
-            public String info() {
-                return "9. Delete";
-            }
-        };
-        menu.addAction(deleteAction);
-        do {
-            menu.show();
-            menu.select(input.ask("select:", ranges));
-        } while (!"y".equals(this.input.ask("Exit?(y)")));
+    public void init() throws SQLException {
+        //Tracker tracker = new Tracker();
+        try (Tracker tracker = new Tracker("jdbc:postgresql://localhost:5432/tracker", "postgres", "password")) {
+            MenuTracker menu = new MenuTracker(this.input, tracker);
+            menu.fillActions();
+            UserAction deleteAction = new UserAction() {
+                public int key() {
+                    return 9;
+                }
+
+                public void execute(Input input, Tracker tracker) {
+                    //todo
+                }
+
+                public String info() {
+                    return "9. Delete";
+                }
+            };
+            menu.addAction(deleteAction);
+            do {
+                menu.show();
+                menu.select(input.ask("select:", ranges));
+            } while (!"y".equals(this.input.ask("Exit?(y)")));
+        }
     }
 
     /**
      * main.
      * @param args .
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Input input = new ValidateInput();
         new StartUI(input).init();
     }
