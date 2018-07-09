@@ -1,0 +1,38 @@
+CREATE TABLE company
+(
+id integer NOT NULL,
+name character varying,
+CONSTRAINT company_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE person
+(
+id integer NOT NULL,
+name character varying,
+company_id integer,
+CONSTRAINT person_pkey PRIMARY KEY (id)
+);
+
+insert into company(id, name) values(1, 'Company 1');
+insert into company(id, name) values(2, 'Company 2');
+insert into company(id, name) values(3, 'Company 3');
+insert into company(id, name) values(4, 'Company 4');
+insert into company(id, name) values(5, 'Company 5');
+
+insert into person(id, name, company_id) values(1, 'Person 1', 1);
+insert into person(id, name, company_id) values(2, 'Person 2', 5);
+insert into person(id, name, company_id) values(3, 'Person 3', 5);
+insert into person(id, name, company_id) values(4, 'Person 4', 2);
+insert into person(id, name, company_id) values(5, 'Person 5', 2);
+insert into person(id, name, company_id) values(6, 'Person 6', 2);
+insert into person(id, name, company_id) values(7, 'Person 7', 3);
+
+-- 1) Retrieve in a single query:
+-- - names of all persons that are NOT in the company with id = 5
+-- - company name for each person
+select * from person as p inner join company as c on p.company_id = c.id where not company_id = 5;
+
+-- 2) Select the name of the company with the maximum number of persons + number of persons in this company
+select c.name, count(p) from company as c inner join person as p on c.id = p.company_id group by c.name having count(p) = (
+	select max(count) from (select c.name, count(p) from company as c inner join person as p on c.id = p.company_id group by c.name) as t
+)
