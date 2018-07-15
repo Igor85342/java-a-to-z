@@ -14,15 +14,15 @@ public class ConvertXSQT {
     /**
      * fileNameSource.
      */
-    private String fileNameSource = "C:\\projects\\java-a-to-z\\level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries.xml";
+    private String fileNameSource = "level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries.xml";
     /**
      * fileNameDestance.
      */
-    private String fileNameDestance = "C:\\projects\\java-a-to-z\\level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries002.xml";
+    private String fileNameDestance = "level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries002.xml";
     /**
      * fileNameScheme.
      */
-    private String fileNameScheme = "C:\\projects\\java-a-to-z\\level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\scheme.xsl";
+    private String fileNameScheme = "level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\scheme.xsl";
 
     /**
      * Преобразует файлы.

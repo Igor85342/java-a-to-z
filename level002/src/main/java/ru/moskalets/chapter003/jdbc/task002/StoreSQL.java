@@ -35,10 +35,9 @@ public class StoreSQL implements AutoCloseable {
      * В методе генерируются данные.
      * @param count
      */
-    public void generate(int count) {
-        try  {
-            config.getConn().setAutoCommit(false);
-            PreparedStatement ps = config.getConn().prepareStatement("insert into 'entry' ('field') values (?)");
+    public void generate(int count) throws SQLException {
+        config.getConn().setAutoCommit(false);
+        try  (PreparedStatement ps = config.getConn().prepareStatement("insert into 'entry' ('field') values (?)")) {
             for (int i = 1; i < count + 1; i++) {
                 ps.setInt(1, i);
                 ps.executeUpdate();
@@ -47,11 +46,7 @@ public class StoreSQL implements AutoCloseable {
             config.getConn().setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();
-            try {
                 config.getConn().rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 

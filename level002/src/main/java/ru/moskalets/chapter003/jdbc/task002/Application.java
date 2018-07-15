@@ -9,6 +9,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
@@ -24,12 +25,12 @@ public class Application  {
     /**
      * fileNameDestance
      */
-   private String fileNameDestance = "C:\\projects\\java-a-to-z\\level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries002.xml";
+   private String fileNameDestance = "level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\entries002.xml";
     /**
      * entries.
      */
    private ArrayList<Entry> entries = new ArrayList<Entry>();
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws SQLException  {
         Application application = new Application();
         application.startApplication();
     }
@@ -37,21 +38,21 @@ public class Application  {
     /**
      * Запуск приложения.
      */
-    public void startApplication() {
+    public void startApplication() throws SQLException {
             Config config = new Config();
             config.startDB();
-            StoreSQL ssql = new StoreSQL(config);
-            ssql.createTable();
-            ssql.generate(1000000);
-            ssql.read();
-            StoreXML storeXML = new StoreXML(ssql.read());
-            storeXML.save();
-            ConvertXSQT convertXSQT = new ConvertXSQT();
-            convertXSQT.convert();
-            parsingFile();
-            amount();
-            ssql.delete();
-            ssql.close();
+            try (StoreSQL ssql = new StoreSQL(config);) {
+                ssql.createTable();
+                ssql.generate(1000000);
+                ssql.read();
+                StoreXML storeXML = new StoreXML(ssql.read());
+                storeXML.save();
+                ConvertXSQT convertXSQT = new ConvertXSQT();
+                convertXSQT.convert();
+                parsingFile();
+                amount();
+                ssql.delete();
+            }
     }
 
     /**
