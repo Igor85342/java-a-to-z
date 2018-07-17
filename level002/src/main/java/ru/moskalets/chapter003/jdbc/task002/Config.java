@@ -17,7 +17,7 @@ public class Config {
     public void startDB() {
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:task002.s3db");
+            conn = DriverManager.getConnection("jdbc:sqlite:level002\\src\\main\\java\\ru\\moskalets\\chapter003\\jdbc\\task002\\task002.s3db");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
