@@ -70,6 +70,21 @@ public class User {
     }
 
     /**
+     * Возвращает login.
+     * @return
+     */
+    public String getLogin() {
+       return this.login;
+    }
+
+    /**
+     * Возвращает email.
+     * @return
+     */
+    public String getEmail() {
+        return this.email;
+    }
+    /**
      * Изменяет name, login, email.
      * @param name
      * @param login
