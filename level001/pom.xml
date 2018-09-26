@@ -1,0 +1,11 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>level001</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+    <parent>
+        <groupId>ru.imoskalets</groupId>
+        <artifactId>java-a-to-z</artifactId>
+        <version>1.0</version>
+    </parent>
+</project>
