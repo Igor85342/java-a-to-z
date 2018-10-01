@@ -74,7 +74,7 @@ public class UserUpdateServlet extends HttpServlet {
     /**
      * Обновляет данные пользователя.
      */
-    Consumer<HttpServletRequest> update = req -> this.validateService.update(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
+    Consumer<HttpServletRequest> update = req -> this.validateService.update(new User(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email")));
 
     /**
      * Удаляет пользователя.

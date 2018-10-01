@@ -46,6 +46,20 @@ public class User {
     }
 
     /**
+     * Конструктор.
+     * @param id
+     * @param name
+     * @param login
+     * @param email
+     */
+    public User(int id, String name, String login, String email) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+    }
+
+    /**
      * Возвращает id.
      * @return
      */

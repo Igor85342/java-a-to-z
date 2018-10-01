@@ -39,20 +39,14 @@ public class ValidateService {
         if (!this.memoryStore.findAll().contains(user)) {
             this.memoryStore.add(user);
         }
-
     }
 
     /**
      * Находит пользователя по id и изменяет его данные.
-     * @param id
-     * @param name
-     * @param login
-     * @param email
+     * @param user
      */
-    public void update(int id, String name, String login, String email) {
-        if (this.memoryStore.findAll().containsKey(id)) {
-            this.memoryStore.update(id, name, login, email);
-        }
+    public void update(User user) {
+            this.memoryStore.update(user);
     }
 
     /**
@@ -60,9 +54,7 @@ public class ValidateService {
      * @param id
      */
     public void delete(int id) {
-        if (this.memoryStore.findAll().containsKey(id)) {
             this.memoryStore.delete(id);
-        }
     }
 
     /**

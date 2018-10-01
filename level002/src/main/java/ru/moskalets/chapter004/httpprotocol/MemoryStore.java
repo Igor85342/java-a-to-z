@@ -39,16 +39,15 @@ public class MemoryStore implements Store {
 
     @Override
     public void add(User user) {
-        counter.incrementAndGet();
-        user.setId(counter.get());
+        user.setId(counter.incrementAndGet());
         this.users.put(counter.get(), user);
     }
 
     @Override
-    public void update(int id, String name, String login, String email) {
-        User user = this.users.get(id);
-        user.updateUser(name, login, email);
-    }
+    public void update(User userUpdate) {
+    User user = this.users.get(userUpdate.getId());
+    user.updateUser(userUpdate.getName(), userUpdate.getLogin(), userUpdate.getEmail());
+}
 
     @Override
     public void delete(int id) {

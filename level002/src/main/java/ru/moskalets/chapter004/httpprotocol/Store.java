@@ -15,12 +15,9 @@ public interface Store {
 
     /**
      * Изменяте данные пользователя.
-     * @param id
-     * @param name
-     * @param login
-     * @param email
+     * @param user
      */
-    void update(int id, String name, String login, String email);
+    void update(User user);
 
     /**
      * Удаляет пользователя.
