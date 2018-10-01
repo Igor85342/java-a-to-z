@@ -9,6 +9,18 @@ import java.util.function.Function;
  */
 public class CountingFunctionDiapason {
     /**
+     * Линейная функция.
+     */
+    Function<Double, Double> lineFunction = x -> 2 * x + 1;
+    /**
+     * Квадратичная функция.
+     */
+    Function<Double, Double> quadraticFunction = x -> Math.pow(x, 2) + 2 * x + 3;
+    /**
+     * Логарфмическая функция.
+     */
+    Function<Double, Double> logarithmicFunction = x -> Math.log(x);
+    /**
      * Считает функцию переданную в параметре.
      * @param start
      * @param end
@@ -22,18 +34,4 @@ public class CountingFunctionDiapason {
         }
         return result;
     }
-
-    /**
-     * Линейная функция.
-     */
-    Function<Double, Double> lineFunction = x -> 2 * x + 1;
-    /**
-     * Квадратичная функция.
-     */
-    Function<Double, Double> quadraticFunction = x -> Math.pow(x, 2) + 2 * x + 3;
-    /**
-     * Логарфмическая функция.
-     */
-    Function<Double, Double> logarithmicFunction = x -> Math.log(x);
-
 }
