@@ -1,4 +1,7 @@
 package ru.moskalets.chapter004.lambda.task002.start;
+
+import java.util.function.Consumer;
+
 /**
  * The class displays the menu items.
  */
@@ -27,6 +30,8 @@ public class StartUI {
 		Tracker tracker = new Tracker();
 		MenuTracker menu = new MenuTracker(this.input, tracker);
 		menu.fillActions();
+
+		Consumer<Integer> select = menu::select;
 		UserAction deleteAction = new UserAction() {
 			public int key() {
 				return 8;
@@ -41,7 +46,7 @@ public class StartUI {
 		menu.addAction(deleteAction);
 		do {
 			menu.show();
-			menu.select(input.ask("select:", ranges));
+			select.accept(input.ask("select:", ranges));
 		} while (!"y".equals(this.input.ask("Exit?(y)")));
 	}
 
