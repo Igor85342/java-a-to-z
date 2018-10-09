@@ -50,7 +50,8 @@ public class UserUpdateServlet extends HttpServlet {
                                 + "Login : <input type='text' name='login' value='" + user.getLogin() + "'/> "
                                 + "Email : <input type='text' name='email' value='" + user.getEmail() + "'/>"
                                 + " <input type='submit' name='button' value='Update'>" + ""
-                                + "<input type='hidden' name='id' value='" + user.getId() + "'"
+                                + "<input type='hidden' name='id' value='" + user.getId() + "'>"
+                                + "</form>"
                             + "</td>"
                         + "</tr>"
                         + "</table>"
@@ -70,6 +71,7 @@ public class UserUpdateServlet extends HttpServlet {
             }
             String action = req.getParameter("button");
             this.dispatch.get(action).accept(req);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
     /**
      * Обновляет данные пользователя.

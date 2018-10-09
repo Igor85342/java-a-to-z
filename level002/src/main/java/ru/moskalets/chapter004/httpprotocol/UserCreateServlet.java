@@ -44,5 +44,6 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         this.validateService.add(new User(req.getParameter("name"), req.getParameter("login"), req.getParameter("email")));
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }
