@@ -1,5 +1,6 @@
 package ru.moskalets.chapter004.httpprotocol;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -13,10 +14,9 @@ public class ValidateService {
     private static final ValidateService INSTANCE = new ValidateService();
 
     /**
-     * memoryStore
+     * store
      */
-    private final MemoryStore memoryStore = MemoryStore.getInstance();
-
+    private final Store store = DbStore.getInstance();
     /**
      * Конструктор.
      */
@@ -36,9 +36,7 @@ public class ValidateService {
      * @param user
      */
     public void add(User user) {
-        if (!this.memoryStore.findAll().contains(user)) {
-            this.memoryStore.add(user);
-        }
+            this.store.add(user);
     }
 
     /**
@@ -46,7 +44,7 @@ public class ValidateService {
      * @param user
      */
     public void update(User user) {
-            this.memoryStore.update(user);
+            this.store.update(user);
     }
 
     /**
@@ -54,15 +52,21 @@ public class ValidateService {
      * @param id
      */
     public void delete(int id) {
-            this.memoryStore.delete(id);
+            this.store.delete(id);
     }
 
     /**
      * Возвращает map со всеми пользователями.
      * @return
      */
-    public ConcurrentHashMap<Integer, User> findAll() {
-        return memoryStore.findAll();
+    public Map<Integer, User> findAll() {
+        Map<Integer, User> result = null;
+        try {
+            result = this.store.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -72,8 +76,8 @@ public class ValidateService {
      */
     public User findById(int id) {
         User user = null;
-        if ((this.memoryStore.findAll().containsKey(id))) {
-            user = this.memoryStore.findById(id);
+        if ((this.store.findAll().containsKey(id))) {
+            user = this.store.findById(id);
         }
         return user;
     }

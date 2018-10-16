@@ -30,7 +30,7 @@ public class User {
     /**
      * createDate
      */
-    private Date createDate;
+    private String createDate;
 
     /**
      * Конструктор.
@@ -42,7 +42,7 @@ public class User {
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDate = new Date();
+        this.createDate = new Date().toString();
     }
 
     /**
@@ -58,7 +58,13 @@ public class User {
         this.login = login;
         this.email = email;
     }
-
+    public User(int id, String name, String login, String email, String createDate) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
     /**
      * Возвращает id.
      * @return
@@ -98,6 +104,10 @@ public class User {
     public String getEmail() {
         return this.email;
     }
+
+    public String getCreateDate() {
+        return this.createDate;
+    }
     /**
      * Изменяет name, login, email.
      * @param name
@@ -115,8 +125,7 @@ public class User {
      * @return
      */
     public String printUserInfo() {
-        String result = this.id + " " + this.name + " " + this.login + " " + this.email + " " + this.createDate.toString();
-        return result;
+        return this.id + " " + this.name + " " + this.login + " " + this.email + " " + this.createDate;
     }
 
     @Override
