@@ -120,14 +120,6 @@ public class User {
         this.email = email;
     }
 
-    /**
-     * Печатает поля user.
-     * @return
-     */
-    public String printUserInfo() {
-        return this.id + " " + this.name + " " + this.login + " " + this.email + " " + this.createDate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

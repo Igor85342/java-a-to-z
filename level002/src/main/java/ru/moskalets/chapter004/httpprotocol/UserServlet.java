@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * Класс выводит список пользователей системы.
  */
-@WebServlet(value = "/user", loadOnStartup = 0)
+@WebServlet(value = "/", loadOnStartup = 0)
 public class UserServlet extends HttpServlet {
 
     /**
@@ -21,47 +21,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
-        if (this.validateService.findAll().isEmpty()) {
-                writer.append("Users not found.");
-        } else {
-            for (User user : this.validateService.findAll().values()) {
-                writer.append("<!DOCTYPE html"
-                        + "html lang=\"en\">"
-                        + "<head>"
-                        + "<meta charset=\"UTF-8\">"
-                        + "<title></title>"
-                        + "</head>"
-                        + "<body>"
-                        + "<table border='1'>"
-                        + "<tr>"
-                            + "<td>"
-                                + user.printUserInfo()
-                            + "</td>"
-                            + "<td> "
-                                + "<form action ='" + req.getContextPath() + "/update' method='post'>"
-                                + "<input type='submit' name='button' value='Update'>"
-                                + "<input type='hidden' name='id' value='" + user.getId() + "'"
-                            + "</td>"
-                        + "</tr>"
-                        + "<tr>"
-                            + "<td>"
-                            + "</td>"
-                            + "<td>"
-                                + "<form action ='" + req.getContextPath() + "/update' method='post'>"
-                                + "<input type='submit' name='button' value='Delete'>"
-                            + "</td>"
-                        + "</tr>"
-                        + "</form>"
-                        + "</table>"
-                        + "</body>"
-                        + "</html>"
-                );
-                writer.flush();
-            }
-        }
-        writer.close();
+        req.setAttribute("users", validateService.findAll().values());
+        req.getRequestDispatcher("WEB-INF/views/UsersView.jsp").forward(req, resp);
     }
 
     @Override
