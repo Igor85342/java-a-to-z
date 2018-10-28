@@ -19,13 +19,14 @@ public class UserCreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("roles", this.validateService.getAllRoles());
         req.getRequestDispatcher("WEB-INF/views/UserCreateView.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        this.validateService.add(new User(req.getParameter("name"), req.getParameter("login"), req.getParameter("email")));
+        this.validateService.add(new User(req.getParameter("login"), req.getParameter("password"), req.getParameter("role")));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

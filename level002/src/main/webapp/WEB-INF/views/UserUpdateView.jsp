@@ -6,9 +6,18 @@
 </head>
 <body>
 <form action ="${pageContext.servletContext.contextPath}/update" method='post'>
-    Name : <input type="text" name="name" value="${user.name}"/>
     Login : <input type="text" name="login" value="${user.login}"/>
-    Email : <input type="text" name="email" value="${user.email}"/>
+    Password : <input type="text" name="password" value="${user.password}"/>
+    <c:if test = "${sessionScope.get('user').role == 'Admin'}">
+        Role: <select name="role">
+        <c:forEach items = "${roles}" var = "role">
+            <option value="${role.name}"><c:out value = "${role.name}"></c:out></option>
+        </c:forEach>
+    </select>
+    </c:if>
+    <c:if test = "${sessionScope.get('user').role == 'User'}">
+        <input type="hidden" name="role" value="${user.role}">
+    </c:if>
     <input type="submit" name="button" value="Update">
     <input type="hidden" name="id" value="${user.id}">
 </form>

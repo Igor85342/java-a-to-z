@@ -6,9 +6,13 @@
 </head>
 <body>
 <form action ="${pageContext.servletContext.contextPath}/create" method="post">
-    Name : <input type="text" name="name"/>
     Login : <input type="text" name="login"/>
-    Email : <input type="text" name="email"/>
+    Password : <input type="text" name="password"/>
+    Role: <select name="role">
+            <c:forEach items ="${roles}" var="role">
+                <option value="${role.name}"><c:out value = "${role.name}"></c:out></option>
+            </c:forEach>
+    </select>
     <input type="submit">
 </form>
 </body>

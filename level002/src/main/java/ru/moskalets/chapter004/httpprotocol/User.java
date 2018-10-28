@@ -13,57 +13,39 @@ public class User {
     private int id;
 
     /**
-     * name
-     */
-    private String name;
-
-    /**
      * login
      */
     private String login;
 
-    /**
-     * email
-     */
-    private String email;
+    private String password;
+
+    private String role;
 
     /**
      * createDate
      */
     private String createDate;
 
-    /**
-     * Конструктор.
-     * @param name
-     * @param login
-     * @param email
-     */
-    public User(String name, String login, String email) {
-        this.name = name;
+    public User(int id, String login, String password, String role, String createDate) {
+        this.id = id;
         this.login = login;
-        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createDate = createDate;
+    }
+
+    public User(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
         this.createDate = new Date().toString();
     }
 
-    /**
-     * Конструктор.
-     * @param id
-     * @param name
-     * @param login
-     * @param email
-     */
-    public User(int id, String name, String login, String email) {
+    public User(int id, String login, String password, String role) {
         this.id = id;
-        this.name = name;
         this.login = login;
-        this.email = email;
-    }
-    public User(int id, String name, String login, String email, String createDate) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-        this.createDate = createDate;
+        this.password = password;
+        this.role = role;
     }
     /**
      * Возвращает id.
@@ -81,13 +63,7 @@ public class User {
         this.id = id;
     }
 
-    /**
-     * Возвращает name.
-     * @return
-     */
-    public String getName() {
-        return this.name;
-    }
+
 
     /**
      * Возвращает login.
@@ -97,27 +73,22 @@ public class User {
        return this.login;
     }
 
-    /**
-     * Возвращает email.
-     * @return
-     */
-    public String getEmail() {
-        return this.email;
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getRole() {
+        return this.role;
     }
 
     public String getCreateDate() {
         return this.createDate;
     }
-    /**
-     * Изменяет name, login, email.
-     * @param name
-     * @param login
-     * @param email
-     */
-    public void updateUser(String name, String login, String email) {
-        this.name = name;
+
+    public void updateUser(String login, String password, String role) {
         this.login = login;
-        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     @Override
@@ -131,20 +102,16 @@ public class User {
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) {
-            return false;
-        }
         if (login != null ? !login.equals(user.login) : user.login != null) {
             return false;
         }
-        return email != null ? email.equals(user.email) : user.email == null;
+        return password != null ? password.equals(user.password) : user.password == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        int result = login != null ? login.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 }

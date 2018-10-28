@@ -1,5 +1,6 @@
 package ru.moskalets.chapter004.httpprotocol;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,4 +38,9 @@ public interface Store {
      * @return
      */
     User findById(int id);
+
+    User isCredentional(String login, String password);
+
+    List getAllRoles();
+
 }

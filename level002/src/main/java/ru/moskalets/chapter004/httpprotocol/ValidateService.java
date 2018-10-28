@@ -1,5 +1,6 @@
 package ru.moskalets.chapter004.httpprotocol;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,7 +37,9 @@ public class ValidateService {
      * @param user
      */
     public void add(User user) {
+        if (!findAll().containsValue(user)) {
             this.store.add(user);
+        }
     }
 
     /**
@@ -60,13 +63,7 @@ public class ValidateService {
      * @return
      */
     public Map<Integer, User> findAll() {
-        Map<Integer, User> result = null;
-        try {
-            result = this.store.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        return this.store.findAll();
     }
 
     /**
@@ -75,10 +72,14 @@ public class ValidateService {
      * @return
      */
     public User findById(int id) {
-        User user = null;
-        if ((this.store.findAll().containsKey(id))) {
-            user = this.store.findById(id);
-        }
-        return user;
+        return this.store.findById(id);
+    }
+
+    public User isCredentional(String login, String password) {
+        return this.store.isCredentional(login, password);
+    }
+
+    public List getAllRoles() {
+        return this.store.getAllRoles();
     }
 }

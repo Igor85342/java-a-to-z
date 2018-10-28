@@ -20,16 +20,21 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = this.validateService.findById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("user", user);
+        req.setAttribute("roles", this.validateService.getAllRoles());
         req.getRequestDispatcher("WEB-INF/views/UserUpdateView.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        this.validateService.update(new User(Integer.parseInt(req.getParameter("id")), req.getParameter("name"), req.getParameter("login"), req.getParameter("email")));
+        this.validateService.update(new User(Integer.parseInt(req.getParameter("id")), req.getParameter("login"), req.getParameter("password"), req.getParameter("role")));
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user.getRole().equals("User")) {
+            session.setAttribute("user", this.validateService.findById(Integer.parseInt(req.getParameter("id"))));
+        }
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

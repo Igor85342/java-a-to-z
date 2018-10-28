@@ -6,27 +6,55 @@
 </head>
 <body>
 <table border='1'>
+    <c:set var="role" value="${sessionScope.get('role')}" />
+    <c:out value="${role}"/>
     <tr>
         <td><strong>Id</strong></td>
-        <td><strong>Name</strong></td>
         <td><strong>Login</strong></td>
-        <td><strong>Email</strong></td>
+        <td><strong>Password</strong></td>
+        <td><strong>Role</strong></td>
         <td><strong>Create Date</strong></td>
         <td><strong>Buttons</strong></td>
     </tr>
+    <c:if test = "${sessionScope.get('user').role == 'User'}">
+        <tr>
+            <td>
+                <c:out value = "${sessionScope.get('user').id}"></c:out>
+            </td>
+            <td>
+                <c:out value = "${sessionScope.get('user').login}"></c:out>
+            </td>
+            <td>
+                <c:out value = "${sessionScope.get('user').password}"></c:out>
+            </td>
+            <td>
+                <c:out value = "${sessionScope.get('user').role}"></c:out>
+            </td>
+            <td>
+                <c:out value = "${sessionScope.get('user').createDate}"></c:out>
+            </td>
+            <td>
+                <form action ="${pageContext.servletContext.contextPath}/update" method="get">
+                    <input type="submit" name="button" value="Update">
+                    <input type="hidden" name="id" value="${user.id}">
+                </form>
+            </td>
+        </tr>
+    </c:if>
+    <c:if test = "${sessionScope.get('user').role == 'Admin'}">
     <c:forEach items ="${users}" var="user">
             <tr>
                 <td>
                     <c:out value = "${user.id}"></c:out>
                 </td>
                 <td>
-                    <c:out value = "${user.name}"></c:out>
-                </td>
-                <td>
                     <c:out value = "${user.login}"></c:out>
                 </td>
                 <td>
-                    <c:out value = "${user.email}"></c:out>
+                    <c:out value = "${user.password}"></c:out>
+                </td>
+                <td>
+                    <c:out value = "${user.role}"></c:out>
                 </td>
                 <td>
                     <c:out value = "${user.createDate}"></c:out>
@@ -35,7 +63,6 @@
                     <form action ="${pageContext.servletContext.contextPath}/update" method="get">
                         <input type="submit" name="button" value="Update">
                         <input type="hidden" name="id" value="${user.id}">
-                        <c:set var="user" value="${user}" scope="session"/>
                     </form>
                 </td>
             </tr>
@@ -61,6 +88,7 @@
         </form>
     </td>
     </tr>
+    </c:if>
 </table>
 </body>
 </html>

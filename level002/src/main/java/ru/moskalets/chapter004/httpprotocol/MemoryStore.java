@@ -1,5 +1,6 @@
 package ru.moskalets.chapter004.httpprotocol;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -46,7 +47,7 @@ public class MemoryStore implements Store {
     @Override
     public void update(User userUpdate) {
     User user = this.users.get(userUpdate.getId());
-    user.updateUser(userUpdate.getName(), userUpdate.getLogin(), userUpdate.getEmail());
+    user.updateUser(userUpdate.getLogin(), userUpdate.getPassword(), userUpdate.getRole());
 }
 
     @Override
@@ -62,5 +63,15 @@ public class MemoryStore implements Store {
     @Override
     public User findById(int id) {
         return this.users.get(id);
+    }
+
+    @Override
+    public User isCredentional(String login, String password) {
+        return null;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return null;
     }
 }
