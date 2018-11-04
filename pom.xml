@@ -24,11 +24,18 @@
     			<groupId>junit</groupId>
     			<artifactId>junit</artifactId>
     			<version>4.12</version>
+				<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>2.7.22</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -77,10 +84,15 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.googlecode.slf4j-maven-plugin-log</groupId>-->
+			<!--<artifactId>slf4j-maven-plugin-log</artifactId>-->
+			<!--<version>1.0.0</version>-->
+		<!--</dependency>-->
 		<dependency>
-			<groupId>com.googlecode.slf4j-maven-plugin-log</groupId>
-			<artifactId>slf4j-maven-plugin-log</artifactId>
-			<version>1.0.0</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -105,6 +117,18 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>

@@ -16,7 +16,7 @@ public class UserUpdateServlet extends HttpServlet {
     /**
      * validateService.
      */
-    private final ValidateService validateService = ValidateService.getInstance();
+    private final Validate validateService = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +31,11 @@ public class UserUpdateServlet extends HttpServlet {
         resp.setContentType("text/html");
         this.validateService.update(new User(Integer.parseInt(req.getParameter("id")), req.getParameter("login"), req.getParameter("password"), req.getParameter("role")));
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user.getRole().equals("User")) {
-            session.setAttribute("user", this.validateService.findById(Integer.parseInt(req.getParameter("id"))));
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user.getRole().equals("User")) {
+                session.setAttribute("user", this.validateService.findById(Integer.parseInt(req.getParameter("id"))));
+            }
         }
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }

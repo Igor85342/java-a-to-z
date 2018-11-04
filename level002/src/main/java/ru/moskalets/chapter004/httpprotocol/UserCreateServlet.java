@@ -15,7 +15,7 @@ public class UserCreateServlet extends HttpServlet {
     /**
      * validateService
      */
-    private final ValidateService validateService = ValidateService.getInstance();
+    private final Validate validateService = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

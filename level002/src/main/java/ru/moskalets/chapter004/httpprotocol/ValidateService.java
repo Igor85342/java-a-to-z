@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Класс производит валидацию данных.
  */
-public class ValidateService {
+public class ValidateService implements Validate {
 
     /**
      * INSTANCE
@@ -28,7 +28,7 @@ public class ValidateService {
      * Возвращает INSTANCE.
      * @return
      */
-    public static ValidateService getInstance() {
+    public static Validate getInstance() {
         return INSTANCE;
     }
 
@@ -36,6 +36,7 @@ public class ValidateService {
      * Проверяет не существует ли пользователя с такими же данными и добавляет если не существует.
      * @param user
      */
+    @Override
     public void add(User user) {
         if (!findAll().containsValue(user)) {
             this.store.add(user);
@@ -46,6 +47,7 @@ public class ValidateService {
      * Находит пользователя по id и изменяет его данные.
      * @param user
      */
+    @Override
     public void update(User user) {
             this.store.update(user);
     }
@@ -54,6 +56,7 @@ public class ValidateService {
      * Находит пользователя по id и удаляет его.
      * @param id
      */
+    @Override
     public void delete(int id) {
             this.store.delete(id);
     }
@@ -71,14 +74,17 @@ public class ValidateService {
      * @param id
      * @return
      */
+    @Override
     public User findById(int id) {
         return this.store.findById(id);
     }
 
+    @Override
     public User isCredentional(String login, String password) {
         return this.store.isCredentional(login, password);
     }
 
+    @Override
     public List getAllRoles() {
         return this.store.getAllRoles();
     }

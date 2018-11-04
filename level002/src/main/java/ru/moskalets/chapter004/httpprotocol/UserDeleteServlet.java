@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @WebServlet (value = "/delete", loadOnStartup = 0)
 public class UserDeleteServlet extends HttpServlet {
-    private final ValidateService validateService = ValidateService.getInstance();
+    private final Validate validateService = ValidateService.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

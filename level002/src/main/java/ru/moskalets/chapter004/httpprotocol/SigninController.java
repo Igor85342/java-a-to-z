@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(value = "/signin", loadOnStartup = 0)
 public class SigninController extends HttpServlet {
-    private final ValidateService validateService = ValidateService.getInstance();
+    private final Validate validateService = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
