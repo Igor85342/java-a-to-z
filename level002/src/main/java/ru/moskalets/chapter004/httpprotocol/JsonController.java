@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet(value = "/json", loadOnStartup = 0)
 public class JsonController extends HttpServlet {
     private final ConcurrentHashMap<Integer, JsonUser> users = new ConcurrentHashMap<Integer, JsonUser>();
-    private volatile int counter = 0;
+    private final AtomicInteger counter = new AtomicInteger(0);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
@@ -27,6 +28,6 @@ public class JsonController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.users.put(this.counter++, new JsonUser(req.getParameter("name"), req.getParameter("surname"), req.getParameter("sex"), req.getParameter("description")));
+        this.users.put(this.counter.incrementAndGet(), new JsonUser(req.getParameter("name"), req.getParameter("surname"), req.getParameter("sex"), req.getParameter("description")));
     }
 }
