@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet(value = "/json", loadOnStartup = 0)
+//@WebServlet(value = "/json", loadOnStartup = 0)
 public class JsonController extends HttpServlet {
     private final ConcurrentHashMap<Integer, JsonUser> users = new ConcurrentHashMap<Integer, JsonUser>();
     private final AtomicInteger counter = new AtomicInteger(0);

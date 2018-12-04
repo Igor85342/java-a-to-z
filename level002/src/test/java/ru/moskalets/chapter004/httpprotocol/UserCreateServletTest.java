@@ -27,9 +27,13 @@ public class UserCreateServletTest {
         when(req.getParameter("login")).thenReturn("User001");
         when(req.getParameter("password")).thenReturn("Password001");
         when(req.getParameter("role")).thenReturn("User");
+        when(req.getParameter("country")).thenReturn("Country001");
+        when(req.getParameter("city")).thenReturn("City001");
         new UserCreateServlet().doPost(req, resp);
         assertThat(validate.findAll().values().iterator().next().getLogin(), is("User001"));
         assertThat(validate.findAll().values().iterator().next().getPassword(), is("Password001"));
         assertThat(validate.findAll().values().iterator().next().getRole(), is("User"));
+        assertThat(validate.findAll().values().iterator().next().getCountry(), is("Country001"));
+        assertThat(validate.findAll().values().iterator().next().getCity(), is("City"));
     }
 }

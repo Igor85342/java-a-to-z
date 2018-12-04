@@ -21,32 +21,43 @@ public class User {
 
     private String role;
 
+    private String country;
+
+    private String city;
+
     /**
      * createDate
      */
     private String createDate;
 
-    public User(int id, String login, String password, String role, String createDate) {
+    public User(int id, String login, String password, String role, String createDate, String country, String city) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
         this.createDate = createDate;
+        this.country = country;
+        this.city = city;
     }
 
-    public User(String login, String password, String role) {
+    public User(String login, String password, String role, String country, String city) {
         this.login = login;
         this.password = password;
         this.role = role;
         this.createDate = new Date().toString();
+        this.country = country;
+        this.city = city;
     }
 
-    public User(int id, String login, String password, String role) {
+    public User(int id, String login, String password, String role, String country, String city) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
+
     /**
      * Возвращает id.
      * @return
@@ -85,10 +96,20 @@ public class User {
         return this.createDate;
     }
 
-    public void updateUser(String login, String password, String role) {
+    public String getCountry() {
+        return this.country;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public void updateUser(String login, String password, String role, String country, String city) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.country = country;
+        this.city = city;
     }
 
     @Override

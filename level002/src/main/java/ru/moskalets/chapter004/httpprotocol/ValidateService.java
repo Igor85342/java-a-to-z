@@ -85,7 +85,19 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public List getAllRoles() {
+    public List<Role> getAllRoles() {
         return this.store.getAllRoles();
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        return this.store.getAllCities();
+    }
+
+    @Override
+    public void addCity(City city) {
+        if (!getAllCities().contains(city)) {
+            this.store.addCity(city);
+        }
     }
 }

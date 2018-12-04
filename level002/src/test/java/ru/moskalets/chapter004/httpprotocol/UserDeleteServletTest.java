@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateService.class)
 public class UserDeleteServletTest {
+
     @Test
     public void whenDeleteUser() throws ServletException, IOException {
         Validate validate = new ValidateStub();
@@ -23,8 +24,8 @@ public class UserDeleteServletTest {
         Mockito.when(ValidateService.getInstance()).thenReturn(validate);
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        User user001 = new User(0,"User001", "Password001", "Admin");
-        User user002 = new User(1,"User002", "Password002", "User");
+        User user001 = new User(0, "User001", "Password001", "Admin", "Country001", "City001");
+        User user002 = new User(1, "User002", "Password002", "User", "Country002", "City002");
         validate.add(user001);
         validate.add(user002);
         when(req.getParameter("id")).thenReturn("0");

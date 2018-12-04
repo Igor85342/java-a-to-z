@@ -47,7 +47,7 @@ public class MemoryStore implements Store {
     @Override
     public void update(User userUpdate) {
     User user = this.users.get(userUpdate.getId());
-    user.updateUser(userUpdate.getLogin(), userUpdate.getPassword(), userUpdate.getRole());
+    user.updateUser(userUpdate.getLogin(), userUpdate.getPassword(), userUpdate.getRole(), userUpdate.getCountry(), userUpdate.getCity());
 }
 
     @Override
@@ -73,5 +73,14 @@ public class MemoryStore implements Store {
     @Override
     public List<Role> getAllRoles() {
         return null;
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        return null;
+    }
+
+    @Override
+    public void addCity(City city) {
     }
 }

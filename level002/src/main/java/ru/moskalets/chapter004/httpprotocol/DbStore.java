@@ -29,11 +29,13 @@ public class DbStore implements Store {
     @Override
     public void add(User user) {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement st = connection.prepareStatement("insert into users(login, password, role, createdate) values(?, ?, ?, ?)")) {
+             PreparedStatement st = connection.prepareStatement("insert into users(login, password, role, createdate, country, city) values(?, ?, ?, ?, ?, ?)")) {
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
             st.setString(3, user.getRole());
             st.setString(4, user.getCreateDate().toString());
+            st.setString(5, user.getCountry());
+            st.setString(6, user.getCity());
             st.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
@@ -43,11 +45,13 @@ public class DbStore implements Store {
     @Override
     public void update(User user) {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement st = connection.prepareStatement("update users as u set login = ?, password = ?, role = ? where u.id = ?")) {
+             PreparedStatement st = connection.prepareStatement("update users as u set login = ?, password = ?, role = ?, country = ?, city = ? where u.id = ?")) {
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
             st.setString(3, user.getRole());
-            st.setInt(4, user.getId());
+            st.setString(4, user.getCountry());
+            st.setString(5, user.getCity());
+            st.setInt(6, user.getId());
             st.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
@@ -72,7 +76,9 @@ public class DbStore implements Store {
              Statement st = connection.createStatement()) {
             try (ResultSet rs = st.executeQuery("select * from users")) {
                 while (rs.next()) {
-                    result.put(rs.getInt("id"), new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"), rs.getString("role"), rs.getString("createdate")));
+                    result.put(rs.getInt("id"), new User(rs.getInt("id"), rs.getString("login"),
+                            rs.getString("password"), rs.getString("role"),
+                            rs.getString("createdate"), rs.getString("country"), rs.getString("city")));
                 }
             }
         } catch (SQLException e) {
@@ -89,7 +95,9 @@ public class DbStore implements Store {
             st.setInt(1, id);
             try (ResultSet rs = st.executeQuery()) {
                 rs.next();
-                user = new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"), rs.getString("role"), rs.getString("createdate"));
+                user = new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"),
+                        rs.getString("role"), rs.getString("createdate"), rs.getString("country"),
+                        rs.getString("city"));
             }
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
@@ -97,6 +105,7 @@ public class DbStore implements Store {
         return user;
     }
 
+    @Override
     public User isCredentional(String login, String password) {
         User user = null;
         try (Connection connection = SOURCE.getConnection();
@@ -105,7 +114,9 @@ public class DbStore implements Store {
             st.setString(2, password);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    user = new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"), rs.getString("role"), rs.getString("createdate"));
+                    user = new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"),
+                            rs.getString("role"), rs.getString("createdate"), rs.getString("country"),
+                            rs.getString("city"));
                 }
             }
         } catch (SQLException e) {
@@ -114,6 +125,7 @@ public class DbStore implements Store {
         return user;
     }
 
+    @Override
     public List<Role> getAllRoles() {
         List<Role> result = new ArrayList<Role>();
         try (Connection connection = SOURCE.getConnection();
@@ -127,5 +139,32 @@ public class DbStore implements Store {
             log.error(e.getMessage(), e);
         }
         return result;
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        List<City> result = new ArrayList<City>();
+        try (Connection connection = SOURCE.getConnection();
+             Statement st = connection.createStatement()) {
+            try (ResultSet rs = st.executeQuery("select * from cities")) {
+                while (rs.next()) {
+                    result.add(new City(rs.getInt("id"), rs.getString("name")));
+                }
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public void addCity(City city) {
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement st = connection.prepareStatement("insert into cities(name) values(?)")) {
+            st.setString(1, city.getName());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
     }
 }

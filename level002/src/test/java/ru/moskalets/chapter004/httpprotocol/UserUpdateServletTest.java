@@ -23,16 +23,20 @@ public class UserUpdateServletTest {
         Mockito.when(ValidateService.getInstance()).thenReturn(validate);
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        User user = new User(0,"User001", "Password001", "Admin");
+        User user = new User(0, "User001", "Password001", "Admin", "Country001", "City001");
         validate.add(user);
         when(req.getParameter("id")).thenReturn("0");
         when(req.getParameter("login")).thenReturn("User001u");
         when(req.getParameter("password")).thenReturn("Password001u");
         when(req.getParameter("role")).thenReturn("Admin");
+        when(req.getParameter("country")).thenReturn("Country001u");
+        when(req.getParameter("city")).thenReturn("City001u");
         new UserUpdateServlet().doPost(req, resp);
         assertThat(validate.findAll().values().iterator().next().getLogin(), is("User001u"));
         assertThat(validate.findAll().values().iterator().next().getPassword(), is("Password001u"));
         assertThat(validate.findAll().values().iterator().next().getRole(), is("Admin"));
+        assertThat(validate.findAll().values().iterator().next().getCountry(), is("Country001u"));
+        assertThat(validate.findAll().values().iterator().next().getCity(), is("City001u"));
         assertThat(validate.findAll().get(0).getLogin(), is("User001u"));
     }
 }

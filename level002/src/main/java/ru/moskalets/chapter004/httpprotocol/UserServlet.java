@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Класс выводит список пользователей системы.
  */
-//@WebServlet(value = "/", loadOnStartup = 0)
+@WebServlet(value = "/", loadOnStartup = 0)
 public class UserServlet extends HttpServlet {
 
     /**

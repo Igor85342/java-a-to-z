@@ -41,6 +41,10 @@ public interface Store {
 
     User isCredentional(String login, String password);
 
-    List getAllRoles();
+    List<Role> getAllRoles();
+
+    List<City> getAllCities();
+
+    void addCity(City city);
 
 }

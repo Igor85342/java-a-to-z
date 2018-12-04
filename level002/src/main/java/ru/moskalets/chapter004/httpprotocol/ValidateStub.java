@@ -47,7 +47,16 @@ public class ValidateStub implements Validate {
     }
 
     @Override
-    public List getAllRoles() {
+    public List<Role> getAllRoles() {
         return null;
+    }
+
+    @Override
+    public List<City> getAllCities() {
+        return null;
+    }
+
+    @Override
+    public void addCity(City city) {
     }
 }
