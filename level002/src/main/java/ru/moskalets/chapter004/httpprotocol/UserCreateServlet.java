@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * Класс позволяет добавлять пользователей.
  */
-@WebServlet (value = "/create", loadOnStartup = 0)
+//@WebServlet (value = "/create", loadOnStartup = 0)
 public class UserCreateServlet extends HttpServlet {
     /**
      * validateService

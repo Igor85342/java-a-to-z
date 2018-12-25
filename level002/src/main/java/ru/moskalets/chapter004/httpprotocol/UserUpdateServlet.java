@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 /**
  * Класс позволяет редактировать данные пользователей.
  */
-@WebServlet(value = "/update", loadOnStartup = 0)
+//@WebServlet(value = "/update", loadOnStartup = 0)
 public class UserUpdateServlet extends HttpServlet {
     /**
      * validateService.

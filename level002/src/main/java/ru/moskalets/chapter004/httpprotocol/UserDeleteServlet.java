@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet (value = "/delete", loadOnStartup = 0)
+//@WebServlet (value = "/delete", loadOnStartup = 0)
 public class UserDeleteServlet extends HttpServlet {
     private final Validate validateService = ValidateService.getInstance();
 
