@@ -21,7 +21,9 @@ public class LikeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        this.counter.set(Integer.parseInt(req.getParameter("counter")) + 1);
+        if ((req.getParameter("like")) != null) {
+            this.counter.incrementAndGet();
+        }
         doGet(req, resp);
     }
 }

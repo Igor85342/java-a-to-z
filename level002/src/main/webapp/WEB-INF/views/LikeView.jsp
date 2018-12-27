@@ -15,7 +15,7 @@
 <div class="container">
     <form action="${pageContext.servletContext.contextPath}/like" method="post">
         <button type="submit" class="btn btn-default">Like</button>
-        <input type="hidden" name="counter" value="${counter}">
+        <input type="hidden" name="like" value="like">
     </form>
 </div>
 </body>
