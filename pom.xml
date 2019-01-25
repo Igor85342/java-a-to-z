@@ -18,6 +18,7 @@
 		<module>level2</module>
 		<module>level001</module>
 		<module>level002</module>
+		<module>level003</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -140,7 +141,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.7</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>
