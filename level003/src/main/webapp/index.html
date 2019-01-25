@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hibernate</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+
+        window.onload = function() {viewItems()};
+
+        function viewItems() {
+            $(
+                $.ajax('./item', {
+                    method: 'get',
+                    complete: function (data) {
+                        console.log(JSON.parse(data.responseText));
+                        var result =
+                            "<thead>" +
+                            "<tr>" +
+                            "<th>ID</th>" +
+                            "<th>Description</th>" +
+                            "<th>Created</th>" +
+                            "<th>Done</th>" +
+                            "</tr>" +
+                            "</thead>" +
+                            "<tbody>";
+                        var items = JSON.parse(data.responseText);
+                        if ($('#checkbox').is(':checked')) {
+                            for (i = 0; i != items.length; i++) {
+                                result += "<tr>" +
+                                    "<td>" + items[i].id + "</td>" +
+                                    "<td>" + items[i].description + "</td>" +
+                                    "<td>" + items[i].created + "</td>" +
+                                    "<td>" + items[i].done + "</td>" +
+                                    "</tr>";
+                            }
+                        } else {
+                            for (i = 0; i != items.length; i++) {
+                                if (items[i].done == false) {
+                                    result += "<tr>" +
+                                        "<td>" + items[i].id + "</td>" +
+                                        "<td>" + items[i].description + "</td>" +
+                                        "<td>" + items[i].created + "</td>" +
+                                        "<td>" + items[i].done + "</td>" +
+                                        "</tr>";
+                                }
+                            }
+                        }
+                        result += "</tbody>";
+                        var table = document.getElementById("table");
+                        table.innerHTML = result;
+                    }
+                })
+            );
+        }
+
+        function createItem() {
+            var done;
+            if ($('#checkboxItem').is(':checked')){
+                done = true;
+            } else {
+                done = false;
+            }
+            $.ajax({
+                type: "post",
+                url: './item',
+                data: {
+                    description: document.getElementById("description").value,
+                    done: done
+                },
+            });
+            alert("Item created.");
+            return false;
+        }
+
+    </script>
+</head>
+<body>
+<div class="checkbox">
+    <label><input type="checkbox" id="checkbox" checked="checked" onclick="viewItems()">Show all</label>
+</div>
+<div class="container">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" title="Enter item description." id="description" placeholder="Enter description" rows="3"></textarea>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" id="checkboxItem" >Done</label>
+        </div>
+        <button type="button" class="btn btn-default" value = "Ajax" onclick="return createItem();">Create item</button>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-bordered" id="table">
+    </table>
+</div>
+</body>
+</html>
