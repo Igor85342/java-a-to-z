@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@WebServlet(value = "/like", loadOnStartup = 0)
+//@WebServlet(value = "/like", loadOnStartup = 0)
 public class LikeServlet extends HttpServlet {
     private final AtomicInteger counter = new AtomicInteger(0);
     @Override
