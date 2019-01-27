@@ -10,7 +10,7 @@ public class Item {
     private Timestamp created;
     private boolean done;
 
-    public Item () {
+    public Item() {
     }
 
     public Item(String description, boolean done) {
@@ -65,14 +65,24 @@ public class Item {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Item item = (Item) o;
 
-        if (id != item.id) return false;
-        if (done != item.done) return false;
-        if (description != null ? !description.equals(item.description) : item.description != null) return false;
+        if (id != item.id) {
+            return false;
+        }
+        if (done != item.done) {
+            return false;
+        }
+        if (description != null ? !description.equals(item.description) : item.description != null) {
+            return false;
+        }
         return created != null ? created.equals(item.created) : item.created == null;
     }
 

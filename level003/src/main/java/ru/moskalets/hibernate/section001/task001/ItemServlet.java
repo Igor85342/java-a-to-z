@@ -30,6 +30,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.validateService.addItem(new Item(req.getParameter("description"), new Timestamp(System.currentTimeMillis()), Boolean.valueOf(req.getParameter("done")) ));
+        this.validateService.addItem(new Item(req.getParameter("description"), new Timestamp(System.currentTimeMillis()), Boolean.valueOf(req.getParameter("done"))));
     }
 }
