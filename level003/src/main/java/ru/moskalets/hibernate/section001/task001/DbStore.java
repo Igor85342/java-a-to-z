@@ -8,12 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DbStore {
+public class DbStore implements AutoCloseable {
     private static final DbStore INSTANCE = new DbStore();
+    private SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
     private <T> T tx(final Function<Session, T> command) {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
+        Session session = this.factory.openSession();
         session.beginTransaction();
         try {
             return command.apply(session);
@@ -23,9 +23,9 @@ public class DbStore {
         } finally {
             session.getTransaction().commit();
             session.close();
-            factory.close();
         }
     }
+
 
     public static DbStore getInstance() {
         return INSTANCE;
@@ -59,6 +59,9 @@ public class DbStore {
         this.tx(session ->  session.save(item));
     }
 
-
+    @Override
+    public void close() {
+        this.factory.close();
+    }
 
 }
