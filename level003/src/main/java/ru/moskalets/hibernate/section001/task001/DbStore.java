@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 public class DbStore implements AutoCloseable {
     private static final DbStore INSTANCE = new DbStore();
-    private SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    private final SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
     private <T> T tx(final Function<Session, T> command) {
         Session session = this.factory.openSession();

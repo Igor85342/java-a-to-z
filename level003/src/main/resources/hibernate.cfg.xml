@@ -10,11 +10,6 @@
         <property name="connection.password">password</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="show_sql">true</property>
-
         <mapping resource = "ru/moskalets/hibernate/section001/task001/Item.hbm.xml"/>
-
-        <!--<mapping class="Item"></mapping>-->
-
-
     </session-factory>
 </hibernate-configuration>
