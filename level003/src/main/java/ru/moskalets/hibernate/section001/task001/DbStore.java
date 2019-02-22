@@ -26,7 +26,6 @@ public class DbStore implements AutoCloseable {
         }
     }
 
-
     public static DbStore getInstance() {
         return INSTANCE;
     }

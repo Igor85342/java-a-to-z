@@ -11,5 +11,13 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="show_sql">true</property>
         <mapping resource = "ru/moskalets/hibernate/section001/task001/Item.hbm.xml"/>
-    </session-factory>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/CarXML.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/CarbodyXML.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/MotorXML.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/TransmissionXML.hbm.xml"/>
+        <mapping class="ru.moskalets.hibernate.section002.task001.CarAnnotations"/>
+        <mapping class="ru.moskalets.hibernate.section002.task001.CarbodyAnnotations"/>
+        <mapping class="ru.moskalets.hibernate.section002.task001.MotorAnnotations"/>
+        <mapping class="ru.moskalets.hibernate.section002.task001.TransmissionAnnotations"/>
+            </session-factory>
 </hibernate-configuration>

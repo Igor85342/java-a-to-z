@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.moskalets.hibernate.section002.task001.CarXML" table="cars">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="carbody"
+                     column="id_carbody"
+                     class="ru.moskalets.hibernate.section002.task001.CarbodyXML"
+                     lazy="false"/>
+        <many-to-one name="motor"
+                     column="id_motor"
+                     class="ru.moskalets.hibernate.section002.task001.MotorXML"
+                     lazy="false"/>
+        <many-to-one name="transmission"
+                     column="id_transmission"
+                     class="ru.moskalets.hibernate.section002.task001.TransmissionXML"
+                     lazy="false"/>
+    </class>
+</hibernate-mapping>
