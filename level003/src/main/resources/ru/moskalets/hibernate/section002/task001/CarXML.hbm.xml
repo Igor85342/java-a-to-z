@@ -7,6 +7,14 @@
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
+        <many-to-one name="category"
+                     column="id_category"
+                     class="ru.moskalets.hibernate.section002.task001.Category"
+                     lazy="false"/>
+        <many-to-one name="brand"
+                     column="id_brand"
+                     class="ru.moskalets.hibernate.section002.task001.Brand"
+                     lazy="false"/>
         <many-to-one name="carbody"
                      column="id_carbody"
                      class="ru.moskalets.hibernate.section002.task001.CarbodyXML"
@@ -19,5 +27,12 @@
                      column="id_transmission"
                      class="ru.moskalets.hibernate.section002.task001.TransmissionXML"
                      lazy="false"/>
+        <property name="imageBase64" column="image_base64"/>
+        <property name="sold" column="sold"/>
+        <many-to-one name="user"
+                     column="id_user"
+                     class="ru.moskalets.hibernate.section002.task001.User"
+                     lazy="false"
+        />
     </class>
 </hibernate-mapping>

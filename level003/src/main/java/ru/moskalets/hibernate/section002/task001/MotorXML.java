@@ -23,12 +23,18 @@ public class MotorXML {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         MotorXML motorXML = (MotorXML) o;
 
-        if (id != motorXML.id) return false;
+        if (id != motorXML.id) {
+            return false;
+        }
         return name != null ? name.equals(motorXML.name) : motorXML.name == null;
     }
 

@@ -3,8 +3,9 @@ package ru.moskalets.hibernate.section002.task001;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.moskalets.hibernate.section001.task001.Item;
-
+import javax.persistence.Query;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Function;
 
@@ -33,7 +34,7 @@ public class DbStore implements AutoCloseable {
         this.tx(session ->  session.save(car));
     }
 
-    public List<Car> getAllCarsXML() {
+    public List<CarXML> getAllCarsXML() {
         return this.tx(
                 session -> session.createQuery("from CarXML").list()
         );
@@ -88,12 +89,59 @@ public class DbStore implements AutoCloseable {
                             + "\tid_carbody int not null references carbodyes(id),\n"
                             + "\tid_motor int not null references motors(id),\n"
                             + "\tid_transmission int not null references transmissions(id)\n"
+                            + "\tid_category int not null references categoryes(id)\n"
+                            + "\tid_brand int not null references brands(id)\n"
                             + ");").executeUpdate();
                     return true;
                 }
         );
     }
 
+    public List<Category> getAllCategories() {
+        return this.tx(
+                session -> session.createQuery("from Category").list()
+        );
+    }
+
+    public List<Brand> getAllBrands() {
+        return this.tx(
+                session -> session.createQuery("from Brand").list()
+        );
+    }
+
+    public List<CarbodyXML> getAllCarbodyes() {
+        return this.tx(
+                session -> session.createQuery("from CarbodyXML").list()
+        );
+    }
+
+    public List<MotorXML> getAllMotors() {
+        return this.tx(
+                session -> session.createQuery("from MotorXML").list()
+        );
+    }
+
+    public List<TransmissionXML> getAllTransmissions() {
+        return this.tx(
+                session -> session.createQuery("from TransmissionXML").list()
+        );
+    }
+
+    public List<User> getUsers() {
+        return this.tx(
+                session -> session.createQuery("from User").list()
+        );
+    }
+
+    public User getUserByLogin(String login) {
+        return this.tx(
+                session -> {
+                    Query query = session.createQuery("from User where login = :login");
+            query.setParameter("login", login);
+            return (User) query.getSingleResult();
+                }
+        );
+    }
     @Override
     public void close() {
         this.factory.close();

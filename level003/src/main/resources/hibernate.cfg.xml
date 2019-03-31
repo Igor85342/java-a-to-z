@@ -15,6 +15,9 @@
         <mapping resource = "ru/moskalets/hibernate/section002/task001/CarbodyXML.hbm.xml"/>
         <mapping resource = "ru/moskalets/hibernate/section002/task001/MotorXML.hbm.xml"/>
         <mapping resource = "ru/moskalets/hibernate/section002/task001/TransmissionXML.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/Category.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/Brand.hbm.xml"/>
+        <mapping resource = "ru/moskalets/hibernate/section002/task001/User.hbm.xml"/>
         <mapping class="ru.moskalets.hibernate.section002.task001.CarAnnotations"/>
         <mapping class="ru.moskalets.hibernate.section002.task001.CarbodyAnnotations"/>
         <mapping class="ru.moskalets.hibernate.section002.task001.MotorAnnotations"/>

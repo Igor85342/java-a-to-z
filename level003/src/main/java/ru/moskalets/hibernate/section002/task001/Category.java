@@ -1,18 +1,11 @@
 package ru.moskalets.hibernate.section002.task001;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "transmissions")
-public class TransmissionAnnotations {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Category {
     private int id;
-    @Column(name = "name")
     private String name;
-    public TransmissionAnnotations() {
+    public Category() {
     }
-    public TransmissionAnnotations(int id) {
+    public Category(int id) {
         this.id = id;
     }
     public int getId() {
@@ -37,12 +30,12 @@ public class TransmissionAnnotations {
             return false;
         }
 
-        TransmissionAnnotations that = (TransmissionAnnotations) o;
+        Category category = (Category) o;
 
-        if (id != that.id) {
+        if (id != category.id) {
             return false;
         }
-        return name != null ? name.equals(that.name) : that.name == null;
+        return name != null ? name.equals(category.name) : category.name == null;
     }
 
     @Override

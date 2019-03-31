@@ -23,12 +23,18 @@ public class CarbodyXML {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CarbodyXML that = (CarbodyXML) o;
 
-        if (id != that.id) return false;
+        if (id != that.id) {
+            return false;
+        }
         return name != null ? name.equals(that.name) : that.name == null;
     }
 

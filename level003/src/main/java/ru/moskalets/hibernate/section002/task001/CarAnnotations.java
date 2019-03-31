@@ -62,14 +62,24 @@ public class CarAnnotations extends Car {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CarAnnotations that = (CarAnnotations) o;
 
-        if (id != that.id) return false;
-        if (carbody != null ? !carbody.equals(that.carbody) : that.carbody != null) return false;
-        if (motor != null ? !motor.equals(that.motor) : that.motor != null) return false;
+        if (id != that.id) {
+            return false;
+        }
+        if (carbody != null ? !carbody.equals(that.carbody) : that.carbody != null) {
+            return false;
+        }
+        if (motor != null ? !motor.equals(that.motor) : that.motor != null) {
+            return false;
+        }
         return transmission != null ? transmission.equals(that.transmission) : that.transmission == null;
     }
 

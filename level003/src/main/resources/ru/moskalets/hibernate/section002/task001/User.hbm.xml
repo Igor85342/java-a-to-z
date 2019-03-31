@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.moskalets.hibernate.section002.task001.User" table="users">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="login"  column="login"/>
+        <property name="password"  column="password"/>
+        <set name="cars" table="cars"
+              inverse="false" lazy="false" cascade="all">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <one-to-many class="ru.moskalets.hibernate.section002.task001.CarXML" />
+        </set>
+    </class>
+</hibernate-mapping>
