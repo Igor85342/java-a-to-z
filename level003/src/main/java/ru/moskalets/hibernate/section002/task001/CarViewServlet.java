@@ -1,4 +1,6 @@
 package ru.moskalets.hibernate.section002.task001;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,8 @@ public class CarViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        req.setAttribute("cars", validateService.getAllCar());
+        req.setAttribute("cars", this.validateService.getAllCar());
+        req.setAttribute("brands", this.validateService.getAllBrands());
         req.getRequestDispatcher("WEB-INF/views/CarsView.jsp").forward(req, resp);
     }
 

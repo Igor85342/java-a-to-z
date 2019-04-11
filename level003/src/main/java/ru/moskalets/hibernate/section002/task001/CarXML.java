@@ -10,13 +10,14 @@ public class CarXML extends Car {
     private String imageBase64;
     private boolean sold;
     private User user;
+    private long date;
 
     public CarXML() {
     }
     public CarXML(int id) {
         this.id = id;
     }
-    public CarXML(int id, Category category, Brand brand, CarbodyXML carbody, MotorXML motor, TransmissionXML transmission, String imageBase64, boolean sold, User user) {
+    public CarXML(int id, Category category, Brand brand, CarbodyXML carbody, MotorXML motor, TransmissionXML transmission, String imageBase64, boolean sold, User user, long date) {
         this.id = id;
         this.category = category;
         this.brand = brand;
@@ -26,8 +27,9 @@ public class CarXML extends Car {
         this.imageBase64 = imageBase64;
         this.sold = sold;
         this.user = user;
+        this.date = date;
     }
-    public CarXML(Category category, Brand brand, CarbodyXML carbody, MotorXML motor, TransmissionXML transmission, String imageBase64, boolean sold, User user) {
+    public CarXML(Category category, Brand brand, CarbodyXML carbody, MotorXML motor, TransmissionXML transmission, String imageBase64, boolean sold, User user, long date) {
         this.category = category;
         this.brand = brand;
         this.carbody = carbody;
@@ -36,6 +38,7 @@ public class CarXML extends Car {
         this.imageBase64 = imageBase64;
         this.sold = sold;
         this.user = user;
+        this.date = date;
     }
     public int getId() {
         return this.id;
@@ -91,6 +94,12 @@ public class CarXML extends Car {
     public void setUser(User user) {
         this.user = user;
     }
+    public long getDate() {
+        return this.date;
+    }
+    public void setDate(long date) {
+        this.date = date;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -107,6 +116,9 @@ public class CarXML extends Car {
             return false;
         }
         if (sold != carXML.sold) {
+            return false;
+        }
+        if (date != carXML.date) {
             return false;
         }
         if (category != null ? !category.equals(carXML.category) : carXML.category != null) {
@@ -141,6 +153,7 @@ public class CarXML extends Car {
         result = 31 * result + (imageBase64 != null ? imageBase64.hashCode() : 0);
         result = 31 * result + (sold ? 1 : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (int) (date ^ (date >>> 32));
         return result;
     }
 }

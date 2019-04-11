@@ -10,6 +10,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <h2>Фильтры</h2>
+    <form action ="${pageContext.servletContext.contextPath}/filtercars" method="get">
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>
+            <td>
+                    <button type="submit" class="btn btn-success" name="button" value ="brandbtn">Марка</button>
+            </td>
+            </td>
+            <td>
+                    <button type="submit" class="btn btn-success" name="button" value ="lastday">За день</button>
+            </td>
+            <td>
+                    <button type="submit" class="btn btn-success" name="button" value ="foto">С фотографией</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <select class="form-control" name="brand">
+                        <c:forEach items ="${brands}" var="brand">
+                            <option value="${brand.id}"><c:out value = "${brand.name}"></c:out></option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
 <c:forEach items ="${cars}" var="car">
     <div class="container">
         <table class="table table-bordered">
@@ -53,6 +88,14 @@
                     <c:if test = "${car.sold == true}">
                         <b>Да</b>
                     </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Дата создания</b></td>
+                <td>
+                        <jsp:useBean id="myDate" class="java.util.Date"/>
+                        <c:set target="${myDate}" property="time" value="${car.date}"/>
+                        <c:out value = "${myDate}"></c:out>
                 </td>
             </tr>
             <tr>

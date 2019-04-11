@@ -55,6 +55,7 @@
             </div>
             Select file to upload: <input type="file" name="file" size="60" /><br />
         <button type="submit" class="btn btn-default" <%--onclick="return validate();"--%>  >Create</button>
+        <input type="hidden" name="id_user" value="${user.id}">
     </form>
 </div>
 </body>

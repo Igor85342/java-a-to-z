@@ -40,7 +40,7 @@
         <!--<module name="LineLength"/>-->
         <module name="MethodLength"/>
         <module name="ParameterNumber">
-            <property name="max" value="9"/>
+            <property name="max" value="10"/>
         </module>
 
         <!-- Checks for whitespace                               -->

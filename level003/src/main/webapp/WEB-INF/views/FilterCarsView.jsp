@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<c:forEach items ="${user.cars}" var="car">
+<c:forEach items ="${carsFilter}" var="car">
     <div class="container">
         <table class="table table-bordered">
             <thead>
@@ -73,20 +73,12 @@
                     </c:if>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <form action ="${pageContext.servletContext.contextPath}/updatecar" method="get">
-                        <button type="submit" class="btn btn-success" name="button" value ="Update">Update</button>
-                        <input type="hidden" name="id" value="${car.id}">
-                    </form>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
 </c:forEach>
-<form action ="${pageContext.servletContext.contextPath}/cars" method="get">
-    <button type="submit" class="btn btn-success" name="button" value ="cars">Все авто</button>
-</form>
+        <form action ="${pageContext.servletContext.contextPath}/cars" method="get">
+            <button type="submit" class="btn btn-success" name="button" value ="cars">Все авто</button>
+        </form>
 </body>
 </html>

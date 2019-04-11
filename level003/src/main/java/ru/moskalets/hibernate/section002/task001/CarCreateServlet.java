@@ -1,6 +1,7 @@
 package ru.moskalets.hibernate.section002.task001;
 
 import com.google.common.io.ByteStreams;
+import com.sun.jmx.snmp.Timestamp;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+
+
 @MultipartConfig
 @WebServlet(value = "/create", loadOnStartup = 0)
 public class CarCreateServlet extends HttpServlet {
@@ -41,7 +44,9 @@ public class CarCreateServlet extends HttpServlet {
                 new TransmissionXML(Integer.parseInt(req.getParameter("transmission"))),
                 imageBase64,
                 false,
-                user));
+                this.validateService.getUserById(Integer.parseInt(req.getParameter("id_user"))),
+                new Timestamp(System.currentTimeMillis()).getDateTime()
+                ));
         resp.sendRedirect(String.format("%s/cars", req.getContextPath()));
     }
 }

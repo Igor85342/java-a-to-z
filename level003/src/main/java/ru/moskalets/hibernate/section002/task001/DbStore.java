@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import javax.persistence.Query;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import java.util.function.Function;
 
@@ -142,8 +142,61 @@ public class DbStore implements AutoCloseable {
                 }
         );
     }
+
+    public User getUserById(int id) {
+        return this.tx(
+                session -> {
+                    Query query = session.createQuery("from User where id = :id");
+                    query.setParameter("id", id);
+                    return (User) query.getSingleResult();
+                }
+        );
+    }
+
+    public List<CarXML> getCarWithImage() {
+        return this.tx(
+                session -> {
+                    Query query = session.createQuery("from CarXML c where c.imageBase64 != :imageBase64");
+                    query.setParameter("imageBase64", "");
+                    List<CarXML> list = query.getResultList();
+                    return list;
+                }
+        );
+    }
+
+    public List<CarXML> getCarWithBrand(int brand) {
+        return this.tx(
+                session -> {
+                    Query query = session.createQuery("from CarXML c where c.brand.id = :brand");
+                    query.setParameter("brand", brand);
+                    List<CarXML> list = query.getResultList();
+                    return list;
+                }
+        );
+    }
+
+    public List<CarXML> getCarLastDay() {
+        return this.tx(
+                session -> {
+                    long now = new Timestamp(System.currentTimeMillis()).getTime();
+                    Query query = session.createQuery("from CarXML c WHERE c.date >= :lastDay and c.date <= :now");
+                    query.setParameter("lastDay", getLastDay(now));
+                    query.setParameter("now", now);
+                    List<CarXML> list = query.getResultList();
+                    return list;
+                }
+        );
+    }
+
     @Override
     public void close() {
         this.factory.close();
+    }
+
+    public long getLastDay(long now) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(now));
+        cal.add(Calendar.DATE, -1);
+        return cal.getTimeInMillis();
     }
 }

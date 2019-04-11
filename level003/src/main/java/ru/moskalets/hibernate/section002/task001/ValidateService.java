@@ -45,6 +45,7 @@ public class ValidateService {
     public CarXML getCarXML(int id) {
         return this.store.getCarXML(id);
     }
+
     public boolean isCredentional(String login, String password) {
         boolean result = false;
         List<User> list = this.store.getUsers();
@@ -56,7 +57,25 @@ public class ValidateService {
         }
         return result;
     }
+
     public User getUserByLogin(String login) {
         return this.store.getUserByLogin(login);
     }
+
+    public User getUserById(int id) {
+        return this.store.getUserById(id);
+    }
+
+    public List<CarXML> getCarLastDay() {
+        return this.store.getCarLastDay();
+    }
+
+    public List<CarXML> getCarWithBrand(int brand) {
+        return this.store.getCarWithBrand(brand);
+    }
+
+    public List<CarXML> getCarWithImage() {
+        return this.store.getCarWithImage();
+    }
+
 }

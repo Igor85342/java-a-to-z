@@ -34,5 +34,6 @@
                      class="ru.moskalets.hibernate.section002.task001.User"
                      lazy="false"
         />
+        <property name="date" column="date"/>
     </class>
 </hibernate-mapping>
