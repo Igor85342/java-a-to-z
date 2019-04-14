@@ -65,19 +65,10 @@ public class DbStore implements AutoCloseable {
     }
 
     public CarXML getCarXML(int id) {
-        Session session = this.factory.openSession();
-        session.beginTransaction();
-        CarXML result;
-        try {
-            result = session.get(CarXML.class, id);
-        } catch (final Exception e) {
-            session.getTransaction().rollback();
-            throw e;
-        } finally {
-            session.getTransaction().commit();
-           session.close();
-        }
-        return result;
+        return this.tx(
+                session -> session.get(CarXML.class, id)
+        );
+
     }
 
     public void deleteTableCar() {
@@ -97,10 +88,18 @@ public class DbStore implements AutoCloseable {
         );
     }
 
+    public void addCategory(Category category) {
+        this.tx(session ->  session.save(category));
+    }
+
     public List<Category> getAllCategories() {
         return this.tx(
                 session -> session.createQuery("from Category").list()
         );
+    }
+
+    public void addBrand(Brand brand) {
+        this.tx(session ->  session.save(brand));
     }
 
     public List<Brand> getAllBrands() {
@@ -109,10 +108,18 @@ public class DbStore implements AutoCloseable {
         );
     }
 
+    public void addCarbody(CarbodyXML carbody) {
+        this.tx(session ->  session.save(carbody));
+    }
+
     public List<CarbodyXML> getAllCarbodyes() {
         return this.tx(
                 session -> session.createQuery("from CarbodyXML").list()
         );
+    }
+
+    public void addMotor(MotorXML motor) {
+        this.tx(session ->  session.save(motor));
     }
 
     public List<MotorXML> getAllMotors() {
@@ -121,10 +128,18 @@ public class DbStore implements AutoCloseable {
         );
     }
 
+    public void addTransmission(TransmissionXML transmission) {
+        this.tx(session ->  session.save(transmission));
+    }
+
     public List<TransmissionXML> getAllTransmissions() {
         return this.tx(
                 session -> session.createQuery("from TransmissionXML").list()
         );
+    }
+
+    public void addUser(User user) {
+        this.tx(session ->  session.save(user));
     }
 
     public List<User> getUsers() {
