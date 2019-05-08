@@ -4,11 +4,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MemoryStorage implements Storage {
     private static final Logger LOG = LoggerFactory.getLogger(MemoryStorage.class);
 
+    private final ArrayList users = new ArrayList();
+
     public void add(User user) {
-        System.out.println("Store to memory.");
+        users.add(user);
+    }
+
+    public List<User> getAll() {
+        return this.users;
     }
 }
