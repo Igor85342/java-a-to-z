@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/viewUserCars", loadOnStartup = 0)
+//@WebServlet(value = "/viewUserCars", loadOnStartup = 0)
 public class ViewUserCarsServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

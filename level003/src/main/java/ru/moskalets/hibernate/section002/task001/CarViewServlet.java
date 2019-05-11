@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-@WebServlet(value = "/cars", loadOnStartup = 0)
+//@WebServlet(value = "/cars", loadOnStartup = 0)
 public class CarViewServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
     @Override

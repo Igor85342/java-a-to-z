@@ -13,7 +13,7 @@ import javax.servlet.http.Part;
 import java.io.*;
 
 
-@MultipartConfig
+//@MultipartConfig
 @WebServlet(value = "/create", loadOnStartup = 0)
 public class CarCreateServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-@WebServlet(value = "/", loadOnStartup = 0)
+//@WebServlet(value = "/", loadOnStartup = 0)
 public class SigninController extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
 
