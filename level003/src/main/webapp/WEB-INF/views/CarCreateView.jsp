@@ -12,7 +12,8 @@
 <body>
 <div class="container">
     <h2>Создать новое объявление</h2>
-    <form action="${pageContext.servletContext.contextPath}/create" method="post" enctype="multipart/form-data">
+    <%--enctype="multipart/form-data"--%>
+    <form action="${pageContext.servletContext.contextPath}/cars/createCar" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label name = "category">Категория:</label>
                 <select class="form-control" name="category">
@@ -56,6 +57,21 @@
             Select file to upload: <input type="file" name="file" size="60" /><br />
         <button type="submit" class="btn btn-default" <%--onclick="return validate();"--%>  >Create</button>
         <input type="hidden" name="id_user" value="${user.id}">
+
+
+
+    <%--<form action="${pageContext.servletContext.contextPath}/cars/createCar" method="post">--%>
+        <%--category: <input type="number" name = "category"><br/>--%>
+        <%--<input type="submit"><br/>--%>
+            <%--<div class="form-group">--%>
+                <%--<label name = "category">Категория:</label>--%>
+                <%--<select class="form-control" name="category">--%>
+                    <%--<c:forEach items ="${categories}" var="category">--%>
+                        <%--<option value="${category.id}"><c:out value = "${category.name}"></c:out></option>--%>
+                    <%--</c:forEach>--%>
+                <%--</select>--%>
+                <%--<button type="submit" class="btn btn-default" &lt;%&ndash;onclick="return validate();"&ndash;%&gt;  >Create</button>--%>
+            <%--</div>--%>
     </form>
 </div>
 </body>

@@ -7,6 +7,21 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="ru.moskalets"/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="200000" />
+    </bean>
+
     <bean id="memory" class="ru.moskalets.spring.section001.task001.MemoryStorage"/>
     <bean id="storage" class="ru.moskalets.spring.section001.task001.UserStorage">
         <constructor-arg name="storage" ref="memory"></constructor-arg>
@@ -18,7 +33,5 @@
     <bean id="importuser" class="ru.moskalets.spring.section001.task001.ImportUser">
         <constructor-arg name="storage" ref="jdbcstorage"></constructor-arg>
     </bean>
-
-    <!--<context:component-scan base-package="ru.moskalets"/>-->
 
 </beans>

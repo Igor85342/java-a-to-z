@@ -11,40 +11,57 @@
 </head>
 <body>
 <div class="container">
-    <h2>Фильтры</h2>
-    <form action ="${pageContext.servletContext.contextPath}/filtercars" method="get">
     <table class="table">
         <tbody>
         <tr>
             <td>
-            <td>
-                    <button type="submit" class="btn btn-success" name="button" value ="brandbtn">Марка</button>
-            </td>
-            </td>
-            <td>
-                    <button type="submit" class="btn btn-success" name="button" value ="lastday">За день</button>
+                <form action ="${pageContext.servletContext.contextPath}/cars/" method="get">
+                    <button type="submit" class="btn btn-success" name="button" value ="view">Все объявления</button>
+                </form>
             </td>
             <td>
-                    <button type="submit" class="btn btn-success" name="button" value ="foto">С фотографией</button>
+                <form action ="${pageContext.servletContext.contextPath}/cars/createCar" method="get">
+                    <button type="submit" class="btn btn-success" name="button" value ="Create">Добавить</button>
+                </form>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="form-group">
-                    <select class="form-control" name="brand">
-                        <c:forEach items ="${brands}" var="brand">
-                            <option value="${brand.id}"><c:out value = "${brand.name}"></c:out></option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </td>
-            <td></td>
             <td></td>
         </tr>
         </tbody>
     </table>
-    </form>
 </div>
+
+<div class="container">
+    <h2>Фильтры</h2>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>
+                <form action ="${pageContext.servletContext.contextPath}/cars/showCarsWithImage" method="get">
+                    <button type="submit" class="btn btn-success" name="button" value ="foto">С фотографией</button>
+                </form>
+            </td>
+            <td>
+                <form action ="${pageContext.servletContext.contextPath}/cars/showCarsLastDay" method="get">
+                    <button type="submit" class="btn btn-success" name="button" value ="lastday">За день</button>
+                </form>
+            </td>
+            <td>
+                    <form action ="${pageContext.servletContext.contextPath}/cars/showCarsWithBrand" method="get">
+                        <button type="submit" class="btn btn-success">Марка</button>
+                        <div class="form-group">
+                            <select class="form-control" name="brand">
+                                <c:forEach items ="${brands}" var="brand">
+                                    <option value="${brand.id}"><c:out value = "${brand.name}"></c:out></option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <c:forEach items ="${cars}" var="car">
     <div class="container">
         <table class="table table-bordered">
@@ -112,19 +129,5 @@
         </table>
     </div>
 </c:forEach>
-<tr>
-    <td>
-        <form action ="${pageContext.servletContext.contextPath}/create" method="get">
-            <button type="submit" class="btn btn-success" name="button" value ="Create">Create</button>
-        </form>
-    </td>
-</tr>
-<tr>
-    <td>
-        <form action ="${pageContext.servletContext.contextPath}/viewUserCars" method="get">
-            <button type="submit" class="btn btn-success" name="button" value ="view">Показать свои объявления</button>
-        </form>
-    </td>
-</tr>
 </body>
 </html>
