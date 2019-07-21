@@ -62,6 +62,10 @@
     </table>
 </div>
 
+<c:forEach items ="${users}" var="user">
+    <th>Объявление <c:out value = "${user.login}"></c:out></th>
+</c:forEach>
+
 <c:forEach items ="${cars}" var="car">
     <div class="container">
         <table class="table table-bordered">
