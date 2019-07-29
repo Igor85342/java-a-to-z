@@ -13,13 +13,16 @@ public class UserSpring {
 
     private String password;
 
+    private String role;
+
     public UserSpring() {
     }
 
-    public UserSpring(int id, String login, String password) {
+    public UserSpring(int id, String login, String password, String role) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -44,6 +47,14 @@ public class UserSpring {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String Role) {
+        this.role = role;
     }
 
     @Override

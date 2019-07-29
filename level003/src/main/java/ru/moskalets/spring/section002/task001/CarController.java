@@ -4,12 +4,15 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.moskalets.spring.section002.task001.models.CarSpring;
 import ru.moskalets.spring.section002.task001.service.CarService;
+import ru.moskalets.spring.section002.task001.service.UserService;
+
 import java.io.IOException;
 
 @Controller
@@ -18,6 +21,9 @@ public class CarController {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showAllCars(ModelMap model) {
@@ -66,6 +72,7 @@ public class CarController {
                           @RequestParam("transmission") int transmission
     ) throws IOException {
         String imageBase64 = Base64.encode(file.getBytes());
+//        String name = SecurityContextHolder.getContext().getAuthentication().getName(); //todo
         this.carService.addCarSpring(new CarSpring(
                 this.carService.findCategorySpring(category),
                 this.carService.findBrandSpring(brand),
@@ -74,7 +81,7 @@ public class CarController {
                 this.carService.findTransmissionSpring(transmission),
                 imageBase64,
                 false,
-                this.carService.findUserSpring(1),
+                this.userService.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()),
                 new Timestamp(System.currentTimeMillis()).getDateTime()
         ));
         return "redirect:/cars/";

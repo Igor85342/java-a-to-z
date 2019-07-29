@@ -12,25 +12,25 @@ import java.util.Optional;
 public class CarService {
 
     @Autowired
-    BrandRepository brandRepository;
+    private BrandRepository brandRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    CarbodyRepository carbodyRepository;
+    private CarbodyRepository carbodyRepository;
 
     @Autowired
-    MotorRepository motorRepository;
+    private MotorRepository motorRepository;
 
     @Autowired
-    TransmissionRepository transmissionRepository;
+    private TransmissionRepository transmissionRepository;
 
     public Iterable<CarSpring> findAllCarsWithBrand(int brandId) {
         Optional<BrandSpring> brandOptional = brandRepository.findById(brandId);

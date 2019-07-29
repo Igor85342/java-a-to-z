@@ -18,7 +18,7 @@
     </div>
 </c:if>
 <div class="container">
-    <form action="${pageContext.servletContext.contextPath}/signin" method="post">
+    <form action="${pageContext.servletContext.contextPath}/login/process" method="post">
         <div class="form-group">
             <label for="login">Login:</label>
             <input type="login" class="form-control" id="login" placeholder="Enter login" name="login">
